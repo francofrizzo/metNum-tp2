@@ -1,6 +1,6 @@
 CC=g++
 CPPFLAGS=-Wall -Wextra -pedantic -ggdb -c -std=c++11
-DEP=
+DEP=pags_web.o deportes.o
 
 all: rankings
 

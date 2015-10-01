@@ -16,7 +16,7 @@ Lectura e investigación:
    
 Implementación:
   Ránking de páginas web:
-   ☐ Crear clases y funciones básicas @started(15-09-30 23:28)
+   ✔ Crear clases y funciones básicas @started(15-09-30 23:28) @done (15-10-01 05:01) @lasted(5:33)
    ☐ Programar método In-Deg
      (Ordena por cantidad de páginas que apuntan)
    ☐ Elegir y programar la estructura para representación de matriz esparsa
