@@ -1,0 +1,54 @@
+Lectura e investigación:
+  ✔ Investigar sobre los métodos de representación de matriz esparsa @done (15-09-30 22:15)
+  Leer los papers:
+    ☐ Sergey Brin and Lawrence Page - "The Anatomy of a Large-Scale Hypertextual Web Search Engine"
+      ./docs/referencias/brin_paper.pdf
+      Este va a modo introductorio
+    ☐ Kurt Bryan and Tanya Leise - "The $25,000,000,000 Eigenvector: The Linear Algebra behind Google"
+      ./docs/referencias/bryan_paper.pdf
+      Una descripción más profunda de la idea de PageRank
+    ☐ Sepandar D. Kamvar et al. - "Extrapolation Methods for Accelerating PageRank Computations"
+      ./docs/referencias/kamvar_paper.pdf
+      Limitarse a la introducción y la mejora propuesta para calcular x^(k+1) = P_2 * x^k
+    ☐ Anjela Y. Govan et al. - "Generalizing Google’s PageRank to Rank National Football League Teams"
+      ./docs/referencias/govan_paper.pdf
+      Este es para la segunda parte. Las slides (./docs/referencias/govan_slides.pdf) están buenas
+   
+Implementación:
+  Ránking de páginas web:
+   ☐ Crear clases y funciones básicas @started(15-09-30 23:28)
+   ☐ Programar método In-Deg
+     (Ordena por cantidad de páginas que apuntan)
+   ☐ Elegir y programar la estructura para representación de matriz esparsa
+     Hay que elegir entre Dictionary of Keys (dok), Compressed Sparse Row (CSR) o Compressed Sparse Column (CSC)
+   ☐ Programar método de potencia para calcular autovectores
+   ☐ Crear el ejecutable principal: parseo de opciones y esas cosas
+ Ránking de ligas deportivas:
+   ☐ Decidir si reutilizamos la implementación anterior (ahora no esparsa) o hacemos una nueva
+
+Experimentación:
+  Ránking de páginas web:
+    ☐ Estudiar la convergencia de PageRank
+      analizando la evolución de la norma Manhattan entre dos iteraciones sucesivas. Comparar los resultados obtenidos para al menos dos instancias de tamaño mediano-grande, variando el valor de c.
+    ☐ Estudiar cualitativamente los rankings obtenidos por los dos métodos
+      Analizar los resultados individualmente en una primera etapa, y luego realizar un análisis comparativo entre los dos rankings obtenidos.
+  Ránking de ligas deportivas:
+    ☐ Realizar experimentos variando el parámetro c, indicando cómo impacta en los resultados.
+    ☐ Analizar la evolución del ránking en el tiempo e identificar características/hechos particulares que puedan ser determinantes para el modelo, si es que existe alguno.
+
+Informe:
+  ✔ Armar esqueleto del informe en LaTeX @done (15-09-30 23:28)
+  ☐ Pensar la estructura general del informe, así no queda un quilombo como el anterior
+  ☐ Escribir introducción general del trabajo
+  ☐ Resumir el estado de la cuestión y trabajos existentes
+  ☐ Explicar los métodos matemáticos usados
+  ☐ Explicar brevemente la implementación
+  ☐ Experimentos realizados e hipótesis
+  ☐ Resultados de los experimentos
+  ☐ Discusión de cada uno de ellos
+  ☐ Conclusión general del trabajo
+
+Cosas a tener en cuenta:
+  ☐ Ver el temita de los empates
+    El método GeM asume que no se producen empates entre los equipos (o que si se producen, son poco frecuentes).
+    En caso de considerar un deporte donde el empate se da con cierta frecuencia no despreciable (por ejemplo, fútbol), es fundamental aclarar como se refleja esto en el modelo y analizar su eventual impacto.

@@ -1,0 +1,110 @@
+\documentclass[11pt, a4paper, spanish]{article}
+
+\usepackage[a4paper, margin=2.5cm, top=3.5cm, bottom=3.5cm]{geometry} % Define los márgenes
+\usepackage{amsmath, amscd, amssymb, amsthm, latexsym, gensymb} % Paquetes matemáticos
+\usepackage[spanish]{babel} % Traduce los paquetes a español
+\usepackage[utf8]{inputenc} % Codificación UTF8
+\usepackage{fancyhdr} % Encabezados y pies de página
+    \pagestyle{fancyplain}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage[page, toc]{appendix} % Apéndices
+\usepackage[nottoc]{tocbibind} % Referencias en la TDC
+\usepackage{scrextend} % Para usar addmargin
+\usepackage{listings} % Código
+    \lstdefinestyle{customcpp}{
+        belowcaptionskip=1\baselineskip,
+        breaklines=true,
+        xleftmargin=3em,
+        language=C++,
+        basicstyle=\small\ttfamily
+    }
+\usepackage[onelanguage, spanish]{algorithm2e}
+    % \NoCaptionOfAlgo
+    \LinesNumbered\RestyleAlgo{ruled}\IncMargin{1em}\DontPrintSemicolon\SetArgSty{}\SetCommentSty{textsf}\SetFuncSty{textsf}
+    \SetKwProg{For}{para}{ hacer}{fin}
+    \SetKwProg{Fn}{función}{:}{fin}
+\usepackage[pdftex]{graphicx} % Imágenes
+\usepackage[usenames,dvipsnames]{color} % Autoexplicativo
+\usepackage{caption} % Captions sin números
+\usepackage{multirow}
+\usepackage{caratula} % Carátula del DC
+\usepackage{url}
+
+% Bibliografía
+\usepackage{biblatex}
+\addbibresource{referencias.bib}
+
+% Comandos personalizados
+\let\strong\textbf
+\renewcommand{\appendixtocname}{Apéndices}
+\renewcommand{\appendixpagename}{Apéndices}
+\theoremstyle{plain}
+    \newtheorem{prop}{Proposición}
+    \newtheorem{lema}{Lema}
+\theoremstyle{remark}
+    \newtheorem{obs}{Observación}
+\setlength{\parskip}{.3em}
+
+% Encabezado
+\lhead{Métodos Numéricos}
+\rhead{Trabajo Práctico Nº 2 - \emph{``Ohhh solo tiran $\pi$-edras\dots''}}
+% Pie de pagina
+\renewcommand{\footrulewidth}{0.4pt}
+% \lfoot{FCEN}
+% \rfoot{UBA}
+
+\begin{document}
+
+% Datos de carátula
+\materia{Métodos Numéricos}
+\titulo{Trabajo Práctico Nº 2}
+\subtitulo{``Ohhh solo tiran $\pi$-edras\dots''}
+\fecha{Segundo cuatrimestre de 2015}
+
+\integrante{Frizzo, Franco}{013/14}{francofrizzo@gmail.com}
+\integrante{Martínez, Manuela}{160/14}{martinez.manuela.22@gmail.com}
+\integrante{Rabinowicz, Lucía}{105/14}{lu.rabinowicz@gmail.com}
+
+% Carátula
+\maketitle
+\newpage
+
+% Resumen y palabras clave
+\begin{addmargin}[4em]{4em}
+
+\section*{\centering Resumen}
+
+\vspace{4em}
+\noindent \strong{Palabras clave:} palabra clave 1, palabra clave 2, palabra clave 3, palabra clave 4
+
+\end{addmargin}
+\clearpage
+
+% Índice
+\tableofcontents
+\clearpage
+
+% Contenido
+\input{secciones/1-intro}
+\clearpage
+\input{secciones/2-desarrollo}
+\clearpage
+\input{secciones/3-resultados}
+\clearpage
+\input{secciones/4-discusion}
+\clearpage
+\input{secciones/5-conclusiones}
+\clearpage
+
+% Apéndices
+\begin{appendices}
+    \input{apendices/a-enunciado}
+    \clearpage
+\end{appendices}
+\clearpage
+
+% Referencias
+\printbibliography[heading=bibintoc]
+
+\end{document}
