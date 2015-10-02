@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cmath>
 
 #include "./config.h"
 
@@ -17,6 +18,11 @@ class matrize {
     vector<int> ptr_filas;
  public:
     matrize(ifstream&, int, int);
+
+    vector<double> potencias(const vector<double>&, const double, double) const;
+    vector<double> prod(const vector<double>&, const double) const;
+    void rango_fila(int, int&, int&) const;
+    double difManhattan(const vector<double>&, const vector<double>&) const;
 };
 
 void resolver_pags_web(conf& args, ifstream& ifile, int cant_nodos,
