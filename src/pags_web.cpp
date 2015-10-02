@@ -8,6 +8,9 @@ void resolver_pags_web(
     switch (args.alg) {
         case ALG_PAGERANK: {
             matrize data(ifile, cant_nodos, cant_aristas);
+            vector<double> inicial (cant_nodos, (double) 1/cant_nodos);
+            cout << inicial[cant_nodos - 1] << endl;
+            resultado = data.potencias(inicial, args.c, args.tol);
             break;
         }
         case ALG_ALT: {
@@ -72,9 +75,11 @@ matrize::matrize(ifstream& data, int cant_nodos, int cant_aristas) {
 
 vector<double> matrize::potencias(const vector<double>& inicial, double c, double tol) const {
     vector<double> v1 = inicial;
-    vector<double> v2;
+    vector<double> v2 = prod(v1, c);
     while (difManhattan(v1, v2) > tol) {
+        vector<double> aux = v2;
         v2 = prod(v1, c);
+        v1 = aux;
     }
     return v2;
 }
@@ -102,7 +107,7 @@ vector<double> matrize::prod(const vector<double>& vec, double c) const {
                 acum = acum + (1 - c) * vals[j] * vec[ind_cols[j]];
             }
         }
-        res[i] = acum;
+        res.push_back(acum);
     }
 
     return res;
@@ -128,6 +133,7 @@ double matrize::difManhattan(const vector<double>& v1, const vector<double>& v2)
     for (int i = 0; i < v1.size(); i++) {
         res = res + abs(v1[i] - v2[i]);
     }
+    cout << res << endl;
     return res;
 }
 
@@ -150,10 +156,9 @@ vector<double> indeg(ifstream& ifile, int cant_nodos, int cant_aristas) {
     }
 
 
-    /*for (int i = 0; i < resultado.size(); i++) {
+    for (int i = 0; i < resultado.size(); i++) {
         cout << resultado[i] << ",";
     }
-    cout << endl << endl; DEBUG*/ 
-
+    cout << endl << endl; 
     return resultado;
 }

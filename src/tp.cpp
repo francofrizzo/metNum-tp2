@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
 
     // Escritura en archivo de salida
     for (vector<double>::iterator it = resultado.begin(); it != resultado.end(); it++) {
-        ofile << *it << endl;
+        ofile << fixed << setprecision(6) << *it << endl;
     }
 
     // Imprimir por pantalla tiempo de ejecución
