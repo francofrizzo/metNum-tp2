@@ -2,10 +2,19 @@
 
 void resolver_pags_web(
     conf& args, ifstream& ifile, int cant_nodos,
-    int cant_aristas, double resultado[]
+    int cant_aristas, vector<double>& resultado
 ) {
     MEDIR_TIEMPO_INICIO(args.timer);
-    matrize data(ifile, cant_nodos, cant_aristas);
+    switch (args.alg) {
+        case ALG_PAGERANK: {
+            matrize data(ifile, cant_nodos, cant_aristas);
+            break;
+        }
+        case ALG_ALT: {
+            resultado = indeg(ifile, cant_nodos, cant_aristas);
+            break;
+        }
+    }
     MEDIR_TIEMPO_FIN(args.timer);
 }
 
@@ -120,4 +129,8 @@ double matrize::difManhattan(const vector<double>& v1, const vector<double>& v2)
         res = res + abs(v1[i] - v2[i]);
     }
     return res;
+}
+
+vector<double> indeg(ifstream& ifile, int cant_nodos, int cant_aristas) {
+
 }

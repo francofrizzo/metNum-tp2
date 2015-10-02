@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
     int cant_nodos;
     int cant_aristas;
     ifstream data;
-    double* resultado;
+    vector<double> resultado;
 
     // Parseo de argumentos
     if (argc > 5) {
@@ -119,13 +119,11 @@ int main(int argc, char* argv[]) {
     switch (args.tipo_inst) {
         case TIPO_PAGS_WEB: {
             LEER_ENCAB_SNAP(ifile, cant_nodos, cant_aristas)
-            resultado = new double[cant_nodos];
             resolver_pags_web(args, ifile, cant_nodos, cant_aristas, resultado);
             break;
         }
         case TIPO_DEPORTES: {
             LEER_ENCAB_LIGA(ifile, cant_nodos, cant_aristas)
-            resultado = new double[cant_nodos];
             resolver_deportes(args, ifile, cant_nodos, cant_aristas, resultado);
             break;    
         }
@@ -137,13 +135,8 @@ int main(int argc, char* argv[]) {
     }
 
     // Escritura en archivo de salida
-    for (int i = 0; i < cant_nodos; i++) {
-        if (resultado != NULL) {
-            ofile << resultado[i] << endl;
-        }
-    }
-    if (resultado != NULL) {
-        delete resultado;
+    for (vector<double>::iterator it = resultado.begin(); it != resultado.end(); it++) {
+        ofile << *it << endl;
     }
 
     // Imprimir por pantalla tiempo de ejecución
