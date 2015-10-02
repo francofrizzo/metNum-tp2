@@ -132,5 +132,28 @@ double matrize::difManhattan(const vector<double>& v1, const vector<double>& v2)
 }
 
 vector<double> indeg(ifstream& ifile, int cant_nodos, int cant_aristas) {
+    int sumaTotal = 0;
+    vector<double> resultado (cant_nodos, 0); 
+    int i = 0;
+    int j = 0;
+    for (int k = 0; k < cant_aristas; k++) {
+        ifile >> i;
+        i--;
+        ifile >> j;
+        j--;
+        resultado[j]++;
+        sumaTotal++;
+    }
 
+    for (int i = 0; i < cant_nodos; i++){
+        resultado[i] = resultado[i] / sumaTotal;
+    }
+
+
+    /*for (int i = 0; i < resultado.size(); i++) {
+        cout << resultado[i] << ",";
+    }
+    cout << endl << endl; DEBUG*/ 
+
+    return resultado;
 }
