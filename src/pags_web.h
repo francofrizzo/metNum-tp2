@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "./config.h"
+#include <algorithm>    // std::sort
 
 using namespace std;
 

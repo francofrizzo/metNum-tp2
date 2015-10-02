@@ -9,15 +9,56 @@ void resolver_pags_web(
     MEDIR_TIEMPO_FIN(args.timer);
 }
 
+
+
 matrize::matrize(ifstream& data, int cant_nodos, int cant_aristas) {
     _cant_nodos = cant_nodos;
     int i = 0;
     int j = 0;
+    vector<vector<int> > dataPorFila(_cant_nodos, vector<int>());
+
     for (int k = 0; k < cant_aristas; k++) {
         data >> i;
+        i--;
         data >> j;
-        cout << "Datos: " << i << ", " << j << endl;
+        j--;
+        dataPorFila[i].push_back(j);
+        //cout << i << "," << j << endl; DEBUG
     }
+
+    for (int i = 0; i < dataPorFila.size(); i++) {
+        sort(dataPorFila[i].begin(), dataPorFila[i].end());
+    }
+
+
+    for (int l = 0; l < _cant_nodos; l++) {
+        if (dataPorFila[l].size() == 0) {
+            ptr_filas.push_back(-1);
+        } else {
+            for (int h = 0; h < dataPorFila[l].size(); h++) {
+                int n = dataPorFila[l].size();
+                
+                vals.push_back((double) 1 / n);
+                ind_cols.push_back(dataPorFila[l][h]);
+            };
+            ptr_filas.push_back(vals.size());
+        };
+    }
+
+    /*for (int i = 0; i < vals.size(); i++) {
+        cout << vals[i] << ",";
+    }
+    cout << endl << endl;
+
+    for (int i = 0; i < ind_cols.size(); i++) {
+        cout << ind_cols[i] << ",";
+    }
+    cout << endl << endl;
+
+    for (int i = 0; i < ptr_filas.size(); i++) {
+        cout << ptr_filas[i] << ",";
+    }
+    cout << endl << endl;  DEBUG*/   
 }
 
 vector<double> matrize::potencias(const vector<double>& inicial, double c, double tol) const {
