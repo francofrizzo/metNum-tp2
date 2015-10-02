@@ -1,0 +1,32 @@
+{
+    ".deps_version": 2, 
+    "g++ -c ./deportes.cpp -o ./deportes.o -std=c++0x -g": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "config.h": "input-d967668953e6c6c4dd53c18f973a1923", 
+        "deportes.cpp": "input-e81ace530e0f04578741f0dabac3e073", 
+        "deportes.h": "input-baccff3d735d68173ee5613266950036", 
+        "deportes.o": "output-745496f6abb5dd621b68acf139af5dcf"
+    }, 
+    "g++ -c ./pags_web.cpp -o ./pags_web.o -std=c++0x -g": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "config.h": "input-d967668953e6c6c4dd53c18f973a1923", 
+        "pags_web.cpp": "input-c95fe77ea63fb1a9e06ec066b72a51f3", 
+        "pags_web.h": "input-b332abba6df26f46260abd5fc7c6371b", 
+        "pags_web.o": "output-aca8f722d80318ac4cbcb4c46f18ef7a"
+    }, 
+    "g++ -c ./tp.cpp -o ./tp.o -std=c++0x -g": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "config.h": "input-d967668953e6c6c4dd53c18f973a1923", 
+        "deportes.h": "input-baccff3d735d68173ee5613266950036", 
+        "pags_web.h": "input-b332abba6df26f46260abd5fc7c6371b", 
+        "tp.cpp": "input-b5b708c00e1f2be19b889c11e3180e11", 
+        "tp.o": "output-6352130b7f8105043036102d24aa873d"
+    }, 
+    "g++ -o ./tp ./tp.o ./deportes.o ./pags_web.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "deportes.o": "input-745496f6abb5dd621b68acf139af5dcf", 
+        "pags_web.o": "input-aca8f722d80318ac4cbcb4c46f18ef7a", 
+        "tp": "output-1ba4f5291b26314d796a912afb122948", 
+        "tp.o": "input-6352130b7f8105043036102d24aa873d"
+    }
+}

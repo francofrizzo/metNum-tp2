@@ -2,14 +2,14 @@ CC=g++
 CPPFLAGS=-Wall -Wextra -pedantic -ggdb -c -std=c++11
 DEP=pags_web.o deportes.o
 
-all: rankings
+all: tp
 
-rankings: rankings.o $(DEP)
-	$(CC) rankings.o $(DEP) -o rankings
+tp: tp.o $(DEP)
+	$(CC) tp.o $(DEP) -o rankings
 
 %.o: %.cpp
 	$(CC) $(CPPFLAGS) $< -o $@
 
 clean:
 	rm -f *.o
-	rm -f rankings
+	rm -f tp
