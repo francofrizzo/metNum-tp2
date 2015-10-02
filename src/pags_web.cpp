@@ -2,7 +2,7 @@
 
 void resolver_pags_web(
     conf& args, ifstream& ifile, int cant_nodos,
-    int cant_aristas, vector<double>& resultado
+    int cant_aristas, double resultado[]
 ) {
     MEDIR_TIEMPO_INICIO(args.timer);
     matrize data(ifile, cant_nodos, cant_aristas);

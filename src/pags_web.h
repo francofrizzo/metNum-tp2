@@ -20,6 +20,6 @@ class matrize {
 };
 
 void resolver_pags_web(conf& args, ifstream& ifile, int cant_nodos,
-    int cant_aristas, vector<double>& resultado);
+    int cant_aristas, double resultado[]);
 
 #endif

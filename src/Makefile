@@ -5,7 +5,7 @@ DEP=pags_web.o deportes.o
 all: tp
 
 tp: tp.o $(DEP)
-	$(CC) tp.o $(DEP) -o rankings
+	$(CC) tp.o $(DEP) -o tp
 
 %.o: %.cpp
 	$(CC) $(CPPFLAGS) $< -o $@
