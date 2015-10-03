@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
 
     // Parseo de opciones especiales
     char opt;
-    while ((opt = getopt(argc, argv, "ho:e:t")) != -1) {
+    while ((opt = getopt(argc, argv, "ho:e:tc")) != -1) {
         switch (opt) {
             case 'h': { // mostrar ayuda
                 mostrar_ayuda(argv[0]);
@@ -76,6 +76,10 @@ int main(int argc, char* argv[]) {
             }
             case 't': { // calcular tiempo de ejecución
                 args.timer_flag = true;
+                break;
+            }
+            case 'c': { // calcular cantidad de iteraciones
+                args.count_iter_flag = true;
                 break;
             }
             default: { // si las opciones son inválidas
@@ -141,7 +145,12 @@ int main(int argc, char* argv[]) {
 
     // Imprimir por pantalla tiempo de ejecución
     if (args.timer_flag) {
-        imprimir_tiempo(args.timer);
+        cout << "Tiempo de ejecución (ticks de reloj): " << args.timer << endl;
+    }
+
+    // Imprimir por pantalla cantidad de iteraciones
+    if (args.count_iter_flag) {
+        cout << "Cantidad de iteraciones: " << args.count_iter << endl;
     }
 
     ifile.close();
@@ -167,6 +176,8 @@ void mostrar_ayuda(char* s) {
     cout << "                  archivo con nombres de equipos" << endl;
     cout << "    -t          Calcula e imprime en pantalla el tiempo insumido por la ejecu-" << endl;
     cout << "                  ción del método" << endl;
+    cout << "    -c          Calcula e imprime en pantalla la cantidad de iteraciones del al-" << endl;
+    cout << "                goritmo elegido que fueron ejecutadas" << endl;
 }
 
 void parsear_argumentos(conf& args, char* argv[]) {
@@ -178,6 +189,3 @@ void parsear_argumentos(conf& args, char* argv[]) {
     args.ofile = args.ifile + ".out";
 }
 
-void imprimir_tiempo(clock_t timer) {
-    cout << "Tiempo de ejecución (ticks de reloj): " << timer << endl;
-}

@@ -25,4 +25,7 @@ def test():
   import unittest
   unittest.main(module='scripts.tptests', exit=False, argv=argv[:1], verbosity=3)
 
+def exp1():
+  print "caca"
+
 main()

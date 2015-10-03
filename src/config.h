@@ -18,6 +18,8 @@ using namespace std;
 #define MEDIR_TIEMPO_INICIO(timer) timer = clock();
 #define MEDIR_TIEMPO_FIN(timer) timer = clock() - timer;
 
+#define SUMAR_ITERACION(count_iter) (*count_iter)++;
+
 struct conf {
     int alg;                   // algoritmo a utilizar
     double c;                  // probabilidad de teletransportación
@@ -31,10 +33,13 @@ struct conf {
 
     clock_t timer = 0;         // timer
     bool timer_flag = false;   // determina si se calculará el tiempo de ejecución
+
+    unsigned int count_iter = 0;    // contador de iteraciones
+    bool count_iter_flag = false;   // determina si se contarán las iteraciones
 };
 
 template<typename T>
-ostream& operator<<(ostream& os, vector<T>& vec) {
+ostream& operator<<(ostream& os, const vector<T>& vec) {
     os << "[";
     for (int i = 0; i < vec.size() - 1; i++) {
         os << vec[i] << ", ";

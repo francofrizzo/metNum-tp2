@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <cmath>
+#include <iomanip>
 
 #include "./config.h"
 #include <algorithm>    // std::sort
@@ -20,10 +21,12 @@ class matrize {
  public:
     matrize(ifstream&, int, int);
 
-    vector<double> potencias(const vector<double>&, const double, double) const;
+    vector<double> potencias(const vector<double>&, const double, double, unsigned int*) const;
     vector<double> prod(const vector<double>&, const double) const;
     void rango_columna(int, int&, int&) const;
     double difManhattan(const vector<double>&, const vector<double>&) const;
+
+    void imprimir() const;
 };
 
 void resolver_pags_web(conf& args, ifstream& ifile, int cant_nodos,
