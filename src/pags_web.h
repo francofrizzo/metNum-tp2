@@ -15,8 +15,8 @@ class matrize {
  private:
     int _cant_nodos;
     vector<double> vals;
-    vector<int> ind_cols;
-    vector<int> ptr_filas;
+    vector<int> ind_filas;
+    vector<int> ptr_cols;
  public:
     matrize(ifstream&, int, int);
 
