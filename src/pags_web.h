@@ -22,7 +22,7 @@ class matrize {
 
     vector<double> potencias(const vector<double>&, const double, double) const;
     vector<double> prod(const vector<double>&, const double) const;
-    void rango_fila(int, int&, int&) const;
+    void rango_columna(int, int&, int&) const;
     double difManhattan(const vector<double>&, const vector<double>&) const;
 };
 

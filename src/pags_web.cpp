@@ -9,7 +9,6 @@ void resolver_pags_web(
         case ALG_PAGERANK: {
             matrize data(ifile, cant_nodos, cant_aristas);
             vector<double> inicial (cant_nodos, (double) 1/cant_nodos);
-            cout << inicial[cant_nodos - 1] << endl;
             resultado = data.potencias(inicial, args.c, args.tol);
             break;
         }
@@ -75,17 +74,36 @@ matrize::matrize(ifstream& data, int cant_nodos, int cant_aristas) {
 
 vector<double> matrize::potencias(const vector<double>& inicial, double c, double tol) const {
     vector<double> v1 = inicial;
+    int i = 0;
     vector<double> v2 = prod(v1, c);
     while (difManhattan(v1, v2) > tol) {
-        vector<double> aux = v2;
+        v1 = v2;
         v2 = prod(v1, c);
-        v1 = aux;
     }
     return v2;
 }
 
 vector<double> matrize::prod(const vector<double>& vec, double c) const {
-    vector<double> res;
+    vector<double> res(cant_nodos, 0);
+    double dumping = c / cant_nodos;
+    for (int j = 0; j < cant_nodos; j++) {
+        double val_vec = vec[j];
+        int ptr_actual;
+        int ptr_next;
+        rango_columna(j, ptr_actual, ptr_next);
+        if (ptr_actual == -1) {
+            double a = val_vec / cant_nodos;
+            for (int i = 0; i < cant_nodos; i++) {
+                res[i] = res[i] = a;
+            }
+            // Le sumo a todos 1/n * vec_j
+        } else {
+            for (int i = ptr_actual; i < ptr_next; i++) { // vamos sumando el valor correspondiente a cada posición no nula de la fila
+                res[ind_filas[i]] = res[ind_filas[i]] + val_vec * (dumping + (1-c) * vals[i]);
+            }
+        }
+        return res;
+    }
 
     double prom = 0;
     for (int i = 0; i < _cant_nodos; i++) {
@@ -95,25 +113,14 @@ vector<double> matrize::prod(const vector<double>& vec, double c) const {
     double dumping = prom * c;
     
     for (int i = 0; i < _cant_nodos; i++) {
-        int ptr_actual;
-        int ptr_next;
-        rango_fila(i, ptr_actual, ptr_next);
         double acum = 0;
-        if (ptr_actual == -1) {
-            acum = prom;
-        } else {
-            acum = dumping;  // arranco con el valor de dumping
-            for (int j = ptr_actual; j < ptr_next; j++) { // vamos sumando el valor correspondiente a cada posición no nula de la fila
-                acum = acum + (1 - c) * vals[j] * vec[ind_cols[j]];
-            }
-        }
         res.push_back(acum);
     }
 
     return res;
 }
 
-void matrize::rango_fila(int fila, int& ptr_actual, int& ptr_next) const {
+void matrize::rango_columna(int fila, int& ptr_actual, int& ptr_next) const {
     ptr_actual = ptr_filas[fila];
     if (ptr_actual != -1) {
         ptr_next = -1;
@@ -133,7 +140,6 @@ double matrize::difManhattan(const vector<double>& v1, const vector<double>& v2)
     for (int i = 0; i < v1.size(); i++) {
         res = res + abs(v1[i] - v2[i]);
     }
-    cout << res << endl;
     return res;
 }
 

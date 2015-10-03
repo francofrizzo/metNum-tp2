@@ -2,6 +2,7 @@
 #define MNTP2_CONFIG_H
 
 #include <ctime>
+#include <vector>
 #include <string.h>
 
 using namespace std;
@@ -31,5 +32,15 @@ struct conf {
     clock_t timer = 0;         // timer
     bool timer_flag = false;   // determina si se calculará el tiempo de ejecución
 };
+
+template<typename T>
+ostream& operator<<(ostream& os, vector<T>& vec) {
+    os << "[";
+    for (int i = 0; i < vec.size() - 1; i++) {
+        os << vec[i] << ", ";
+    }
+    os << vec[vec.size() - 1] << "]";
+    return os;
+}
 
 #endif
