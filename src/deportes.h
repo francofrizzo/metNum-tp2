@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cmath>
+#include <iomanip>
 
 #include "./config.h"
 
@@ -12,9 +14,15 @@ using namespace std;
 class matriz {
  private:
     int _cant_nodos;
-    vector<vector<int> > vals;
+    vector<vector<double> > vals;
  public:
-    matriz(ifstream&, int, int);
+    matriz(ifstream&, int, int, double);
+
+    vector<double> potencias(const vector<double>&, const double, double, unsigned int*) const;
+    vector<double> prod(const vector<double>&, const double) const;
+    double difManhattan(const vector<double>&, const vector<double>&) const;
+    
+    void imprimir();
 };
 
 void resolver_deportes(conf& args, ifstream& ifile, int cant_nodos,

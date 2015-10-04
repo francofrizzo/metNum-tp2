@@ -28,14 +28,17 @@ struct conf {
     string ofile;              // path del archivo de salida
     double tol;                // tolerancia para la parada del método de la potencia
 
+    bool rfile_flag = false;   // determina si calculará y guardará el ranking
+    string rfile;              // archivo de rankings
+
     bool tfile_flag = false;   // determina si se usará archivo con nombres de equipos
     string tfile;              // path del archivo con los nombres de equipos
 
-    clock_t timer = 0;         // timer
     bool timer_flag = false;   // determina si se calculará el tiempo de ejecución
+    clock_t timer = 0;         // timer
 
-    unsigned int count_iter = 0;    // contador de iteraciones
     bool count_iter_flag = false;   // determina si se contarán las iteraciones
+    unsigned int count_iter = 0;    // contador de iteraciones
 };
 
 template<typename T>

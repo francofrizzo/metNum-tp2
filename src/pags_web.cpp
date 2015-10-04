@@ -8,7 +8,7 @@ void resolver_pags_web(
     switch (args.alg) {
         case ALG_PAGERANK: {
             matrize data(ifile, cant_nodos, cant_aristas);
-            vector<double> inicial (cant_nodos, (double) 1/cant_nodos);
+            vector<double> inicial(cant_nodos, (double) 1/cant_nodos);
             resultado = data.potencias(inicial, args.c, args.tol, &args.count_iter);
             break;
         }
@@ -108,6 +108,14 @@ vector<double> matrize::prod(const vector<double>& vec, double c) const {
     return res;
 }
 
+double matrize::difManhattan(const vector<double>& v1, const vector<double>& v2) const {
+    double res = 0;
+    for (int i = 0; i < v1.size(); i++) {
+        res = res + abs(v1[i] - v2[i]);
+    }
+    return res;
+}
+
 void matrize::rango_columna(int col, int& ptr_actual, int& ptr_next) const {
     ptr_actual = ptr_cols[col];
     if (ptr_actual != -1) {
@@ -121,14 +129,6 @@ void matrize::rango_columna(int col, int& ptr_actual, int& ptr_next) const {
     } else {
         ptr_next = -1;
     }
-}
-
-double matrize::difManhattan(const vector<double>& v1, const vector<double>& v2) const {
-    double res = 0;
-    for (int i = 0; i < v1.size(); i++) {
-        res = res + abs(v1[i] - v2[i]);
-    }
-    return res;
 }
 
 void matrize::imprimir() const {
