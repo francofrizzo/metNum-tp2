@@ -42,10 +42,12 @@ int main(int argc, char* argv[]) {
     ifstream ifile;
     ofstream ofile;
     ifstream tfile;
+    ofstream rfile;
     int cant_nodos;
     int cant_aristas;
     ifstream data;
     vector<double> resultado;
+    vector<string> teams;
 
     // Parseo de argumentos
     if (argc > 5) {
@@ -58,7 +60,7 @@ int main(int argc, char* argv[]) {
 
     // Parseo de opciones especiales
     char opt;
-    while ((opt = getopt(argc, argv, "ho:e:tc")) != -1) {
+    while ((opt = getopt(argc, argv, "ho:e:tcr:")) != -1) {
         switch (opt) {
             case 'h': { // mostrar ayuda
                 mostrar_ayuda(argv[0]);
@@ -80,6 +82,11 @@ int main(int argc, char* argv[]) {
             }
             case 'c': { // calcular cantidad de iteraciones
                 args.count_iter_flag = true;
+                break;
+            }
+            case 'r': {
+                args.rfile_flag = true;
+                args.rfile = optarg;
                 break;
             }
             default: { // si las opciones son inválidas
@@ -108,6 +115,14 @@ int main(int argc, char* argv[]) {
         if (! tfile.good()) {
             cout << "Advertencia: no se pudo abrir el archivo de nombres de equipos (será ignorado)" << endl;
             args.tfile_flag = false;
+        }
+    }
+
+    if (args.rfile_flag) {
+        rfile.open(args.rfile, ios_base::app);  // archivo de ranking
+        if (! rfile.good()) {
+            cout << "Advertencia: no se pudo abrir el archivo para escribir el ranking (será ignorado)" << endl;
+            args.rfile_flag = false;
         }
     }
 
@@ -143,6 +158,44 @@ int main(int argc, char* argv[]) {
         ofile << fixed << setprecision(6) << *it << endl;
     }
 
+    // Lectura del archivo de nombres de equipos
+    if (args.tfile_flag) {
+        teams = vector<string>(cant_nodos);
+        for (int i = 0; i < cant_nodos; i++) {
+            string j;
+            getline(tfile, j, ',');
+            getline(tfile, teams[stoi(j) - 1]);
+        }
+    }
+
+    // Escritura en archivo de rankings
+    if (args.rfile_flag) {
+        // Imprimir encabezado del archivo
+        if (args.tfile_flag) {
+            rfile << "  Pos   #Nodo   Nombre del equipo                  Puntaje" << endl;
+        } else {
+            rfile << "  Pos   #Nodo   Puntaje" << endl;
+        }
+        // Inicializar el ranking con los índices en orden creciente
+        vector<int> rank(cant_nodos);
+        for (int i = 0; i < cant_nodos; i++) {
+            rank[i] = i + 1;
+        }
+        // Ordenar los índices mirando los valores del resultado
+        sort(rank.begin(), rank.end(),
+            [&resultado](int i1, int i2) {return resultado[i1 - 1] > resultado[i2 - 1];});
+        // Imprimir en el archivo de salida
+        for (int i = 0; i < cant_nodos; i++) {
+            rfile << right << setw(5) << i + 1 << "   "
+                << right << setw(5) << rank[i] << "   ";
+            if (args.tfile_flag) {
+                rfile << left << setw(32) << teams[rank[i] - 1] << "   ";
+            }
+            rfile << "(" << right << fixed << setprecision(6) << resultado[rank[i] - 1] << ")"
+                << endl;
+        }
+    }
+
     // Imprimir por pantalla tiempo de ejecución
     if (args.timer_flag) {
         cout << "Tiempo de ejecución (ticks de reloj): " << args.timer << endl;
@@ -155,6 +208,12 @@ int main(int argc, char* argv[]) {
 
     ifile.close();
     ofile.close();
+    if (args.tfile_flag) {
+        tfile.close();
+    }
+    if (args.rfile_flag) {
+        rfile.close();
+    }
     return 0;
 }
 
@@ -172,6 +231,8 @@ void mostrar_ayuda(char* s) {
     cout << "  Opciones:" << endl;
     cout << "    -h          Muestra este texto de ayuda" << endl;
     cout << "    -o <path>   Permite especificar el nombre y ubicación del archivo de salida" << endl;
+    cout << "    -r <path>   Permite especificar un archivo para imprimir el ránking obtenido," << endl;
+    cout << "                es decir, la lista de los nodos ordenada según el resultado." << endl;
     cout << "    -e <path>   Para el tipo de instancia \"deportes\", permite especificar un" << endl;
     cout << "                  archivo con nombres de equipos" << endl;
     cout << "    -t          Calcula e imprime en pantalla el tiempo insumido por la ejecu-" << endl;

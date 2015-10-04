@@ -18,14 +18,15 @@ Lectura e investigación:
 Implementación:
   Ránking de páginas web:
    ✔ Crear clases y funciones básicas @started(15-09-30 23:28) @done (15-10-01 05:01) @lasted(5:33)
-   ☐ Programar método In-Deg
+   ✔ Programar método In-Deg @done (15-10-03 16:59)
      (Ordena por cantidad de páginas que apuntan)
-   ☐ Elegir y programar la estructura para representación de matriz esparsa
+   ✔ Elegir y programar la estructura para representación de matriz esparsa @done (15-10-03 16:59)
      Hay que elegir entre Dictionary of Keys (dok), Compressed Sparse Row (CSR) o Compressed Sparse Column (CSC)
-   ☐ Programar método de potencia para calcular autovectores
-   ☐ Crear el ejecutable principal: parseo de opciones y esas cosas
+   ✔ Programar método de potencia para calcular autovectores @done (15-10-03 17:00)
+   ✔ Crear el ejecutable principal: parseo de opciones y esas cosas @done (15-10-03 17:00)
  Ránking de ligas deportivas:
-   ☐ Decidir si reutilizamos la implementación anterior (ahora no esparsa) o hacemos una nueva
+   ✔ Decidir si reutilizamos la implementación anterior (ahora no esparsa) o hacemos una nueva @done (15-10-03 17:52)
+     Reutilizamos la anterior
 
 Experimentación:
   Ránking de páginas web:
