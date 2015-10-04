@@ -28,4 +28,6 @@ class matriz {
 void resolver_deportes(conf& args, ifstream& ifile, int cant_nodos,
     int cant_aristas, vector<double>& resultado);
 
+vector<double> ranking_afa(ifstream&, int, int);
+
 #endif

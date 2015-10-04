@@ -13,6 +13,7 @@ void resolver_deportes(
             break;
         }
         case ALG_ALT: {
+            resultado = ranking_afa(ifile, cant_nodos, cant_aristas);
             break;
         }
     }
@@ -29,7 +30,7 @@ matriz::matriz(ifstream& data, int cant_nodos, int cant_aristas, double c) {
     int goles_j = 0;
 
     for (int k = 0; k < cant_aristas; k++) {
-        data >> j >> i >> goles_i >> j >> goles_j;
+        data >> i >> i >> goles_i >> j >> goles_j;
         i--;
         j--;
         if (goles_i > goles_j) {
@@ -101,4 +102,36 @@ void matriz::imprimir() {
         }
         cout << endl;
     }
+}
+
+vector<double> ranking_afa(ifstream& data, int cant_nodos, int cant_aristas) {
+    vector<double> res(cant_nodos);
+    int i = 0;
+    int j = 0;
+    int goles_i = 0;
+    int goles_j = 0;
+    int total_puntos = 0;
+
+    for (int k = 0; k < cant_aristas; k++) {
+        data >> i >> i >> goles_i >> j >> goles_j;
+        i--;
+        j--;
+        if (goles_i == goles_j) {
+            res[i] = res[i] + 1;
+            res[j] = res[j] + 1;
+            total_puntos = total_puntos + 2;
+        } else if (goles_i > goles_j) {
+            res[i] = res[i] + 3;
+            total_puntos = total_puntos + 3;
+        } else {
+            res[j] = res[j] + 3;
+            total_puntos = total_puntos + 3;
+        }
+    }
+
+    for (int i = 0; i < cant_nodos; i++) {
+        res[i] = res[i] / total_puntos;
+    }
+
+    return res;
 }
