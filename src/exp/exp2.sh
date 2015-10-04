@@ -4,13 +4,13 @@ cs=0.85 #c probabilidad de teletransportación
 nodos=13
 iteraciones=1
 tolerancia=0.00001
-cantPag="$(seq 5 5 30)"
+#cantPag="$(seq 5 5 30)"
 
 while getopts 'cha:' opt; do
   case $opt in
     a) iteraciones=$OPTARG ;;
     h) echo ""
-       echo "    Experimento 2. Calculas el tiempo de ejecuión cuando variamos la "
+       echo "    Experimento 2. Calcula el tiempo de ejecución cuando variamos la "
        echo "    cantidad de nodos."
        echo ""
        echo "    Opciones disponibles:"
@@ -19,7 +19,7 @@ while getopts 'cha:' opt; do
        echo "        -a <núm>  Cantidad de iteraciones- por defecto 1"
        echo ""
        exit 0 ;;
-    c) if [ -d $(dirname $0)/exp1 ]; then rm $(dirname $0)/exp1 -R; fi
+    c) if [ -d $(dirname $0)/exp2 ]; then rm $(dirname $0)/exp2 -R; fi
        exit 0 ;;
   esac
 done
@@ -35,17 +35,17 @@ fi
 echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp2 #crear carpeta
 
-for k in $cantPag; do
-  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-$k.in $(dirname $0)/exp2/exp2-graph-$k.out
-done
+#for k in $cantPag; do
+  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-30.in $(dirname $0)/exp2/exp2-graph.out
+#done
 
 
-for j in $iteraciones; do 
-  for i in $cantPag; do
-      $(dirname $0)/../tp 0 $i 0 $(dirname $0)/exp2/exp2-graph.out $tolerancia -t -o $(dirname $0)/exp2/exp2-n$nodos-$i.out|
+for j in $(seq $iteraciones); do 
+  #for i in $cantPag; do
+      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2/exp2-graph.out $tolerancia -t -o $(dirname $0)/exp2/exp2-hola.out|
   sed 's/.*: //' |
       while IFS= read -r line; do
-        printf " %d \n" "$line" >> $(dirname $0)/exp2/exp2-tiempos-$i.txt ;
+        printf " %d \n" "$line" >> $(dirname $0)/exp2/exp2-tiempos.txt ;
       done
-  done
+  #done
 done

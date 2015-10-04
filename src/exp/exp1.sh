@@ -1,7 +1,6 @@
 #!/bin/bash 
 
 cs="0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1"
-nodos=13
 iteraciones=1
 tolerancia=0.00001
 
@@ -35,9 +34,9 @@ echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp1 #crear carpeta
 python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp1.in $(dirname $0)/exp1/exp1-graph.out
 
-for j in $iteraciones; do 
+for j in $(seq $iteraciones); do 
   for i in $cs; do
-      $(dirname $0)/../tp 0 $i 0 $(dirname $0)/exp1/exp1-graph.out $tolerancia -t -o $(dirname $0)/exp1/exp1-n$nodos-c$i.out|
+      $(dirname $0)/../tp 0 $i 0 $(dirname $0)/exp1/exp1-graph.out $tolerancia -t -o $(dirname $0)/exp1/exp1-c$i.out|
   sed 's/.*: //' |
       while IFS= read -r line; do
         printf " %d \n" "$line" >> $(dirname $0)/exp1/exp1-tiempos.txt ;

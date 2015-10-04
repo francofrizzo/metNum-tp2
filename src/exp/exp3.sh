@@ -18,7 +18,7 @@ while getopts 'cha:' opt; do
        echo "        -a <núm>  Cantidad de iteraciones- por defecto 1"
        echo ""
        exit 0 ;;
-    c) if [ -d $(dirname $0)/exp1 ]; then rm $(dirname $0)/exp1 -R; fi
+    c) if [ -d $(dirname $0)/exp3 ]; then rm $(dirname $0)/exp3 -R; fi
        exit 0 ;;
   esac
 done
@@ -37,7 +37,7 @@ mkdir -p $(dirname $0)/exp3 #crear carpeta
 
 python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp3.in $(dirname $0)/exp3/exp3-graph.out
 
-for j in $iteraciones; do 
+for j in $(seq $iteraciones); do 
   for i in $tolerancia; do
       $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp3/exp3-graph.out $i -t -o $(dirname $0)/exp3/exp3-n$nodos-t$i.out|
   sed 's/.*: //' |
