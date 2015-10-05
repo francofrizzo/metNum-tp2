@@ -3,14 +3,15 @@
 cs=0.85 #c probabilidad de teletransportación
 nodos=13
 iteraciones=1
-tolerancia="0.000001 0.000005 0.00001 0.00005 0.0001 0.0005 0.001 0.005 0.01 0.1 0.3 0.5 0.7" #13
+tolerancia=0.00001
+
 
 while getopts 'cha:' opt; do
   case $opt in
     a) iteraciones=$OPTARG ;;
     h) echo ""
-       echo "    Experimento 3. Calculamos el tiempo de ejecución cuando cambiamos el"
-       echo "    valor de la tolerancia."
+       echo "    Experimento 2. Calcula el tiempo de ejecución cuando variamos la "
+       echo "    cantidad de nodos."
        echo ""
        echo "    Opciones disponibles:"
        echo "        -c        Elimina los archivos generados por el experimento."
@@ -32,17 +33,22 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Generando datos de entrada...";
-mkdir -p $(dirname $0)/exp3 #crear carpeta
+mkdir -p $(dirname $0)/exp4 #crear carpeta
+
+#for k in $(seq 1 2); do
+  #python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp4-$k.in $(dirname $0)/exp4/exp4-graph-$k.out
+  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp4-1.in $(dirname $0)/exp4/exp4-graph-1.out
+#done
 
 
-python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp3.in $(dirname $0)/exp3/exp3-graph.out
+for j in $(seq $iteraciones); do 
+  #for i in $(seq 1 2); do
+      #$(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp4/exp4-graph-$i.out $tolerancia -r $(dirname $0)/exp4/exp4-ranking-$i.out -t -o $(dirname $0)/exp4/exp4-$i.out|
+       $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp4/exp4-graph-1.out $tolerancia -r $(dirname $0)/exp4/exp4-ranking-1.out -t -o $(dirname $0)/exp4/exp4-1.out|
 
-for j in $iteraciones; do 
-  for i in $tolerancia; do
-      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp3/exp3-graph.out $i -t -o $(dirname $0)/exp3/exp3-n$nodos-t$i.out|
   sed 's/.*: //' |
       while IFS= read -r line; do
-        printf " %d \n" "$line" >> $(dirname $0)/exp3/exp3-tiempos-$i.txt ;
+        printf " %d \n" "$line" >> $(dirname $0)/exp4/exp4-tiempos.txt ;
       done
-  done
+  #done
 done

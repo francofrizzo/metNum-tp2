@@ -35,17 +35,18 @@ fi
 echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp2 #crear carpeta
 
-#for k in $cantPag; do
-  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-30.in $(dirname $0)/exp2/exp2-graph.out
-#done
+for k in $(seq 5 5 30); do
+  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-$k.in $(dirname $0)/exp2/exp2-graph-$k.out
+done
 
 
 for j in $(seq $iteraciones); do 
-  #for i in $cantPag; do
-      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2/exp2-graph.out $tolerancia -t -o $(dirname $0)/exp2/exp2-hola.out|
+  for i in $(seq 5 5 30); do
+      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2/exp2-graph-$i.out $tolerancia -r $(dirname $0)/exp2/exp2-ranking-$i.out -t -o $(dirname $0)/exp2/exp2-$i.out|
+
   sed 's/.*: //' |
       while IFS= read -r line; do
         printf " %d \n" "$line" >> $(dirname $0)/exp2/exp2-tiempos.txt ;
       done
-  #done
+  done
 done
