@@ -1,1 +1,68 @@
-\section{Resultados}
+\section{Experimentación - PageRank y páginas web}
+	A continuación, se presentan los experimentos que se realizaron. Con el código del trabajo práctico se incluye una serie de scripts de \emph{bash} que permiten recrear los experimentos realizados, como así también los gráficos que se incluyen en este informe; esto puede hacerse ingresando al directorio \texttt{exp} dentro de la raíz, y ejecutando el comando \texttt{./expi.sh} siendo i el número de experimento.
+
+	\subsection{Experimento 1}
+	En el primer experimento se quiere observar como varía la cantidad de iteraciones a realizar a medida que se modifica el valor del parámetro c, para lograr que la norma Manhattan entre dos iteraciones consecutivas sea menor que la tolerancia indicada. Para ello se toma una determinada cantidad de páginas web que no se modificarán a lo largo del experimento y se ejecutará el programa para diferentes valores de c. 
+
+		\subsubsection*{Hipótesis} 
+		Se conjetura que cuanta mayor sea la probabilidad de teletransportarse de una página a otra, menos tiempo va a tardar el algoritmo en llegar al estado en el que la tolerancia sea menor que la norma Manhattan. (1-c) indica cual es la probabilidad de estando en cualquier página teletransportarse a otra. Por esto es que cuanto más chico sea el valor de c, menos tiempo de ejecución demorará el algoritmo.
+
+		\subsubsection*{Valores utilizados como parámetros} 
+
+
+		\subsubsection*{Resultados}
+
+		\subsubsection*{Conclusiones y observaciones} 
+		Como se puede observar en el experimento, a medida que aumenta el valor de c, aumenta el tiempo de ejecución. Esto se debe a que la matriz inicial no es homogénea y la que formamos a partir del c si lo es. Así, cuando la segunda toma dicha importancia, el sistema tiende más rápido a ser homogéneo y requiere menos iteraciones del ciclo para lograr una norma menor a la tolerancia deseada. 
+
+
+
+	\subsection{Experimento 2}
+	El objetivo de este experimento se pretende observar la diferencia en el tiempo de ejecución cuando se varía la cantidad de links en una determinada cantidad de páginas manteniendo el valor de la tolerancia constante.
+
+	Para ello se utilizan listas de páginas diferentes como parámetro de entrada en cada una de las ejecuciones a comparar, pero manteniendo la cantidad de las mismas. Se toma el tiempo que se demora en ejecutar el algoritmo y se lo divide por la cantidad de iteraciones realizadas. Esto permite obtener un promedio del tiempo que demora por cada una de las iteraciones del ciclo. 
+	
+
+
+		\subsubsection*{Hipótesis} 
+			Suponemos que variar la cantidad de links altera más el tiempo de ejecución que variar la cantidad de páginas sin que estén relacionadas entre ellas. Esto se debe a que en la implementación para las páginas que no están relacionadas solamente se realiza un cáculo sencillo a diferencia de las que si lo están. Por lo tanto, se espera observar que el tiempo de ejecución aumente a medida que la cantidad de relaciones entre páginas sea mayor. 
+
+		\subsubsection*{Valores utilizados como parámetros} 		
+
+		\subsubsection*{Resultados}
+
+		\subsubsection*{Conclusiones y observaciones} 
+
+
+
+	\subsection{Experimento 3}
+	En este experimento también se observa la diferencia en el tiempo de ejecución pero comparando igual cantidad de páginas y relaciones entre las mismas y variando el valor de la tolerancia.
+
+	Para ello se toma como parámetro de entrada en cada una de las ejecuciones una misma lista de páginas y se incrementa el valor de la tolerancia.
+
+		\subsubsection*{Hipótesis} 
+		Creemos que cuanto mayor sea la tolerancia, menor será el tiempo de ejecución del algoritmo. Esto se debe a que el algoritmo termina cuando la diferencia Manhattan es menor que la tolerancia. Entonces cuanto más grande sea el valor de la tolerancia, más rápido se cumplirá la condición para salir del ciclo y menos tardará en ejecutarse el algoritmo. 
+
+		\subsubsection*{Valores utilizados como parámetros} 		
+
+		\subsubsection*{Resultados}
+
+		\subsubsection*{Conclusiones y observaciones}
+		Como se puede ver en el gráfico, al aumentar la tolerancia disminuye el tiempo de ejecución. En este sentido, se pudo confirmar la hipótesis.  
+
+	
+
+	\subsection{Experimento 4}
+	Otra de las pruebas consiste en comparar los rankings formados al ejecutar los algoritmos de PageRank y el de INDEG. Primero se analiza una lista de páginas de entrada en la que una de ellas sea apuntada por el resto. Luego se realiza la comparación con una lista en la que hayan dos páginas (a las que llamaremos página 1 y página 3) que sean apuntadas por varias paginas. Además, la página 3 tendrá un link a la 1. También se cuenta con otra (a la que llamaremos página 2) que apunta y es apuntada por la página 1.
+
+		\subsubsection*{Hipótesis} 
+		En el primero, suponemos que los rankings obtenidos en ambos casos serán iguales ya que existe una sola página principal y el resto tiene igual cantidad de relaciones. Por otro lado, en el segundo notaremos diferencias. Llamaremos enlace fuerte a aquel que va de una página que es apuntada por muchas otras hacia otra página. El método PageRank tiene en cuenta cual es el peso de los links que apuntan a las distintas páginas. En el caso de INDEG solo se utiliza como información la cantidad de enlaces que llegan a cada una de las distintas páginas.
+
+		En el experimento, si consideramos el método PageRank, la página 1 quedará en primer lugar ya que es la que recibe más links a la misma, pero en segundo lugar quedará la página 2. Esto se debe a que el enlace de la 1 a la 2 es un enlace muy fuerte. En el caso de INDEG, esto no sucede ya que este método solo toma en cuenta que existe un único link hacia la página 2. Por lo tanto en PageRank las posiciones serán 1-2-3 y luego el resto. En INDEG tendremos primero a la página 1 seguida de la 3, luego la 2 y finalmente el resto.
+
+		\subsubsection*{Valores utilizados como parámetros} 		
+
+		\subsubsection*{Resultados}
+
+		\subsubsection*{Conclusiones y observaciones} 
+		Como podemos ver en los rankings del primer análisis en ambos casos quedan iguales. En cambio en el segundo observamos variaciones ya que en la lista de entrada el peso de todos los enlaces no es el mismo, es decir, hay enlaces más fuertes que otros. A diferencia de PageRank, el método INDEG no tiene en cuenta esta propiedad. Por lo tanto, si en las páginas de entrada todos los links tienen igual fuerza, el resultado obtenido por ambos métodos no difiere. 
