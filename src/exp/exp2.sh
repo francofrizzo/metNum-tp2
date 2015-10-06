@@ -37,9 +37,9 @@ fi
 echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp2 #crear carpeta
 
-#for k in $links; do
-#  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-$k.in $(dirname $0)/exp2/exp2-graph-$k.out
-#done
+for k in $links; do
+  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-$k.in $(dirname $0)/exp2/exp2-graph-$k.out
+done
 
 printf "%d\n" $iteraciones >> $(dirname $0)/exp2/exp2-data.txt
 printf "%d\n" $iteraciones >> $(dirname $0)/exp2/exp2-iteraciones.txt

@@ -1,4 +1,5 @@
 #!/bin/bash 
+LC_NUMERIC="en_US.UTF-8"
 
 cs=0.85 #c probabilidad de teletransportación
 nodos=13
@@ -37,12 +38,19 @@ mkdir -p $(dirname $0)/exp3 #crear carpeta
 
 python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp3.in $(dirname $0)/exp3/exp3-graph.out
 
-for j in $(seq $iteraciones); do 
-  for i in $tolerancia; do
+printf "%d\n" $iteraciones >> $(dirname $0)/exp3/exp3-data.txt
+
+
+for i in $tolerancia; do
+  printf "%f"  $i >> $(dirname $0)/exp3/exp3-data.txt
+  for j in $(seq $iteraciones); do 
       $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp3/exp3-graph.out $i -t -o $(dirname $0)/exp3/exp3-n$nodos-t$i.out|
   sed 's/.*: //' |
       while IFS= read -r line; do
-        printf " %d \n" "$line" >> $(dirname $0)/exp3/exp3-tiempos-$i.txt ;
+        printf " %d" "$line" >> $(dirname $0)/exp3/exp3-data.txt ;
       done
   done
+  printf "\n" >> $(dirname $0)/exp3/exp3-data.txt
 done
+
+octave -q $(dirname $0)/exp3.m

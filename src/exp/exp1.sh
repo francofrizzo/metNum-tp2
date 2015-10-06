@@ -35,7 +35,7 @@ echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp1 #crear carpeta
 python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp1.in $(dirname $0)/exp1/exp1-graph.out
 
-echo "$iteraciones" #DEBUG
+#echo "$iteraciones" #DEBUG
 
 printf "%d\n" $iteraciones >> $(dirname $0)/exp1/exp1-data.txt
 
