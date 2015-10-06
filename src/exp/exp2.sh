@@ -1,9 +1,11 @@
 #!/bin/bash 
+LC_NUMERIC="en_US.UTF-8"
 
 cs=0.85 #c probabilidad de teletransportación
 nodos=13
 iteraciones=1
 tolerancia=0.00001
+links="4 32 70 105 130 160"
 #cantPag="$(seq 5 5 30)"
 
 while getopts 'cha:' opt; do
@@ -35,18 +37,32 @@ fi
 echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp2 #crear carpeta
 
-for k in $(seq 5 5 30); do
-  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-$k.in $(dirname $0)/exp2/exp2-graph-$k.out
-done
+#for k in $links; do
+#  python $(dirname $0)/../tools/webparser.py $(dirname $0)/../tools/weblist-exp2-$k.in $(dirname $0)/exp2/exp2-graph-$k.out
+#done
 
+printf "%d\n" $iteraciones >> $(dirname $0)/exp2/exp2-data.txt
+printf "%d\n" $iteraciones >> $(dirname $0)/exp2/exp2-iteraciones.txt
 
-for j in $(seq $iteraciones); do 
-  for i in $(seq 5 5 30); do
-      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2/exp2-graph-$i.out $tolerancia -r $(dirname $0)/exp2/exp2-ranking-$i.out -t -o $(dirname $0)/exp2/exp2-$i.out|
-
+for i in $links; do
+  printf "%d"  $i >> $(dirname $0)/exp2/exp2-data.txt
+  printf "%d"  $i >> $(dirname $0)/exp2/exp2-iteraciones.txt
+  for j in $(seq $iteraciones); do 
+      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2/exp2-graph-$i.out $tolerancia -r $(dirname $0)/exp2/exp2-ranking-$i.out -t -o $(dirname $0)/exp2/exp2-$i.out |
   sed 's/.*: //' |
       while IFS= read -r line; do
-        printf " %d \n" "$line" >> $(dirname $0)/exp2/exp2-tiempos.txt ;
+        printf " %d" "$line" >> $(dirname $0)/exp2/exp2-data.txt 
       done
   done
+  for j in $(seq $iteraciones); do 
+      $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2/exp2-graph-$i.out $tolerancia -r $(dirname $0)/exp2/exp2-ranking-$i.out -o $(dirname $0)/exp2/exp2-$i.out -c |
+  sed 's/.*: //' |
+      while IFS= read -r line; do
+        printf " %d" "$line" >> $(dirname $0)/exp2/exp2-iteraciones.txt 
+      done
+  done
+  printf "\n" >> $(dirname $0)/exp2/exp2-data.txt
+  printf "\n" >> $(dirname $0)/exp2/exp2-iteraciones.txt
 done
+
+octave -q $(dirname $0)/exp2.m
