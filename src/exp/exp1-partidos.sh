@@ -2,7 +2,7 @@
 
 LC_NUMERIC="en_US.UTF-8"
 
-cs="0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1"
+cs=0.85
 iteraciones=1
 tolerancia=0.00001
 
@@ -30,18 +30,21 @@ echo "Compilando..."
 make -s -C $(dirname $0)/..
 if [ $? -ne 0 ]; then
     echo "ERROR: Error de compilación."
-    exit 1
+    exit 1s
 fi
 
 echo "Generando datos de entrada...";
-mkdir -p $(dirname $0)/exp1-partidos #crear carpeta
+mkdir -p $(dirname $0)/exp2-partidos #crear carpeta
 
   for j in $(seq $iteraciones); do 
-      for i in $cs ; do
-        $(dirname $0)/../tp 1 $i 0 $(dirname $0)/partidos-exp1.out $tolerancia -r $(dirname $0)/exp1-partidos/exp1-ranking-$i.out -t -o $(dirname $0)/exp1-partidos/exp1-$i.out |
-        sed 's/.*: //' |
-        while IFS= read -r line; do
-          printf " %d \n" $line >> $(dirname $0)/exp1-partidos/exp1-partidos-tiempos.txt ;
-        done
+      
+      $(dirname $0)/../tp 1 $cs 1 $(dirname $0)/partidos-exp2.out $tolerancia -r $(dirname $0)/exp2-partidos/exp2-ranking-$i-afa.out -t -o $(dirname $0)/exp2-partidos/exp1-$i-afa.out|
+
+      $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/partidos-exp2.out $tolerancia -r $(dirname $0)/exp2-partidos/exp2-ranking-$i-page.out -t -o $(dirname $0)/exp2-partidos/exp1-$i-page.out|
+
+      sed 's/.*: //' |
+      while IFS= read -r line; do
+        printf " %d \n" $line >> $(dirname $0)/exp2-partidos/exp2-partidos-tiempos.txt ;
       done
+      
   done
