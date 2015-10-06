@@ -37,14 +37,14 @@ echo "Generando datos de entrada...";
 mkdir -p $(dirname $0)/exp2-partidos #crear carpeta
 
   for j in $(seq $iteraciones); do 
-      for i in $cs ; do
-        $(dirname $0)/../tp 1 $cs 0 $(dirname $0)/exp2-partidos/exp2-graph-$i-afa.out $tolerancia -r $(dirname $0)/exp2-partidos/exp2-ranking-$i-afa.out -t -o $(dirname $0)/exp2-partidos/exp1-$i-afa.out|
+      
+      $(dirname $0)/../tp 1 $cs 1 $(dirname $0)/partidos-exp2.out $tolerancia -r $(dirname $0)/exp2-partidos/exp2-ranking-$i-afa.out -t -o $(dirname $0)/exp2-partidos/exp1-$i-afa.out|
 
-         $(dirname $0)/../tp 0 $cs 0 $(dirname $0)/exp2-partidos/exp2-graph-$i-page.out $tolerancia -r $(dirname $0)/exp2-partidos/exp2-ranking-$i-page.out -t -o $(dirname $0)/exp2-partidos/exp1-$i-page.out|
+      $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/partidos-exp2.out $tolerancia -r $(dirname $0)/exp2-partidos/exp2-ranking-$i-page.out -t -o $(dirname $0)/exp2-partidos/exp1-$i-page.out|
 
-        sed 's/.*: //' |
-        while IFS= read -r line; do
-          printf " %d \n" $line >> $(dirname $0)/exp2-partidos/exp2-partidos-tiempos.txt ;
-        done
+      sed 's/.*: //' |
+      while IFS= read -r line; do
+        printf " %d \n" $line >> $(dirname $0)/exp2-partidos/exp2-partidos-tiempos.txt ;
       done
+      
   done

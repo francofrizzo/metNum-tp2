@@ -38,8 +38,7 @@ mkdir -p $(dirname $0)/exp1-partidos #crear carpeta
 
   for j in $(seq $iteraciones); do 
       for i in $cs ; do
-        $(dirname $0)/../tp 1 $cs 0 $(dirname $0)/exp1-partidos/exp1-graph-$i.out $tolerancia -r $(dirname $0)/exp1-partidos/exp1-ranking-$i.out -t -o $(dirname $0)/exp1-partidos/exp1-$i.out|
-
+        $(dirname $0)/../tp 1 $i 0 $(dirname $0)/partidos-exp1.out $tolerancia -r $(dirname $0)/exp1-partidos/exp1-ranking-$i.out -t -o $(dirname $0)/exp1-partidos/exp1-$i.out |
         sed 's/.*: //' |
         while IFS= read -r line; do
           printf " %d \n" $line >> $(dirname $0)/exp1-partidos/exp1-partidos-tiempos.txt ;
