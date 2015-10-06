@@ -44,7 +44,7 @@ mkdir -p $(dirname $0)/exp2-partidos #crear carpeta
 
         sed 's/.*: //' |
         while IFS= read -r line; do
-          printf " %d \n" "$line" >> $(dirname $0)/exp2-partidos/exp2-partidos-tiempos.txt ;
+          printf " %d \n" $line >> $(dirname $0)/exp2-partidos/exp2-partidos-tiempos.txt ;
         done
       done
   done
