@@ -159,23 +159,13 @@
 \section{Experimentación - PageRank y ligas deportivas}
 	
 	\subsection{Experimento 1}
-
-		\subsubsection*{Hipótesis}
-		
-		\subsubsection*{Valores utilizados como parámetros} 
-
-		\subsubsection*{Resultados}
-
-		\subsubsection*{Conclusiones y observaciones} 
-
-	\subsection{Experimento 2}
 	En este experimento se verá la diferencia entre los métodos de pageRank y el de la AFA para determinar el ranking de una liga deportiva. Para ello se tomará como parámetro de entrada una tabla con los partidos, sus respectivas fechas, y sus resultados. En la misma, deberá existir un equipo que ocupe una de las primaras posiciones en la tabla de rankings que haya perdido contra otro que ocupa una de las últimas. Observaremos la diferencia entre el ranking generado por cada uno de los métodos.
 		
 
 		\subsubsection*{Hipótesis} 
 		Cuando se juega un partido entre dos equipos, en el método de pageRank se tendrá en cuanta que tan fuerte son los equipos involucrados y cual fue la diferencia de goles en el partido. En cambio, en el método de la AFA el ganador recibirá 3 puntos sin importar los resultados ni las posiciones que los mismos tenían hasta el momento. Esto puede generar diferencias en el ranking ya que cada método considera distinta información para determinar las nuevas posiciones. 
 		
-		Por otro lado, si un equipo malo juega contra uno bueno y gana el peor, para el método de la AFA es exactamente igual que haya jugado con cualquier otro. Para pageRank, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así en este método entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la AFA no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador. Si éste se encontraba en las ultimas posiciones de la tabla no podrá ascender más de 3 posiciones. 		
+		Por otro lado, si un equipo que se encuentra en las últimas posiciones de la tabla juega contra uno que esta en las primeras y gana el peor, para el método de la AFA es exactamente igual que haya jugado con cualquier otro. Para pageRank, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así en este método entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la AFA no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador. Si éste se encontraba en las ultimas posiciones de la tabla no podrá ascender más de 3 posiciones. 		
 
 		\subsubsection*{Valores utilizados como parámetros} 
 
