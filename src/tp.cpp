@@ -5,6 +5,7 @@
 #include <string.h>
 #include <limits>
 #include <ctime>
+#include <algorithm>
 
 #include "./config.h"
 #include "./pags_web.h"
@@ -249,4 +250,3 @@ void parsear_argumentos(conf& args, char* argv[]) {
     INTENTAR_PARSEO(args.tol = stod(argv[5]);, <tolerancia>)
     args.ofile = args.ifile + ".out";
 }
-

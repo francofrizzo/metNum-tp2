@@ -6,9 +6,9 @@
 #include <vector>
 #include <cmath>
 #include <iomanip>
+#include <algorithm>
 
 #include "./config.h"
-#include <algorithm>    // std::sort
 
 using namespace std;
 

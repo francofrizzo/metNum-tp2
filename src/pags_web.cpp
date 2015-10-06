@@ -32,7 +32,6 @@ matrize::matrize(ifstream& data, int cant_nodos, int cant_aristas) {
         data >> i;
         i--;
         dataPorColumna[j].push_back(i);
-        // cout << i << "," << j << endl; DEBUG
     }
 
     for (int i = 0; i < dataPorColumna.size(); i++) {
@@ -51,22 +50,7 @@ matrize::matrize(ifstream& data, int cant_nodos, int cant_aristas) {
                 ind_filas.push_back(dataPorColumna[l][h]);
             };
         };
-    }
-
-    // for (int i = 0; i < vals.size(); i++) {
-    //     cout << vals[i] << ",";
-    // }
-    // cout << endl << endl;
-
-    // for (int i = 0; i < ind_filas.size(); i++) {
-    //     cout << ind_filas[i] << ",";
-    // }
-    // cout << endl << endl;
-
-    // for (int i = 0; i < ptr_cols.size(); i++) {
-    //     cout << ptr_cols[i] << ",";
-    // }
-    // cout << endl << endl;  //DEBUG    
+    } 
 }
 
 vector<double> matrize::potencias(const vector<double>& inicial, double c, double tol, unsigned int* counter) const {
@@ -175,11 +159,6 @@ vector<double> indeg(ifstream& ifile, int cant_nodos, int cant_aristas) {
     for (int i = 0; i < cant_nodos; i++){
         resultado[i] = resultado[i] / sumaTotal;
     }
-
-    /* for (int i = 0; i < resultado.size(); i++) {
-        cout << resultado[i] << ",";
-    }
-    cout << endl << endl; */
 
     return resultado;
 }
