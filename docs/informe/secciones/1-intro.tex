@@ -12,13 +12,12 @@
 
 \section{Conceptos teóricos}
 
-    En esta sección, enunciamos a modo introductorio los principales conceptos que funcionan como sustento teórico de los métodos que implementaremos. Nuestro objetivo no es profundizar en los mismos, dado que ya existen excelentes trabajos realizados que abordan cada uno de ellos más en detalle.
+    En esta sección, enunciamos a modo introductorio los principales conceptos que funcionan como sustento teórico de los métodos numéricos que emplearemos. Nuestro objetivo no es profundizar en los mismos, dado que ya existen excelentes trabajos realizados que abordan cada uno de ellos más en detalle.
 
-    \subsection{Cadenas de Márkov y matrices estocásticas}
+    Consideremos un sistema que puede tomar diferentes estados, dentro de un conjunto finito de ellos. Un \emph{proceso estocástico} es una sucesión de estos estados. Si consideramos un caso particular de proceso estocástico, en que la probabilidad de que el sistema se encuentre en un estado dado en el momento $k+1$ queda completamente determinada por su estado en el momento $k$, tenemos una \emph{cadena de Márkov}.
 
-    % TODO
+    Supongamos que el sistema tiene $n$ estados posibles, y denominemos $p_{ij}$ a la probabilidad de que el sistema pase del estado $j$ al estado $i$. Entonces podemos acomodar estos valores en una matriz $P \in \mathbb{R}^{n \times n}$, que llamaremos \emph{matriz de transición} de la cadena.
 
-    \subsection{Cálculo de autovectores a través del método de la potencia}
+    Notemos que todas las entradas de la matriz, dado que indican valores de una probabilidad, son no negativas, y además, para $j = 1, \cdots, n$, tenemos que $\sum_{i=1}^{n} p_{ij} = 1$. A una matriz que cumpla con estas condiciones la denominaremos \emph{matriz estocástica por columnas}, y, como enuncian Bryan y Leise en \cite{Bryan2006}, cumplen con la importante propiedad de tener a $1$ como autovalor dominante; es decir, $1$ es autovalor y además, para cualquier otro $\lambda \in \mathbb{R}$ autovalor de una de estas matrices, se cumple que $|\lambda| < 1$. Si, además, una matriz estocástica cumple que todas sus entradas son estrictamente positivas, entonces podemos afirmar que la dimensión del espacio de autovectores asociados al autovalor $1$ tiene dimensión $1$.
 
-    % TODO
-
+    (Solo falta explicar el método de la potencia)
