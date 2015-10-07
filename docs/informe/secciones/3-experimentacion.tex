@@ -1,5 +1,5 @@
-\section{Experimentación - PageRank y páginas web}
-	A continuación, se presentan los experimentos que se realizaron. Con el código del trabajo práctico se incluye una serie de scripts de \emph{bash} que permiten recrear los experimentos realizados, como así también los gráficos que se incluyen en este informe; esto puede hacerse ingresando al directorio \texttt{exp} dentro de la raíz, y ejecutando el comando \texttt{./expi.sh} siendo i el número de experimento.
+\section{Experimentación - \emph{PageRank} y páginas web}
+	A continuación, se presentan los experimentos que se realizaron. Con el código del trabajo práctico se incluye una serie de scripts de \emph{bash} que permiten recrear los experimentos realizados, como así también los gráficos que se incluyen en este informe; esto puede hacerse ingresando al directorio \texttt{exp} dentro de la raíz, y ejecutando el comando \texttt{./expi.sh}, siendo i el número de experimento.
 
 	\subsection{Experimento 1}
 	En el primer experimento se quiere observar como varía el tiempo de ejecución a medida que se modifica el valor del parámetro c, para lograr que la norma Manhattan entre dos iteraciones consecutivas sea menor que la tolerancia indicada. Para ello se toma una determinada cantidad de páginas web que no se modificarán a lo largo del experimento y se ejecutará el programa para diferentes valores de c. 
@@ -171,5 +171,7 @@
 
 		\subsubsection*{Resultados}
 
-		\subsubsection*{Conclusiones y observaciones} 
+		\subsubsection*{Conclusiones y observaciones}
+
+		Como podemos ver en las tablas de rankings, los ordenes no son exactamente iguales. Por ejemplo, mirando el equipo 1 (Aldosivi), en el ranking de la AFA se encuentra en la posición 20 y cuando usamos el método de PageRank éste esta en la posición 2. Esto se debe a que Aldosivi le ganó tanto al equipo 24 (San Lorenzo) como al 7 (Boca Juniors), que se encontraban primero y segundo en la tabla de posiciones de la AFA, respectivamente. Por esto, en PageRank sube muchas posiciones mientras que con la AFA solo se le otorgan 3 puntos por cada uno de los dos partidos.
 
