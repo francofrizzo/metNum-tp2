@@ -15,7 +15,7 @@
 
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
-			      \includegraphics[width=12cm]{../../src/exp/graficos/exp1.png} \\
+			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp1.png} \\
 			    \end{tabular}}
 
 			\subsubsection*{Discusión} 
@@ -35,7 +35,7 @@
 			
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
-			      \includegraphics[width=12cm]{../../src/exp/graficos/exp2.png} \\
+			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp2.png} \\
 			    \end{tabular}}
 
 
@@ -55,7 +55,7 @@
 
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
-			      \includegraphics[width=12cm]{../../src/exp/graficos/exp3.png} \\
+			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp3.png} \\
 			    \end{tabular}}
 
 			\subsubsection*{Conclusiones y observaciones}
@@ -66,9 +66,18 @@
 
 		Luego se realiza la comparación con una lista en la que hayan dos páginas (a las que llamaremos página 1 y página 3) que sean apuntadas por varias paginas. Además, la página 3 tendrá un link a la 1. También se cuenta con otra (a la que llamaremos página 2) que apunta y es apuntada por la página 1, tal como se muestra en el siguiente esquema (Web 2):
 
-				{\centering \begin{tabular}{c}
-			      \includegraphics[width=6cm]{../../src/exp/graficos/exp4-graph.png} \\
-			    \end{tabular}}
+			\begin{figure}[h]
+
+				\begin{center}
+					\begin{tabular}{@{\extracolsep{2cm}} cc}
+				      \includegraphics{imagenes/exp4-graph1.pdf} & \includegraphics{imagenes/exp4-graph2.pdf} \\
+				      {\small \strong{Web 1}} & {\small \strong{Web 2}}
+				    \end{tabular}
+			    \end{center}
+
+		    	\caption{Redes utilizadas como datos de entrada para el Experimento 4} \label{fig:exp4-webs}
+
+		    \end{figure}
 
 			\subsubsection*{Hipótesis} 
 			En el primero, suponemos que los \emph{rankings} obtenidos en ambos casos serán iguales ya que existe una sola página principal y el resto tiene igual cantidad de relaciones. Por otro lado, en el segundo notaremos diferencias. Llamaremos enlace fuerte a aquel que va de una página que es apuntada por muchas otras hacia otra página. El método \emph{PageRank} tiene en cuenta cuál es el peso de los \emph{links} que apuntan a las distintas páginas. En el caso de \textsc{In-deg}, solo se utiliza como información la cantidad de enlaces que llegan a cada una de las distintas páginas.
