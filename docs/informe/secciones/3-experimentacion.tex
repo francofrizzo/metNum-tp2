@@ -5,13 +5,14 @@
 	A continuación, se presentan los experimentos que se realizaron. Con el código del trabajo práctico se incluye una serie de scripts de \emph{bash} que permiten recrear los experimentos realizados, como así también los gráficos que se incluyen en este informe; esto puede hacerse ingresando al directorio \texttt{exp} dentro de la raíz, y ejecutando el comando \texttt{./exp{i}.sh}, siendo \texttt{i} el número de experimento.
 
 		\subsubsection{Experimento 1}
-		En el primer experimento se quiere observar como varía el tiempo de ejecución a medida que se modifica el valor del parámetro $c$, para lograr que la norma Manhattan entre dos iteraciones consecutivas sea menor que la tolerancia indicada. Para ello se toma una determinada cantidad de páginas web que no se modificarán a lo largo del experimento y se ejecutará el programa para diferentes valores de $c$. 
+			\subsubsection*{Presentación}
+			En el primer experimento se quiere observar como varía el tiempo de ejecución a medida que se modifica el valor del parámetro $c$, para lograr que la norma Manhattan entre dos iteraciones consecutivas sea menor que la tolerancia indicada. Para ello se toma una determinada cantidad de páginas web que no se modificarán a lo largo del experimento y se ejecutará el programa para diferentes valores de $c$. Con el fin de mejorar la precisión de los resultados y evitar posibles interferencias (por ejemplo, las generadas por otras tareas que pueda estar ejecutando la computadora) cada medición se repitió 10 veces, tomando luego el promedio de los datos obtenidos
 
 			\subsubsection*{Hipótesis}
 			Se conjetura que cuanta mayor sea la probabilidad de teletransportarse de una página a otra, menos tiempo va a tardar el algoritmo en llegar al estado en el que la tolerancia sea menor que la norma Manhattan. $(1-c)$ indica cuál es la probabilidad de, estando en cualquier página, teletransportarse a otra. Por esto es que cuanto más chico sea el valor de $c$, menos tiempo de ejecución demorará el algoritmo.
 
-			\subsubsection*{Valores utilizados como parámetros} 
-			Se toman 13 páginas con 16 \emph{links}. Además el parámetro $c$ toma los valores \texttt{0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}. La tolerancia es de \texttt{0.00001}.
+			\subsubsection*{Datos de entrada} 
+			Se toman 13 páginas con 16 \emph{links}. Además el parámetro $c$ toma los valores \texttt{0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}. La tolerancia es de \texttt{0.00001}. Se eligió la cantidad de páginas y el valor de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. 
 
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
@@ -23,15 +24,15 @@
 
 
 		\subsubsection{Experimento 2}
-		Con este experimento se pretende observar la diferencia en el tiempo de ejecución cuando se varía la cantidad de \emph{links} en una determinada cantidad de páginas, manteniendo el valor de la tolerancia constante.
-
-		Para ello se utilizan listas de páginas diferentes como parámetro de entrada en cada una de las ejecuciones a comparar, pero manteniendo la cantidad de las mismas. Se toma el tiempo que se demora en ejecutar el algoritmo y se lo divide por la cantidad de iteraciones realizadas. Esto permite obtener un promedio del tiempo que demora por cada una de las iteraciones del ciclo.
+			\subsubsection*{Presentación}
+			Con este experimento se pretende observar la diferencia en el tiempo de ejecución cuando se varía la cantidad de \emph{links} en una determinada cantidad de páginas, manteniendo el valor de la tolerancia constante.
+			Para ello se utilizan listas de páginas diferentes como parámetro de entrada en cada una de las ejecuciones a comparar, pero manteniendo la cantidad de las mismas. Se toma el tiempo que se demora en ejecutar el algoritmo y se lo divide por la cantidad de iteraciones realizadas. Esto permite obtener un promedio del tiempo que demora por cada una de las iteraciones del ciclo.
 		
 			\subsubsection*{Hipótesis} 
 			Suponemos que variar la cantidad de \emph{links} altera más el tiempo de ejecución que variar la cantidad de páginas sin que estén relacionadas entre ellas. Esto se debe a que, dada la forma en la que está implementado el algoritmo, sacando provecho del hecho de que la matriz es esparsa, agregar entradas a la matriz de adyacencia tendrá un mayor impacto sobre la cantidad de operaciones a realizar. Por lo tanto, se espera observar que el tiempo de ejecución aumente a medida que la cantidad de relaciones entre páginas sea mayor.
 
-			\subsubsection*{Valores utilizados como parámetros} 		
-			Para este experimento se toman 50 páginas. La cantidad de \emph{links} entre ellas varía, tomando los valores \texttt{4, 32, 70, 105, 130, 160}. Además el valor de $c$ es \texttt{0.85} y el valor de la tolerancia es \texttt{0.00001}. 
+			\subsubsection*{Datos de entrada} 		
+			Para este experimento se toman 50 páginas. La cantidad de \emph{links} entre ellas varía, tomando los valores \texttt{4, 32, 70, 105, 130, 160}. Estos valores fueron elegidos a modo de análisis. Para generarlos se creó una red a partir de diferentes páginas web interconectadas entre sí. Luego se borraron algunas páginas, eliminando una determinada cantidad de \emph{links}, y se agregaron nuevas páginas desconectadas totalmente de las ya existentes. De esta forma, no se disminuyó la cantidad de páginas pero sí la de \emph{links}. Además el valor de $c$ es \texttt{0.85} y el valor de la tolerancia es \texttt{0.00001}. El valor de $c$ y de la tolerancia fueron elegidos arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. 
 			
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
@@ -43,15 +44,15 @@
 			Como se puede observar en el gráfico, a medida que aumentan las relaciones entre las páginas el tiempo de ejecución es mayor.  
 
 		\subsubsection{Experimento 3}
-		En este experimento también se observa la diferencia en el tiempo de ejecución, pero comparando igual cantidad de páginas y relaciones entre las mismas y variando el valor de la tolerancia.
-
-		Para ello se toma como parámetro de entrada en cada una de las ejecuciones una misma lista de páginas y se incrementa el valor de la tolerancia.
+			\subsubsection*{Presentación}
+			En este experimento también se observa la diferencia en el tiempo de ejecución, pero comparando igual cantidad de páginas y relaciones entre las mismas y variando el valor de la tolerancia.
+			Para ello se toma como parámetro de entrada en cada una de las ejecuciones una misma lista de páginas y se incrementa el valor de la tolerancia.
 
 			\subsubsection*{Hipótesis} 
 			Creemos que cuanto mayor sea la tolerancia, menor será el tiempo de ejecución del algoritmo. Esto se debe a que el algoritmo termina cuando la diferencia Manhattan es menor que la tolerancia. Entonces cuanto más grande sea el valor de la tolerancia, más rápido se cumplirá la condición para salir del ciclo y menos tardará en ejecutarse el algoritmo. 
 
-			\subsubsection*{Valores utilizados como parámetros} 
-			Se toman 13 páginas con 16 \emph{links}. Además la tolerancia toma los siguientes valores: \texttt{0.000001, 0.000005, 0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1, 0.3, 0.5, 0.7}. El parámetro $c$ es igual a \texttt{0.85}.
+			\subsubsection*{Datos de entrada} 
+			Se toman 13 páginas con 16 \emph{links}. Además la tolerancia toma los siguientes valores: \texttt{0.000001, 0.000005, 0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1, 0.3, 0.5, 0.7}. El parámetro $c$ es igual a \texttt{0.85}. El valor de $c$ y la cantidad de páginas fueron elegidos arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Los valores de la tolerancia fueron tomados a modo de análisis teniendo en cuenta que el objetivo del experimento. 
 
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
