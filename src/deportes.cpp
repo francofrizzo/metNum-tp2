@@ -69,13 +69,13 @@ matriz::matriz(ifstream& data, conf& args, int cant_nodos, int cant_aristas) {
             if (args.criterio_empates == 2) {
                 if (suma1 == 0) {
                     if (suma2 == 0) {
-                        vals[i][j] = unif * (1 - args.k2);
+                        vals[i][j] = unif;
                     } else {
                         vals[i][j] = unif * (1 - args.k2) + (empates[i][j] / suma2) * args.k2;
                     }
                 } else {
                     if (suma2 == 0) {
-                        vals[i][j] = (vals[i][j] / suma1) * args.c + dumping;
+                        vals[i][j] = (vals[i][j] / suma1) * args.c + unif * args.k2 + dumping;
                     } else {
                         vals[i][j] = (vals[i][j] / suma1) * args.c + (empates[i][j] / suma2) * args.k2 + dumping;
                     }
