@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 
     // Parseo de opciones especiales
     char opt;
-    while ((opt = getopt(argc, argv, "ho:e:tcr:")) != -1) {
+    while ((opt = getopt(argc, argv, "ho:e:tcr:1:2:")) != -1) {
         switch (opt) {
             case 'h': { // mostrar ayuda
                 mostrar_ayuda(argv[0]);
@@ -88,6 +88,16 @@ int main(int argc, char* argv[]) {
             case 'r': {
                 args.rfile_flag = true;
                 args.rfile = optarg;
+                break;
+            }
+            case '1': {
+                args.criterio_empates = 1;
+                args.k1 = opt;
+                break;
+            }
+            case '2': {
+                args.criterio_empates = 2;
+                args.k2 = opt;
                 break;
             }
             default: { // si las opciones son inválidas
@@ -240,6 +250,10 @@ void mostrar_ayuda(char* s) {
     cout << "                  ción del método" << endl;
     cout << "    -c          Calcula e imprime en pantalla la cantidad de iteraciones del al-" << endl;
     cout << "                goritmo elegido que fueron ejecutadas" << endl;
+    cout << "    -1 <k>      Para el tipo de instancia deportes, usa el método 1 para la re-" << endl;
+    cout <<"                   solución de empates" << endl;
+    cout << "    -2 <k>      Para el tipo de instancia deportes, usa el método 2 para la re-" << endl;
+    cout <<"                   solución de empates" << endl;
 }
 
 void parsear_argumentos(conf& args, char* argv[]) {

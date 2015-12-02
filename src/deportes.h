@@ -16,7 +16,7 @@ class matriz {
     int _cant_nodos;
     vector<vector<double> > vals;
  public:
-    matriz(ifstream&, int, int, double);
+    matriz(ifstream&, conf& args, int, int);
 
     vector<double> potencias(const vector<double>&, const double, double, unsigned int*) const;
     vector<double> prod(const vector<double>&, const double) const;
