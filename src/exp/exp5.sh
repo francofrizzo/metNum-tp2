@@ -40,7 +40,7 @@ echo "Generando datos de entrada...";
 for i in $(seq 1 $cantLigas); do
   for j in $k; do
 
-    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp5/liga$i.in $tolerancia -r $(dirname $0)/exp5/exp5-liga$i-ranking-K$j.out -o $(dirname $0)/exp5/exp5-liga$i-K$j.out -k $j
+    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp5/liga$i.in $tolerancia -r $(dirname $0)/exp5/exp5-liga$i-ranking-K$j.out -o $(dirname $0)/exp5/exp5-liga$i-K$j.out -1 $j
   
   done
 done

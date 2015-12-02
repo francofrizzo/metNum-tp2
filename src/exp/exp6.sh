@@ -2,12 +2,12 @@
 
 LC_NUMERIC="en_US.UTF-8"
 
-cs=0.85 #c probabilidad de teletransportación
+cs=0.6 #c probabilidad de teletransportación
 nodos=13
 tolerancia=0.00001
 algoritmo=0
 cantLigas=5
-cc="0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9" #este es el c2
+cc="0.1 0.15 0.2 0.25 0.3 0.35 0.4" #este es el c2
 
 while getopts 'ch' opt; do
   case $opt in
@@ -40,7 +40,7 @@ echo "Generando datos de entrada...";
 for i in $(seq 1 $cantLigas); do
   for j in $cc; do
 
-    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp6/liga$i.in $tolerancia -r $(dirname $0)/exp6/exp6-liga$i-ranking-c2$j.out -o $(dirname $0)/exp6/exp6-liga$i-c2$j.out -cc $j 
+    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp6/liga$i.in $tolerancia -r $(dirname $0)/exp6/exp6-liga$i-ranking-c2$j.out -o $(dirname $0)/exp6/exp6-liga$i-c2$j.out -2 $j 
   
   done
 done

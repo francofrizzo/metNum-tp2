@@ -49,7 +49,7 @@
 			Para ello se toma como parámetro de entrada en cada una de las ejecuciones una misma lista de páginas y se incrementa el valor de la tolerancia.
 
 			\subsubsection*{Hipótesis} 
-			Creemos que cuanto mayor sea la tolerancia, menor será el tiempo de ejecución del algoritmo. Esto se debe a que el algoritmo termina cuando la diferencia Manhattan es menor que la tolerancia. Entonces cuanto más grande sea el valor de la tolerancia, más rápido se cumplirá la condición para salir del ciclo y menos tardará en ejecutarse el algoritmo. 
+			Creemos que cuanto mayor sea la tolerancia, menor será el tiempo de ejecución del algoritmo. Esto se debe a que el algoritmo termina cuando la diferencia Manhattan es menor que la tolerancia. Entonces cuanto más grande sea el valor de la tolerancia, más rápido se cumplirá la condición para salir del ciclo y menos tardará en ejecutarse el algoritmo. Suponemos que para los valore mas chicos de tolerancia el tiempo de ejecución será altamente mayor que para valores de tolerancia cercanos a 1. Es decir, el crecimiento será exponenecial a medida que disminuimos el valor de la tolerancia.
 
 			\subsubsection*{Datos de entrada} 
 			Se toman 13 páginas con 16 \emph{links}. Además la tolerancia toma los siguientes valores: \texttt{0.000001, 0.000005, 0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1, 0.3, 0.5, 0.7}. El parámetro $c$ es igual a \texttt{0.85}. El valor de $c$ y la cantidad de páginas fueron elegidos arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Los valores de la tolerancia fueron tomados a modo de análisis teniendo en cuenta que el objetivo del experimento. 
@@ -59,10 +59,12 @@
 			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp3.png} \\
 			    \end{tabular}}
 
-			\subsubsection*{Conclusiones y observaciones}
-			Como se puede ver en el gráfico, al aumentar la tolerancia disminuye el tiempo de ejecución. En este sentido, se pudo confirmar la hipótesis.  
+			\subsubsection*{Discusión}
+			Como se puede ver en el gráfico, al aumentar la tolerancia disminuye el tiempo de ejecución linealmente. Al estar en escala logaritmica, esto quiere decir que la función decrece de forma exponencial. Para valores de tolerancia cercanos a 1, la cantidad de iteraciones a realizar es notoriamente menor que para valores de tolerancia cercanos a 0. Esto sucede ya que el método converge cada vez mas lento, entonces cuando la tolerancia toma valores muy chicos las ultimas iteraciones modifican muy poco el vector por lo que se requieren más iteraciones para acercarse al resultado.
+			Además se puede observar que hasta el valor de tolerancia 0.01 la variación en tiempo de ejecución dependiendo del valor de la tolerancia es mínimo. Cuando ese valor es menor que 0.01 el tiempo de ejecución se incrementa notoriamente. Dejamos a experimentos futuros ver cuál es el valor en el que el tiempo de ejecución es muy grande. En este sentido, se pudo confirmar la hipótesis.   
 
-		\subsubsection{Experimento 4}
+	\subsubsection{Experimento 4}
+		\subsubsection*{Presentación}
 		Otra de las pruebas consiste en comparar los \emph{rankings} formados al ejecutar los algoritmos de \emph{PageRank} y el de \textsc{In-deg}. Primero se analiza una lista de páginas de entrada en la que una de ellas sea apuntada por el resto (Web 1). 
 
 		Luego se realiza la comparación con una lista en la que hayan dos páginas (a las que llamaremos página 1 y página 3) que sean apuntadas por varias paginas. Además, la página 3 tendrá un link a la 1. También se cuenta con otra (a la que llamaremos página 2) que apunta y es apuntada por la página 1, tal como se muestra en el siguiente esquema (Web 2):
@@ -85,7 +87,7 @@
 
 			En el experimento, si consideramos el método \emph{PageRank}, la página 1 quedará en primer lugar, ya que es la que recibe más \emph{links} a la misma, pero en segundo lugar quedará la página 2. Esto se debe a que el enlace de la 1 a la 2 es un enlace muy fuerte. En el caso de \textsc{In-deg}, esto no sucede ya que este método solo toma en cuenta que existe un único link hacia la página 2. Por lo tanto en \emph{PageRank} las posiciones serán 1-2-3 y luego el resto. En \textsc{In-deg} tendremos primero a la página 1 seguida de la 3, luego la 2 y finalmente el resto.
 
-			\subsubsection*{Valores utilizados como parámetros}
+			\subsubsection*{Datos de entrada}
 			Para la Web 1, se tomaron 9 páginas con 10 \emph{links}. Para la Web 2, se tomaron 8 páginas con 13 \emph{links}.  
 
 			El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. 
@@ -156,13 +158,14 @@
 	      			\end{tabular}
 	    	\end{center}
 
-			\subsubsection*{Conclusiones y observaciones} 
+			\subsubsection*{Discusión} 
 			Como podemos ver en los \emph{rankings} del primer análisis en ambos casos quedan iguales. En cambio, en el segundo observamos variaciones, ya que en la lista de entrada el peso de todos los enlaces no es el mismo, es decir, hay enlaces más fuertes que otros. A diferencia de \emph{PageRank}, el método \textsc{In-deg} no tiene en cuenta esta propiedad. Por lo tanto, si en las páginas de entrada todos los \emph{links} tienen igual fuerza, el resultado obtenido por ambos métodos no difiere. 
 
 
 	\subsection{\emph{GeM} y ligas deportivas}
 		
 		\subsubsection{Experimento 1}
+		\subsubsection*{Presentación}
 		En este experimento se verá la diferencia entre los métodos de \emph{GeM} y el de la \acr{AFA} para determinar el \emph{ranking} de una liga deportiva. Para ello se tomará como parámetro de entrada una tabla con los partidos, sus respectivas fechas, y sus resultados. En la misma, deberá existir un equipo que ocupe una de las primaras posiciones en la tabla de \emph{rankings} que haya perdido contra otro que ocupa una de las últimas. Observaremos la diferencia entre el \emph{ranking} generado por cada uno de los métodos.
 
 			\subsubsection*{Hipótesis} 
@@ -170,7 +173,7 @@
 			
 			Por otro lado, si un equipo que se encuentra en las últimas posiciones de la tabla juega contra uno que esta en las primeras y gana el peor, para el método de la \acr{AFA} es exactamente igual que haya jugado con cualquier otro. Para \emph{GeM}, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así en este método entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la \acr{AFA} no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador. Si éste se encontraba en las ultimas posiciones de la tabla no podrá ascender más de 3 posiciones. 		
 
-			\subsubsection*{Valores utilizados como parámetros} 
+			\subsubsection*{Datos de entrada} 
 				Resultados del Torneo de Primera División del Fútbol Argentino hasta la Fecha 23. El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. 
 
 			\subsubsection*{Resultados}
@@ -252,7 +255,7 @@
 	      			\end{tabular} 
 	      	\end{center}
 
-			\subsubsection*{Conclusiones y observaciones}
+			\subsubsection*{Discusión}
 
 			Como podemos ver en las tablas de \emph{rankings}, los ordenes no son exactamente iguales. Por ejemplo, mirando el equipo 1 (Aldosivi), en el \emph{ranking} de la \acr{AFA} se encuentra en la posición 20 y cuando usamos el método de \emph{GeM} éste esta en la posición 2. Esto se debe a que Aldosivi le ganó tanto al equipo 24 (San Lorenzo) como al 7 (Boca Juniors), que se encontraban primero y segundo en la tabla de posiciones de la \acr{AFA}, respectivamente. Por esto, en \emph{GeM} sube muchas posiciones mientras que con la \acr{AFA} solo se le otorgan 3 puntos por cada uno de los dos partidos.
 
