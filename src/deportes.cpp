@@ -7,7 +7,7 @@ void resolver_deportes(
     MEDIR_TIEMPO_INICIO(args.timer);
     switch (args.alg) {
         case ALG_PAGERANK: {
-            matriz data(ifile, cant_nodos, cant_aristas, args.c);
+            matriz data(ifile, args, cant_nodos, cant_aristas);
             vector<double> inicial(cant_nodos, (double) 1/cant_nodos);
             resultado = data.potencias(inicial, args.c, args.tol, &args.count_iter);
             break;
@@ -20,7 +20,7 @@ void resolver_deportes(
     MEDIR_TIEMPO_FIN(args.timer);
 }
 
-matriz::matriz(ifstream& data, int cant_nodos, int cant_aristas, double c) {
+matriz::matriz(ifstream& data, conf& args, int cant_nodos, int cant_aristas) {
     _cant_nodos = cant_nodos;
 
     vals = vector<vector<double> >(cant_nodos, vector<double>(cant_nodos, 0));
@@ -29,11 +29,21 @@ matriz::matriz(ifstream& data, int cant_nodos, int cant_aristas, double c) {
     int goles_i = 0;
     int goles_j = 0;
 
+    vector<vector<double> > empates(cant_nodos, vector<double>(cant_nodos, 0));
+
     for (int k = 0; k < cant_aristas; k++) {
         data >> i >> i >> goles_i >> j >> goles_j;
         i--;
         j--;
-        if (goles_i > goles_j) {
+        if (goles_i == goles_j) {
+            if (args.criterio_empates == 1) {
+                vals[i][j] = vals[i][j] + args.k1;
+                vals[j][i] = vals[j][i] + args.k1;
+            } else if (args.criterio_empates == 2) {
+                empates[i][j] = empates[i][j] + goles_i;
+                empates[j][i] = empates[j][i] + goles_i;
+            }
+        } else if (goles_i > goles_j) {
             vals[i][j] = vals[i][j] + (goles_i - goles_j);
         } else {
             vals[j][i] = vals[j][i] + (goles_j - goles_i);
@@ -41,20 +51,42 @@ matriz::matriz(ifstream& data, int cant_nodos, int cant_aristas, double c) {
     }
 
     double unif = (double) 1 / cant_nodos;
-    double dumping = unif * (1 - c);
+    double dumping = args.criterio_empates == 2 ?
+        unif * (1 - args.c) : 
+        unif * (1 - (args.c + args.k2));
 
     for (int j = 0; j < cant_nodos; j++) {
-        double suma = 0;
+        double suma1 = 0;
+        double suma2 = 0;
         for (int i = 0; i < cant_nodos; i++) {
-            suma = suma + vals[i][j];
-        }
-        if (suma == 0) {
-            for (int i = 0; i < cant_nodos; i++) {
-                vals[i][j] = unif;
+            suma1 = suma1 + vals[i][j];
+            if (args.criterio_empates == 2) {
+                suma2 = suma2 + empates[i][j];
             }
-        } else {
-            for (int i = 0; i < cant_nodos; i++) {
-                vals[i][j] = (vals[i][j] / suma) * c + dumping;
+        }
+        
+        for (int i = 0; i < cant_nodos; i++) {
+            if (args.criterio_empates == 2) {
+                if (suma1 == 0) {
+                    if (suma2 == 0) {
+                        vals[i][j] = unif * (1 - args.k2);
+                    } else {
+                        vals[i][j] = unif * (1 - args.k2) + (empates[i][j] / suma2) * args.k2;
+                    }
+                } else {
+                    if (suma2 == 0) {
+                        vals[i][j] = (vals[i][j] / suma1) * args.c + dumping;
+                    } else {
+                        vals[i][j] = (vals[i][j] / suma1) * args.c + (empates[i][j] / suma2) * args.k2 + dumping;
+                    }
+                }
+            } else {
+                if (suma1 == 0) {
+                    vals[i][j] = unif;
+
+                } else {
+                    vals[i][j] = (vals[i][j] / suma1) * args.c + dumping;
+                }
             }
         }
     }

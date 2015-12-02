@@ -15,6 +15,10 @@ using namespace std;
 #define TIPO_DEPORTES 1
 #define ES_TIPO_VALIDO(cod) (cod == TIPO_PAGS_WEB || cod == TIPO_DEPORTES)
 
+// #define CRIT_EMPATE_
+// #define CRIT_EMPATE_
+// #define CRIT_EMPATE_
+
 #define MEDIR_TIEMPO_INICIO(timer) timer = clock();
 #define MEDIR_TIEMPO_FIN(timer) timer = clock() - timer;
 
@@ -39,6 +43,10 @@ struct conf {
 
     bool count_iter_flag = false;   // determina si se contarán las iteraciones
     unsigned int count_iter = 0;    // contador de iteraciones
+
+    int criterio_empates = 0;
+    int k1 = 0;
+    double k2 = 0;
 };
 
 template<typename T>
