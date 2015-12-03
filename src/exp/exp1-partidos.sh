@@ -11,8 +11,8 @@ while getopts 'cha:' opt; do
   case $opt in
     a) iteraciones=$OPTARG ;;
     h) echo ""
-       echo "    Experimento 2. Calcula el tiempo de ejecución cuando variamos la "
-       echo "    cantidad de nodos."
+       echo "    Experimento 1 - Ligas Deportivas. Compara contra el "
+       echo "    ranking de la AFA. "
        echo ""
        echo "    Opciones disponibles:"
        echo "        -c        Elimina los archivos generados por el experimento."
@@ -20,7 +20,7 @@ while getopts 'cha:' opt; do
        echo "        -a <núm>  Cantidad de iteraciones- por defecto 1"
        echo ""
        exit 0 ;;
-    c) if [ -d $(dirname $0)/exp4 ]; then rm $(dirname $0)/exp4 -R; fi
+    c) if [ -d $(dirname $0)/exp1-partidos ]; then rm $(dirname $0)/exp1-partidos -R; fi
        exit 0 ;;
   esac
 done

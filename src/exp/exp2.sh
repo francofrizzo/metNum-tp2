@@ -5,7 +5,7 @@ cs=0.85 #c probabilidad de teletransportación
 nodos=13
 iteraciones=1
 tolerancia=0.00001
-links="4 32 70 105 130 160"
+links="4 32 " #70 105 130 160"
 #cantPag="$(seq 5 5 30)"
 
 while getopts 'cha:' opt; do

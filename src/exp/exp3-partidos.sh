@@ -14,15 +14,15 @@ while getopts 'ch' opt; do
   case $opt in
     l) algoritmo=$OPTARG ;;
     h) echo ""
-       echo "    Experimento 2. Calcula el tiempo de ejecución cuando variamos la "
-       echo "    cantidad de nodos."
+       echo "    Experimento 3 - Ligas Deportivas. Comparamos los 3 métodos "
+       echo "    de puntuar los empates."
        echo ""
        echo "    Opciones disponibles:"
        echo "        -c        Elimina los archivos generados por el experimento."
        echo "        -h        Imprime este texto de ayuda."
        echo ""
        exit 0 ;;
-    c) if [ -d $(dirname $0)/exp4 ]; then rm $(dirname $0)/exp4 -R; fi
+    c) if [ -d $(dirname $0)/exp3-partidos ]; then rm $(dirname $0)/exp3-partidos -R; fi
        exit 0 ;;
   esac
 done
@@ -36,17 +36,17 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Generando datos de entrada...";
-#mkdir -p $(dirname $0)/exp5 #crear carpeta
+#mkdir -p $(dirname $0)/exp3-partidos #crear carpeta
 
 for i in $(seq 1 $cantLigas); do
   for j in $k; do
 
-    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp5/liga$i.in $tolerancia -r $(dirname $0)/exp5/exp5-liga$i-ranking-K$j.out -o $(dirname $0)/exp5/exp5-liga$i-K$j.out -1 $j
+    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp3-partidos/liga$i.in $tolerancia -r $(dirname $0)/exp3-partidos/exp3-partidos-liga$i-ranking-K$j.out -o $(dirname $0)/exp3-partidos/exp3-partidos-liga$i-K$j.out -1 $j
   
   done
   for j in $cc; do
 
-    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp6/liga$i.in $tolerancia -r $(dirname $0)/exp6/exp6-liga$i-ranking-c2$j.out -o $(dirname $0)/exp6/exp6-liga$i-c2$j.out -2 $j 
+    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp3-partidos/liga$i.in $tolerancia -r $(dirname $0)/exp3-partidos/exp3-partidos-liga$i-ranking-c2$j.out -o $(dirname $0)/exp3-partidos/exp3-partidos-liga$i-c2$j.out -2 $j 
   
   done
 done
