@@ -8,6 +8,7 @@ tolerancia=0.00001
 algoritmo=0
 cantLigas=5
 k="$(seq 0 1 10)"
+cc="0.1 0.15 0.2 0.25 0.3 0.35 0.4" #este es el c2
 
 while getopts 'ch' opt; do
   case $opt in
@@ -41,6 +42,11 @@ for i in $(seq 1 $cantLigas); do
   for j in $k; do
 
     $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp5/liga$i.in $tolerancia -r $(dirname $0)/exp5/exp5-liga$i-ranking-K$j.out -o $(dirname $0)/exp5/exp5-liga$i-K$j.out -1 $j
+  
+  done
+  for j in $cc; do
+
+    $(dirname $0)/../tp 0 $cs 1 $(dirname $0)/exp6/liga$i.in $tolerancia -r $(dirname $0)/exp6/exp6-liga$i-ranking-c2$j.out -o $(dirname $0)/exp6/exp6-liga$i-c2$j.out -2 $j 
   
   done
 done
