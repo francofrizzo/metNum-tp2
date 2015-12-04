@@ -171,10 +171,11 @@
 			\subsubsection*{Hipótesis} 
 			Cuando se juega un partido entre dos equipos, en el método de \emph{GeM} se tendrá en cuanta que tan fuerte son los equipos involucrados y cual fue la diferencia de goles en el partido. En cambio, en el método de la \acr{AFA} el ganador recibirá 3 puntos sin importar los resultados ni las posiciones que los mismos tenían hasta el momento. Esto puede generar diferencias en el \emph{ranking} ya que cada método considera distinta información para determinar las nuevas posiciones. 
 			
-			Por otro lado, si un equipo que se encuentra en las últimas posiciones de la tabla juega contra uno que esta en las primeras y gana el peor, para el método de la \acr{AFA} es exactamente igual que haya jugado con cualquier otro. Para \emph{GeM}, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así en este método entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la \acr{AFA} no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador. Si éste se encontraba en las ultimas posiciones de la tabla no podrá ascender más de 3 posiciones. 		
+			Por otro lado, si un equipo que se encuentra en las últimas posiciones de la tabla juega contra uno que esta en las primeras y gana el peor, para el método de la \acr{AFA} es exactamente igual que haya jugado con cualquier otro. Para \emph{GeM}, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así en este método entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la \acr{AFA} no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador.		
 
 			\subsubsection*{Datos de entrada} 
-				Resultados del Torneo de Primera División del Fútbol Argentino hasta la Fecha 23. El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. 
+				Resultados del Torneo de Primera División del Fútbol Argentino hasta la Fecha 23. El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. Se eligió la cantidad de páginas y el valor de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. 
+. 
 
 			\subsubsection*{Resultados}
 
@@ -183,74 +184,74 @@
 			      		\hline
 			  				\multicolumn{3}{c}{\emph{Ranking} Liga Deportiva - \emph{GeM}} \\
 			 			\hline
-	        			Posición & Nodo & Puntaje \\ \hline
-	         			1 & 7 & 0.080913 \\
-	        			2 & 1 & 0.069879 \\
-	        			3 & 22 & 0.069065 \\
-	        			4 & 24 & 0.058309 \\
-	        			5 & 25 & 0.051788 \\
-	        			6 & 21 & 0.051674 \\
-	        			7 & 23 & 0.046326 \\
-	        			8 & 20 & 0.045206 \\
-	        			9 & 17 & 0.043581 \\
-	        			10 & 30 & 0.039828 \\
-	        			11 & 12 & 0.035738 \\
-	        			12 & 11 & 0.034629 \\
-	        			13 & 6 & 0.033908 \\
-	        			14 & 5 & 0.032996 \\
-	        			15 & 29 & 0.028015 \\
-	        			16 & 10 & 0.027041 \\
-	        			17 & 16 & 0.026036 \\
-	   					18 & 15 & 0.023666 \\
-	   					19 & 28 & 0.023078 \\
-	   					20 & 26 & 0.022266 \\
-	   					21 & 19 & 0.021956 \\
-	   					22 & 9 & 0.021713 \\
-	  					23 & 3 & 0.018678 \\
-	   					24 & 2 & 0.017951 \\
-	   					25 & 27 & 0.017670 \\
-	   					26 & 14 & 0.013740 \\
-	   					27 & 13 & 0.013541 \\
-	   					28 & 4 & 0.011738 \\
-	   					29 & 8 & 0.011141 \\
-	   					30 & 18 & 0.007928 
+	        			Posición & Equipo & Puntaje \\ \hline
+	         			1 & Boca Juniors & 0.080913 \\
+	        			2 & Aldosivi & 0.069879 \\
+	        			3 & River Plate & 0.069065 \\
+	        			4 & San Lorenzo & 0.058309 \\
+	        			5 & San Martín (SJ) & 0.051788 \\
+	        			6 & Racing Club & 0.051674 \\
+	        			7 & Rosario Central & 0.046326 \\
+	        			8 & Quilmes & 0.045206 \\
+	        			9 & Newell's Old Boys & 0.043581 \\
+	        			10 & Vélez Sarsfield & 0.039828 \\
+	        			11 & Gimnasia y Esgrima (LP) & 0.035738 \\
+	        			12 & Estudiantes (LP) & 0.034629 \\
+	        			13 & Belgrano & 0.033908 \\
+	        			14 & Banfield & 0.032996 \\
+	        			15 & Unión & 0.028015 \\
+	        			16 & Defensa y Justicia & 0.027041 \\
+	        			17 & Lanús & 0.026036 \\
+	   					18 & Independiente & 0.023666 \\
+	   					19 & Tigre & 0.023078 \\
+	   					20 & Sarmiento & 0.022266 \\
+	   					21 & Olimpo & 0.021956 \\
+	   					22 & Crucero del Norte & 0.021713 \\
+	  					23 & Arsenal & 0.018678 \\
+	   					24 & Argentinos Juniors & 0.017951 \\
+	   					25 & Tempreley & 0.017670 \\
+	   					26 & Huracán & 0.013740 \\
+	   					27 & Godoy Cruz & 0.013541 \\
+	   					28 & Atlético de Rafaela & 0.011738 \\
+	   					29 & Colón & 0.011141 \\
+	   					30 & Nueva Chicago & 0.007928 
 
 	      			\end{tabular} 
 	      			    \begin{tabular}{|c|c|c|} 
 			      		\hline
 			  				\multicolumn{3}{c}{\emph{Ranking} Liga Deportiva - \acr{AFA}} \\
 			 			\hline
-	        			Posición & Nodo & Puntaje \\ \hline
-						    1 & 24 & 0.054289 \\
-						    2 & 7 & 0.053203 \\
-						    3 & 21 & 0.049946 \\
-						    4 & 23 & 0.048860 \\
-						    5 & 22 & 0.047774 \\
-						    6 & 15 & 0.041260 \\
-						    7 & 6 & 0.041260 \\
-						    8 & 11 & 0.041260 \\
-						    9 & 28 & 0.040174 \\
-						   10 & 5 & 0.040174 \\
-						   11 & 16 & 0.039088 \\
-						   12 & 12 & 0.038002 \\
-						   13 & 20 & 0.034745 \\
-						   14 & 25 & 0.034745 \\
-						   15 & 29 & 0.033659 \\
-						   16 & 27 & 0.030402 \\
-						   17 & 2 & 0.028230 \\
-						   18 & 17 & 0.028230 \\
-						   19 & 1 & 0.028230 \\
-						   20 & 30 & 0.027144 \\
-						   21 & 10 & 0.026059 \\
-						   22 & 26 & 0.026059 \\
-						   23 & 19 & 0.024973 \\
-						   24 & 8 & 0.024973 \\
-						   25 & 13 & 0.023887 \\
-						   26 & 14 & 0.022801 \\
-						   27 & 4 & 0.021716 \\
-						   28 & 3 & 0.018458 \\
-						   29 & 18 & 0.015201 \\
-						   30 & 9 & 0.015201 \\
+	        			Posición & Equipo & Puntaje \\ \hline
+						    1 & San Lorenzo & 0.054289 \\
+						    2 & Boca Juniors & 0.053203 \\
+						    3 & Racing Club & 0.049946 \\
+						    4 & Rosario Central & 0.048860 \\
+						    5 & River Plate & 0.047774 \\
+						    6 & Independiente & 0.041260 \\
+						    7 & Belgrano & 0.041260 \\
+						    8 & Estudiantes (LP) & 0.041260 \\
+						    9 & Tigre & 0.040174 \\
+						   10 & Banfield & 0.040174 \\
+						   11 & Lanús & 0.039088 \\
+						   12 & Gimnasia y Esgrima (LP) & 0.038002 \\
+						   13 & Quilmes & 0.034745 \\
+						   14 & San Martín (SJ) & 0.034745 \\
+						   15 & Unión & 0.033659 \\
+						   16 & Tempreley & 0.030402 \\
+						   17 & Argentinos Juniors & 0.028230 \\
+						   18 & Newell's Old Boys & 0.028230 \\
+						   19 & Aldosivi & 0.028230 \\
+						   20 & Vélez Sarsfield & 0.027144 \\
+						   21 & Defensa y Justicia & 0.026059 \\
+						   22 & Sarmiento & 0.026059 \\
+						   23 & Olimpo & 0.024973 \\
+						   24 & Colón & 0.024973 \\
+						   25 & Godoy Cruz & 0.023887 \\
+						   26 & Huracán & 0.022801 \\
+						   27 & Atlético de Rafaela & 0.021716 \\
+						   28 & Arsenal & 0.018458 \\
+						   29 & Nueva Chicago & 0.015201 \\
+						   30 & Crucero del Norte & 0.015201 \\
 
 	      			\end{tabular} 
 	      	\end{center}
