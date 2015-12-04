@@ -44,6 +44,9 @@ struct conf {
     bool count_iter_flag = false;   // determina si se contarán las iteraciones
     unsigned int count_iter = 0;    // contador de iteraciones
 
+    bool conv_flag = false;
+    string conv_file;
+
     int criterio_empates = 0;
     int k1 = 0;
     double k2 = 0;

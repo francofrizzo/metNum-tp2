@@ -2,14 +2,14 @@
 
 void resolver_deportes(
     conf& args, ifstream& ifile, int cant_nodos,
-    int cant_aristas, vector<double>& resultado
+    int cant_aristas, vector<double>& resultado, ostream& conv
 ) {
     MEDIR_TIEMPO_INICIO(args.timer);
     switch (args.alg) {
         case ALG_PAGERANK: {
             matriz data(ifile, args, cant_nodos, cant_aristas);
             vector<double> inicial(cant_nodos, (double) 1/cant_nodos);
-            resultado = data.potencias(inicial, args.c, args.tol, &args.count_iter);
+            resultado = data.potencias(inicial, args.c, args.tol, &args.count_iter, conv);
             break;
         }
         case ALG_ALT: {
@@ -92,14 +92,17 @@ matriz::matriz(ifstream& data, conf& args, int cant_nodos, int cant_aristas) {
     }
 }
 
-vector<double> matriz::potencias(const vector<double>& inicial, double c, double tol, unsigned int* counter) const {
+vector<double> matriz::potencias(const vector<double>& inicial, double c, double tol, unsigned int* counter, ostream& conv) const {
     vector<double> v1 = inicial;
     vector<double> v2 = prod(v1, c);
     SUMAR_ITERACION(counter);
-    while (difManhattan(v1, v2) > tol) {
+    float dif = difManhattan(v1, v2);
+    while (dif > tol) {
         v1 = v2;
         v2 = prod(v1, c);
+        conv << fixed << setprecision(12) << dif << endl;
         SUMAR_ITERACION(counter);
+        dif = difManhattan(v1, v2);
     }
     return v2;
 }

@@ -21,7 +21,7 @@ class matrize {
  public:
     matrize(ifstream&, int, int);
 
-    vector<double> potencias(const vector<double>&, const double, double, unsigned int*) const;
+    vector<double> potencias(const vector<double>&, const double, double, unsigned int*, ostream&) const;
     vector<double> prod(const vector<double>&, const double) const;
     double difManhattan(const vector<double>&, const vector<double>&) const;
 
@@ -30,7 +30,7 @@ class matrize {
 };
 
 void resolver_pags_web(conf& args, ifstream& ifile, int cant_nodos,
-    int cant_aristas, vector<double>& resultado);
+    int cant_aristas, vector<double>& resultado, ostream& conv);
 
 vector<double> indeg(ifstream&, int, int);
 

@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
     ofstream ofile;
     ifstream tfile;
     ofstream rfile;
+    ofstream conv_file;
     int cant_nodos;
     int cant_aristas;
     ifstream data;
@@ -61,7 +62,7 @@ int main(int argc, char* argv[]) {
 
     // Parseo de opciones especiales
     char opt;
-    while ((opt = getopt(argc, argv, "ho:e:tcr:1:2:")) != -1) {
+    while ((opt = getopt(argc, argv, "ho:e:tcr:1:2:v:")) != -1) {
         switch (opt) {
             case 'h': { // mostrar ayuda
                 mostrar_ayuda(argv[0]);
@@ -92,12 +93,17 @@ int main(int argc, char* argv[]) {
             }
             case '1': {
                 args.criterio_empates = 1;
-                args.k1 = opt;
+                INTENTAR_PARSEO(args.k1 = stoi(optarg);, <path> de la opción 'k1');
                 break;
             }
             case '2': {
                 args.criterio_empates = 2;
-                args.k2 = opt;
+                INTENTAR_PARSEO(args.k2 = stod(optarg);, <path> de la opción 'k2');
+                break;
+            }
+            case 'v': {
+                args.conv_flag = true;
+                args.conv_file = optarg;
                 break;
             }
             default: { // si las opciones son inválidas
@@ -137,6 +143,14 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    if (args.conv_flag) {
+        conv_file.open(args.conv_file, ios_base::app);  // archivo para analisis de convergencia
+        if (! rfile.good()) {
+            cout << "Advertencia: no se pudo abrir el archivo para escribir el análisis de convergencia (será ignorado)" << endl;
+            args.conv_flag = false;
+        }
+    }
+
     // Parseo de archivos de entrada y ejecución de los métodos
 
     // Reviso que el algoritmo solicitado sea válido
@@ -149,12 +163,12 @@ int main(int argc, char* argv[]) {
     switch (args.tipo_inst) {
         case TIPO_PAGS_WEB: {
             LEER_ENCAB_SNAP(ifile, cant_nodos, cant_aristas)
-            resolver_pags_web(args, ifile, cant_nodos, cant_aristas, resultado);
+            resolver_pags_web(args, ifile, cant_nodos, cant_aristas, resultado, conv_file);
             break;
         }
         case TIPO_DEPORTES: {
             LEER_ENCAB_LIGA(ifile, cant_nodos, cant_aristas)
-            resolver_deportes(args, ifile, cant_nodos, cant_aristas, resultado);
+            resolver_deportes(args, ifile, cant_nodos, cant_aristas, resultado, conv_file);
             break;    
         }
         default: {
@@ -225,6 +239,9 @@ int main(int argc, char* argv[]) {
     if (args.rfile_flag) {
         rfile.close();
     }
+    if (args.conv_flag) {
+        conv_file.close();
+    }
     return 0;
 }
 
@@ -240,20 +257,23 @@ void mostrar_ayuda(char* s) {
     cout << "    tolerancia        Valor de tolerancia utilizado en el criterio de parada" << endl;
     cout << "                        del método de la potencia" << endl;
     cout << "  Opciones:" << endl;
-    cout << "    -h          Muestra este texto de ayuda" << endl;
+    cout << "    -h          Muestra este texto de ayuda                                    " << endl;
     cout << "    -o <path>   Permite especificar el nombre y ubicación del archivo de salida" << endl;
-    cout << "    -r <path>   Permite especificar un archivo para imprimir el ránking obtenido," << endl;
-    cout << "                es decir, la lista de los nodos ordenada según el resultado." << endl;
-    cout << "    -e <path>   Para el tipo de instancia \"deportes\", permite especificar un" << endl;
-    cout << "                  archivo con nombres de equipos" << endl;
-    cout << "    -t          Calcula e imprime en pantalla el tiempo insumido por la ejecu-" << endl;
-    cout << "                  ción del método" << endl;
-    cout << "    -c          Calcula e imprime en pantalla la cantidad de iteraciones del al-" << endl;
-    cout << "                goritmo elegido que fueron ejecutadas" << endl;
+    cout << "    -r <path>   Permite especificar un archivo para imprimir el ránking obteni-" << endl;
+    cout << "                  do, es decir, la lista de los nodos ordenada según el resul- " << endl;
+    cout << "                  tado.                                                        " << endl;
+    cout << "    -e <path>   Para el tipo de instancia \"deportes\", permite especificar un " << endl;
+    cout << "                  archivo con nombres de equipos                               " << endl;
+    cout << "    -t          Calcula e imprime en pantalla el tiempo insumido por la ejecu- " << endl;
+    cout << "                  ción del método                                              " << endl;
+    cout << "    -c          Calcula e imprime en pantalla la cantidad de iteraciones del   " << endl;
+    cout << "                  algoritmo elegido que fueron ejecutadas                      " << endl;
+    cout << "    -v <path>   Guarda en el archivo indicado la diferencia Manhattan obtenida " << endl;
+    cout << "                  tras cada iteración del algoritmo                            " << endl;
     cout << "    -1 <k>      Para el tipo de instancia deportes, usa el método 1 para la re-" << endl;
-    cout <<"                   solución de empates" << endl;
+    cout << "                   solución de empates                                         " << endl;
     cout << "    -2 <k>      Para el tipo de instancia deportes, usa el método 2 para la re-" << endl;
-    cout <<"                   solución de empates" << endl;
+    cout << "                   solución de empates                                         " << endl;
 }
 
 void parsear_argumentos(conf& args, char* argv[]) {
