@@ -48,8 +48,8 @@ matrize::matrize(ifstream& data, int cant_nodos, int cant_aristas) {
                 
                 vals.push_back((double) 1 / n);
                 ind_filas.push_back(dataPorColumna[l][h]);
-            };
-        };
+            }
+        }
     } 
 }
 
@@ -70,26 +70,30 @@ vector<double> matrize::potencias(const vector<double>& inicial, double c, doubl
 
 vector<double> matrize::prod(const vector<double>& vec, double c) const {
     vector<double> res(_cant_nodos, 0);
-    double dumping = (1 - c) / _cant_nodos;
+    double suma_cols = 0;
+        
     for (int j = 0; j < _cant_nodos; j++) {
-        double val_vec = vec[j];
+        double val_vec = c * vec[j];
+        suma_cols = suma_cols + val_vec;
+        double empty_col = val_vec / _cant_nodos;
         int ptr_actual;
         int ptr_next;
         rango_columna(j, ptr_actual, ptr_next);
-        if (ptr_actual == -1) {
-            double a = val_vec / _cant_nodos;
-            for (int i = 0; i < _cant_nodos; i++) {
-                res[i] = res[i] + a;
+        int i;
+        if (ptr_actual == -1) { // Le sumo a todos 1/n * vec_j
+            for (i = 0; i < _cant_nodos; i++) {
+                res[i] = res[i] + empty_col;
             }
-            // Le sumo a todos 1/n * vec_j
         } else {
-            for (int i = 0; i < _cant_nodos; i++) {
-                res[i] = res[i] + val_vec * dumping;
-            }
-            for (int i = ptr_actual; i < ptr_next; i++) { // vamos sumando el valor correspondiente a cada posición no nula de la fila
-                res[ind_filas[i]] = res[ind_filas[i]] + val_vec * c * vals[i];
+            for (i = ptr_actual; i < ptr_next; i++) { // vamos sumando el valor correspondiente a cada posición no nula de la fila
+                res[ind_filas[i]] = res[ind_filas[i]] + val_vec * vals[i];
             }
         }
+    }
+
+    double dumping = suma_cols * (1 - c) / _cant_nodos;
+    for (int i = 0; i < _cant_nodos; i++) {
+        res[i] = res[i] + dumping;
     }
 
     return res;

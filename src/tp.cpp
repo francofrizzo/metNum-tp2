@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    ofile.open(args.ofile, ios_base::app);  // archivo de salida
+    ofile.open(args.ofile, ios_base::out);  // archivo de salida
     if (! ofile.good()) {
         cout << "Error al abrir el archivo de salida" << endl;
         exit(1);
@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (args.rfile_flag) {
-        rfile.open(args.rfile, ios_base::app);  // archivo de ranking
+        rfile.open(args.rfile, ios_base::out);  // archivo de ranking
         if (! rfile.good()) {
             cout << "Advertencia: no se pudo abrir el archivo para escribir el ranking (será ignorado)" << endl;
             args.rfile_flag = false;
@@ -144,7 +144,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (args.conv_flag) {
-        conv_file.open(args.conv_file, ios_base::app);  // archivo para analisis de convergencia
+        conv_file.open(args.conv_file, ios_base::out);  // archivo para analisis de convergencia
         if (! rfile.good()) {
             cout << "Advertencia: no se pudo abrir el archivo para escribir el análisis de convergencia (será ignorado)" << endl;
             args.conv_flag = false;

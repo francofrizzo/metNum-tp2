@@ -27,11 +27,15 @@ dataSuffix = dataDirectory + '/exp3'
 outSuffix = outDirectory + '/exp3'
 
 for i in instances:
+    print "Procesando instancia " + i['id']
+
     graphFile = dataSuffix + '-' + i['id'] + '-graph.txt'
     
     if not os.path.isfile(graphFile):
+        print '  Generando datos de entrada'
         graphs.writeGraph(i['graph'], graphFile)
 
     for j in [0, 1]:
+        print '  Corriendo algoritmo ' + str(j)
         outFile = outSuffix + '-' + i['id'] + '-' + str(j) + '.out.txt'
         subprocess.call([executable, str(j), str(c), '0', graphFile, str(tol), '-o', outFile])

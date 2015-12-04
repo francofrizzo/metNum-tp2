@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"val",
+				"val_vec"
+			],
+			[
 				"grap",
 				"graphFile"
 			],
@@ -71,30 +79,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/home/franco/Facultad/materias/metNum/tp2/src/exp/nuevos-PageRank/exp1.py",
-			"settings":
-			{
-				"buffer_size": 1963,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/exp/nuevos-PageRank/exp2.py",
-			"settings":
-			{
-				"buffer_size": 1288,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/exp/nuevos-PageRank/exp2/exp2-b-0.85-converg.txt",
-			"settings":
-			{
-				"buffer_size": 75,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -123,10 +107,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 423.0,
-		"last_filter": "tabs",
+		"height": 66.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"chec",
+				"Git: Checkout Current File"
+			],
 			[
 				"tabs",
 				"Indentation: Convert to Tabs"
@@ -213,24 +201,39 @@
 		"/home/franco/Source/metNum-tp2/src",
 		"/home/franco/Source/metNum-tp2/src/data",
 		"/home/franco/Source/metNum-tp2/src/data/exp2",
-		"/home/franco/Source/metNum-tp2/src/data/exp3",
 		"/home/franco/Source/metNum-tp2/src/exp",
 		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank",
-		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp2",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1-newtimes",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1-oldtimes",
+		"/home/franco/Source/metNum-tp2/src/tests",
 		"/home/franco/Source/metNum-tp2/src/tools"
 	],
 	"file_history":
 	[
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1.m",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1.py",
+		"/home/franco/Source/metNum-tp2/src/pags_web.cpp",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1/exp1-b-times.txt",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1-oldtimes/exp1-b-times.txt",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1-newtimes/exp1-a-times.txt",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1-oldtimes/exp1-a-times.txt",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1-newtimes/exp1-b-times.txt",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1/exp1-a-times.txt",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp3.py",
+		"/home/franco/Source/metNum-tp2/src/tests/test1.txt.out.ahora",
+		"/home/franco/Source/metNum-tp2/src/tests/test1.txt.out",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp2/exp2-b-0.85-converg.txt",
+		"/home/franco/Source/metNum-tp2/src/tp.cpp",
+		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp2.py",
+		"/home/franco/Source/metNum-tp2/src/tools/graph.out",
+		"/home/franco/Facultad/materias/metNum/tp2/src/exp/nuevos-PageRank/exp1.py",
+		"/home/franco/Source/metNum-tp2/src/tools/.gitignore",
 		"/home/franco/Source/metNum-tp2/src/tools/webparser.py",
 		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/graphs.py",
-		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp2.py",
-		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp3.py",
-		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp1.py",
 		"/home/franco/Source/metNum-tp2/docs/informe/informe.tex",
 		"/home/franco/Source/metNum-tp2/docs/informe/secciones/3-experimentacion.tex",
 		"/home/franco/Source/metNum-tp2/src/data/exp1/exp1-a-1200.in.txt",
 		"/home/franco/Source/metNum-tp2/src/exp/nuevos-PageRank/exp3/exp3-3.in.txt",
-		"/home/franco/Source/metNum-tp2/src/pags_web.cpp",
 		"/home/franco/Source/metNum-tp2/src/exp/exp1.py",
 		"/home/franco/Facultad/materias/metNum/tp2/src/exp/exp1.sh",
 		"/home/franco/Source/metNum-tp2/src/exp/exp1/exp1-a-times.txt",
@@ -238,7 +241,6 @@
 		"/home/franco/Source/metNum-tp2/src/exp/exp1-b-data.py3",
 		"/home/franco/Source/metNum-tp2/src/deportes.cpp",
 		"/home/franco/Source/metNum-tp1/docs/informe/secciones/3-experimentos.tex",
-		"/home/franco/Source/metNum-tp2/src/tp.cpp",
 		"/home/franco/Source/metNum-tp2/src/caca.txt",
 		"/home/franco/Source/metNum-tp2/src/config.h",
 		"/home/franco/Source/metNum-tp2/docs/informe/secciones/4-conclusiones.tex",
@@ -314,6 +316,18 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"ind",
+			"val",
+			"_filas[i]",
+			", e2 )",
+			" )",
+			"ind_filas[i]",
+			"2",
+			"'FontName', 'FreeSans'",
+			"FontSize",
+			"c_x",
+			"\"",
+			"'",
 			"writeGraph",
 			"False",
 			"generated",
@@ -429,19 +443,7 @@
 			"u - 1",
 			"A_",
 			"Phi",
-			"des:",
-			"des\\:",
-			"paredes",
-			"des",
-			"color",
-			"hasta",
-			"n[",
-			"enumerate",
-			"\\[no",
-			"\\mat{A}^",
-			"A",
-			"A_",
-			"A"
+			"des:"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -473,274 +475,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/home/franco/Facultad/materias/metNum/tp2/src/exp/nuevos-PageRank/exp1.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1963,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								378,
-								378
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Afterglow-monokai (SL).tmTheme",
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/exp/nuevos-PageRank/exp2.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1288,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								797,
-								797
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Afterglow-monokai (SL).tmTheme",
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 175.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/exp/nuevos-PageRank/exp2/exp2-b-0.85-converg.txt",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 75,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -800,6 +536,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"exp1.m",
+				"src/exp/nuevos-PageRank/exp1.m"
+			],
+			[
+				"exp1.p",
+				"src/exp/nuevos-PageRank/exp1.py"
+			],
+			[
+				"webcpp",
+				"src/pags_web.cpp"
+			],
 			[
 				"exp2",
 				"src/exp/nuevos-PageRank/exp2.py"

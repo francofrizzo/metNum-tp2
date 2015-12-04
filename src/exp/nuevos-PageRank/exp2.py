@@ -6,12 +6,14 @@ import subprocess
 import re
 import graphs
 
+from oct2py import octave
+
 instances = [
     # {'id': 'a', 'generated': True},
     # {'id': 'b', 'generated': False},
     {'id': 'c', 'generated': False}
 ]
-cs = [0.85]
+cs = [0.85, 0.90, 0.95, 0.99]
 tol = 0.001
 dataDirectory = '../../data/exp2'
 outDirectory = 'exp2'
@@ -42,3 +44,6 @@ for i in instances:
         outFile = outSuffix + '-' + str(i['id']) + '-' + str(c) + '.out.txt'
         convergFile = outSuffix + '-' + str(i['id']) + '-' + str(c) + '-converg.txt'
         subprocess.call([executable, '0', str(c), '0', graphFile, str(tol), '-v', convergFile, '-o', outFile])
+
+# Graficos
+octave.exp2()
