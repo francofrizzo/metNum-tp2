@@ -1,18 +1,96 @@
 \section{Experimentación}
 
-	\subsection{\emph{PageRank} y páginas web}
+    En esta sección, se presentan las pruebas experimentales que se realizaron, junto con los resultados obtenidos y una discusión de los mismos.
 
-	A continuación, se presentan los experimentos que se realizaron. Con el código del trabajo práctico se incluye una serie de scripts de \emph{bash} que permiten recrear los experimentos realizados, como así también los gráficos que se incluyen en este informe; esto puede hacerse ingresando al directorio \texttt{exp} dentro de la raíz, y ejecutando el comando \texttt{./exp{i}.sh}, siendo \texttt{i} el número de experimento.
+    En primer lugar, se detallan las experiencias relacionadas con el método de \emph{PageRank} y su aplicación en el desarrollo de motores de búsqueda. Estos experimentos se hallan orientados a evaluar, por un lado, el rendimiento y la convergencia del otro, y por otra parte, la calidad de los resultados obtenidos.
 
-		\subsubsection{Experimento 1}
-			\subsubsection*{Presentación}
-			En el primer experimento se quiere observar como varía el tiempo de ejecución a medida que se modifica el valor del parámetro $c$, para lograr que la norma Manhattan entre dos iteraciones consecutivas sea menor que la tolerancia indicada. Para ello se toma una determinada cantidad de páginas web que no se modificarán a lo largo del experimento y se ejecutará el programa para diferentes valores de $c$. Con el fin de mejorar la precisión de los resultados y evitar posibles interferencias (por ejemplo, las generadas por otras tareas que pueda estar ejecutando la computadora) cada medición se repitió 10 veces, tomando luego el promedio de los datos obtenidos
+    A continuación, se encuentran las pruebas relacionadas con respecto al método \emph{GeM}. Estas se encuentran focalizadas en la elaboración de \emph{rankings} para ligas futbolísticas, estudiando la factibilidad de la aplicación del algoritmo en este contexto particular, y diversas alternativas para resolver la dificultad que se presenta a la hora de tener en cuenta los empates.
 
-			\subsubsection*{Hipótesis}
-			Se conjetura que cuanta mayor sea la probabilidad de teletransportarse de una página a otra, menos tiempo va a tardar el algoritmo en llegar al estado en el que la tolerancia sea menor que la norma Manhattan. $(1-c)$ indica cuál es la probabilidad de, estando en cualquier página, teletransportarse a otra. Por esto es que cuanto más chico sea el valor de $c$, menos tiempo de ejecución demorará el algoritmo.
+    Cabe señalar que con los archivos fuente del trabajo práctico se incluye una serie de scripts en lenguaje Bash que permiten reproducir por completo los experimentos realizados, como así también los gráficos que se incluyen en este informe. Estos se encuentran dentro del directorio \texttt{exp}, y llevan los nombres \texttt{exp{i}.sh}, siendo \texttt{i} el número de experimento.
 
-			\subsubsection*{Datos de entrada} 
-			Se toman 13 páginas con 16 \emph{links}. Además el parámetro $c$ toma los valores \texttt{0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}. La tolerancia es de \texttt{0.00001}. Se eligió la cantidad de páginas y el valor de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. 
+    \subsection{Experimentación con respecto a \emph{PageRank} y páginas web}
+
+        \subsubsection{Experimento 1: Tiempo de ejecución de \emph{PageRank}}
+
+            \subsubsection*{Presentación}
+                El objetivo de este experimento fue extraer conclusiones acerca de la variación en el tiempo de cómputo requerido por el algoritmo de \emph{PageRank} para redes de diferentes tamaños, en función de la cantidad de páginas y de la cantidad de \emph{links} de las mismas.
+
+            \subsubsection*{Metodología, datos y parámetros del experimento}
+                Se realizaron pruebas para medir el rendimiento temporal según dos parámetros:
+                \begin{enumerate}[label=(\alph*)]
+                    \item Cantidad de páginas de la red. Se consideraron redes generadas artificialmente con las siguientes cantidades de nodos: \{200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000\}, estableciendo en todas ellas la misma cantidad de enlaces, 40000, distribuidos entre las páginas de manera uniforme. Los casos de prueba se pueden generar mediante el \emph{script} \texttt{exp/exp1-a-data.sh}.
+
+                    \item Cantidad de enlaces de la red. Se consideraron redes generadas artificialmente con una cantidad fija de 400 nodos, variando la cantidad de enlaces establecidos entre ellos, tomando los valores \{1200, 4000, 10000, 20000, 40000, 60000, 80000, 120000, 160000\}, distribuidos entre las páginas de manera uniforme. Los casos de prueba se pueden generar mediante el \emph{script} \texttt{exp/exp1-b-data.sh}.
+                \end{enumerate}
+
+                El parámetro de amortiguación $c$ se mantuvo fijo con el valor 0.85 (el utilizado normalmente por el buscador Google\cite{Brin1998}), mientras que el umbral de tolerancia para la detención del método se fijó en 0.0001.
+
+                En cada caso, se midió el tiempo necesario para la construcción de la matriz que modela la red y para la ejecución de todas las iteraciones necesarias del método. Para realizar las mediciones se utilizaron las funciones provistas a tal efecto por la biblioteca estándar de C++. Con el fin de evitar posibles errores en las mismas, cada una se repitió 10 veces, considerando luego el promedio entre los valores obtenidos.
+
+            \subsubsection*{Hipótesis}
+            Es importante considerar en este punto la forma en que la implementación del algoritmo \emph{PageRank} aprovecha la propiedad de la matriz que modela la red ($\mat{P_1}$) de ser esparsa. Una inspección al código de dicha implementación revela que la única operación costosa que se realiza en cada iteración es  el producto entre la dicha matriz y el vector resultante de la iteración anterior. Dentro de este producto existen un ciclo que itera sobre todas las posiciones de la matriz, es decir, cuadráticamente en la cantidad de nodos, realizando un producto en cada caso, correspondiente a la multiplicación con la matriz homogénea de amortiguación ($\mat{E}$). Por otra parte, también existe un ciclo que itera sobre las posiciones no nulas de la matriz, es decir, linealmente en la cantidad de \emph{links} de la red, para realizar el producto del vector con estos coeficientes; en este caso, cada iteración requiere que se realicen dos productos.
+
+            Teniendo en cuenta lo anterior, cabe esperar que el tiempo de ejecución dependa cuadráticamente de la cantidad de nodos de la red y linealmente, pero con una constante mayor, de la cantidad de \emph{links} de la misma.
+
+            \subsubsection*{Resultados obtenidos}
+
+            \subsubsection*{Discusión}
+
+        \subsubsection{Experimento 2: Convergencia de \emph{PageRank}}
+
+            \subsubsection*{Presentación}
+            Por medio de este conjunto de pruebas experimentales, se buscó analizar la convergencia lograda por el algoritmo \emph{PageRank} en cada iteración. Como parámetro de la misma, se consideró la diferencia entre el resultado arrojado por dicha iteración y el obtenido en la inmediatamente anterior, en términos de la norma Manhattan de esta diferencia. Teniendo en cuenta que este mismo parámetro es el empleado como criterio de parada del método, se buscó extraer conclusiones sobre la relación entre la tolerancia establecida para dicho criterio y la cantidad de iteraciones necesarias para completar el algoritmo. Además, se analizó la influencia del valor del parámetro $c$ en la convergencia del método.
+
+            \subsubsection*{Metodología, datos y parámetros del experimento}
+            A los efectos del experimento, se consideraron las siguientes tres instancias de redes, una de tamaño pequeño y otras dos con cantidad de nodos mayor:
+            \begin{enumerate}[label=(\alph*)]
+                \item Red pequeña, formada por 50 páginas web reales y la estructura de \emph{links} determinada por las mismas, que al momento del experimento contenía 160 enlaces. La lista de sitios utilizados puede encontrarse en el archivo \texttt{exp/exp2-a-webs.txt}, y el grafo generado, en \texttt{exp/exp2-a-graph.txt}.
+
+                \item Red mediana , formada por las páginas de la Universidad de Stanford (stanford.edu) y los enlaces entre ellas. Comprende 281903 páginas y 2312497 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 2002.
+
+                \item Red mediana, formada por las páginas de la Universidad de Notre Dame (nd.edu) y los enlaces entre ellas. Comprende 325729 páginas y 1497134 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 2002.
+            \end{enumerate}
+
+            Está claro que el tamaño de estas redes no es comparable con el de aquellas que aparecen en el escenario de un buscador web actual (el primer índice de Google, en 1998, contenía 26 millones de páginas \cite{Brin1998}), pero se las consideró suficientes para evaluar el comportamiento del método sin incrementar desmesuradamente los tiempos de ejecución, dejando abierta la posibilidad de realizar, en el futuro, pruebas con instancias mayores.
+
+            Sobre las tres instancias, se ejecutó el algoritmo \emph{PageRank} hasta que la diferencia entre dos iteraciones sucesivas alcanzó el umbral de tolerancia de 0.001 según la norma Manhattan, registrando el valor obtenido para la misma en cada iteración.
+
+            En cuanto al parámetro $c$, el experimento se repitió para cada instancia con los valores \{0.85, 0.90, 0.95, 0.99\}. Se desestimaron valores menores de $c$ porque, como se argumenta en \cite{Kamvar2003}, estos producen resultados poco relevantes y aumentan demasiado la posibilidad de manipulación del método.
+
+            \subsubsection*{Hipótesis}
+            Dada la naturaleza iterativa del método, resulta razonable esperar que el ritmo de convergencia del método disminuya a medida que el resultado obtenido se acerca, de forma asintótica, al estado de equilibrio. Esto significa que el costo requerido en cantidad de iteraciones para aumentar la precisión del resultado obtenido se volverá cada vez mayor, apareciendo, en función de los requerimientos específicos del contexto de aplicación, un umbral mínimo para la tolerancia a partir del cual no valdrá la pena continuar ejecutando el método.
+
+            En cuanto al valor de $c$, es importante recordar que valores pequeños de este parámetro determinan, a la hora de construir la matriz $\mat{P_2}$ sobre la que se aplica el algoritmo, un mayor peso relativo de la matriz de amortiguación ($\mat{E}$) con respecto a la que contiene los pesos reales de cada enlace ($\mat{P_1}$). En otras palabras, conforme disminuye el valor de $c$, cabe esperar que la matriz $\mat{P_2}$ sea más homogénea, o que se “se parezca más” a $\mat{E}$.
+
+            Ahora bien, el vector inicial con el que se realiza la primera iteración es un vector homogéneo, que, como puede deducirse fácilmente, es el resultado esperado en caso de que la matriz de la red sea exactamente $\mat{E}$. Por lo tanto, es razonable esperar que ante valores menores de $c$, el vector inicial sea una mejor aproximación del resultado buscado, produciendo que el método converja más rápidamente.
+
+            \subsubsection*{Resultados obtenidos}
+
+            \subsubsection*{Discusión}
+
+        \subsubsection{Experimento 3: Análisis cualitativo de los resultados}
+
+            \subsubsection*{Presentación}
+            Por medio de estas pruebas, se pretende realizar un estudio cualitativo de los resultados arrojados por el método \emph{PageRank}. A modo de contraste, y para realizar una evaluación comparativo, se implementó un método de clasificación alternativo más simple, denominado In-Deg. Este consiste en ordenar las páginas considerando simplemente la cantidad de \emph{links} entrantes hacia cada una de ellas. En particular, el puntaje de una página se calcula como el cociente entre la cantidad de enlaces que recibe y el total de los mismos en la red.
+
+            \subsubsection*{Metodología, datos y parámetros del experimento}
+            Para esta experiencia se construyeron artificialmente tres redes pequeñas, pensadas con el objetivo de poner de manifiesto y observar las diferencias entre los dos algoritmos planteados.
+            \begin{enumerate}[label=(\alph*)]
+                \item La primera de ellas (Web 1) cuenta con nueve nodos. Uno de ellos recibe enlaces de parte de los otros ocho nodos restantes. Además, estos otros ocho nodos se encuentran enlazados de forma tal que cada uno de ellos recibe enlaces de exactamente dos de los otros.
+            \end{enumerate}
+
+            \begin{figure}[h]
+                \begin{center}
+                    \begin{tabular}{@{\extracolsep{2cm}} cc}
+                      \includegraphics{imagenes/exp3-graph1.pdf} & \includegraphics{imagenes/exp3-graph2.pdf} \\
+                      {\small \strong{Web 1}} & {\small \strong{Web 2}}
+                    \end{tabular}
+                \end{center}
+
+                \caption{Redes utilizadas como datos de entrada para el Experimento 3} \label{fig:exp3-webs}
+            \end{figure}
+
+% Acá sigue lo viejo
 
 			\subsubsection*{Resultados}
 				{\centering \begin{tabular}{c}
@@ -257,6 +335,7 @@
 	      	\end{center}
 
 			\subsubsection*{Discusión}
+
 
 			Como podemos ver en las tablas de \emph{rankings}, los órdenes no son exactamente iguales. Por ejemplo, mirando el equipo 1 (Aldosivi), en el \emph{ranking} de la \acr{AFA} se encuentra en la posición 20 y cuando usamos el método de \emph{GeM} éste está en la posición 2. Esto se debe a que Aldosivi le ganó tanto al equipo 24 (San Lorenzo) como al 7 (Boca Juniors), que se encontraban primero y segundo en la tabla de posiciones de la \acr{AFA}, respectivamente. Por esto, en \emph{GeM} sube muchas posiciones mientras que con la \acr{AFA} sólo se le otorgan 3 puntos por cada uno de los dos partidos.
 
