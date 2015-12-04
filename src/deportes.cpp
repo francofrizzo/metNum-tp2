@@ -51,9 +51,7 @@ matriz::matriz(ifstream& data, conf& args, int cant_nodos, int cant_aristas) {
     }
 
     double unif = (double) 1 / cant_nodos;
-    double dumping = args.criterio_empates == 2 ?
-        unif * (1 - args.c) : 
-        unif * (1 - (args.c + args.k2));
+    double dumping = unif * (1 - args.c);
 
     for (int j = 0; j < cant_nodos; j++) {
         double suma1 = 0;
@@ -75,15 +73,14 @@ matriz::matriz(ifstream& data, conf& args, int cant_nodos, int cant_aristas) {
                     }
                 } else {
                     if (suma2 == 0) {
-                        vals[i][j] = (vals[i][j] / suma1) * args.c + unif * args.k2 + dumping;
+                        vals[i][j] = (vals[i][j] / suma1) * (args.c - args.k2) + unif * args.k2 + dumping;
                     } else {
-                        vals[i][j] = (vals[i][j] / suma1) * args.c + (empates[i][j] / suma2) * args.k2 + dumping;
+                        vals[i][j] = (vals[i][j] / suma1) * (args.c - args.k2) + (empates[i][j] / suma2) * args.k2 + dumping;
                     }
                 }
             } else {
                 if (suma1 == 0) {
                     vals[i][j] = unif;
-
                 } else {
                     vals[i][j] = (vals[i][j] / suma1) * args.c + dumping;
                 }
