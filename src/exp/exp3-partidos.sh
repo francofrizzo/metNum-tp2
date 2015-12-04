@@ -8,7 +8,7 @@ tolerancia=0.00001
 algoritmo=0
 cantLigas=5
 k="$(seq 0 1 10)"
-cc="0.1 0.15 0.2 0.25 0.3 0.35" #este es el c2
+cc="0.1 0.25 0.4 " #este es el c2
 
 while getopts 'ch' opt; do
   case $opt in
