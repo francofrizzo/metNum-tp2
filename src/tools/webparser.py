@@ -110,30 +110,33 @@ def writegraph(graph,graph_file):
 def hasduplicates(weblist):
     return len(weblist) != len(set(weblist))
 
+def parse(weblist_file,graph_file):
+    # Read input file
+    weblist = readfile(weblist_file)
+
+    if hasduplicates(weblist):
+        raise SystemExit('Input file has duplicated web pages')
+
+    # Generate graph
+    graph = generategraph(weblist)
+          
+    # Write output file
+    writegraph(graph,graph_file)
+
+    for i in range(len(graph)):
+        print (i+1),weblist[i]
+        print '[',
+        for j in range(len(graph[i])):
+            print str(graph[i][j]+1),
+        print ']' 
+
 if __name__ == '__main__':
 	if len(sys.argv) == 3:
 		# Get input and output files
 		weblist_file = sys.argv[1].strip()
 		graph_file = sys.argv[2].strip()
 
-		# Read input file
-		weblist = readfile(weblist_file)
-
-		if hasduplicates(weblist):
-			raise SystemExit('Input file has duplicated web pages')
-
-		# Generate graph
-		graph = generategraph(weblist)
-        
-		# Write output file
-		writegraph(graph,graph_file)
-
-		for i in range(len(graph)):
-			print (i+1),weblist[i]
-			print '[',
-			for j in range(len(graph[i])):
-				print str(graph[i][j]+1),
-			print ']'
+		parse(weblist_file,graph_file)
 
 	else:
 		print 'Usage: python webparser.py weblist.in graph.out'

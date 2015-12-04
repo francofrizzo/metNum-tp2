@@ -48,7 +48,7 @@
 
                 \item Red mediana , formada por las páginas de la Universidad de Stanford (stanford.edu) y los enlaces entre ellas. Comprende 281903 páginas y 2312497 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 2002.
 
-                \item Red mediana, formada por las páginas de la Universidad de Notre Dame (nd.edu) y los enlaces entre ellas. Comprende 325729 páginas y 1497134 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 2002.
+                \item Red mediana, formada por las páginas de la Universidad de Notre Dame (nd.edu) y los enlaces entre ellas. Comprende 325729 páginas y 1497134 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 1999.
             \end{enumerate}
 
             Está claro que el tamaño de estas redes no es comparable con el de aquellas que aparecen en el escenario de un buscador web actual (el primer índice de Google, en 1998, contenía 26 millones de páginas \cite{Brin1998}), pero se las consideró suficientes para evaluar el comportamiento del método sin incrementar desmesuradamente los tiempos de ejecución, dejando abierta la posibilidad de realizar, en el futuro, pruebas con instancias mayores.
@@ -74,21 +74,32 @@
             Por medio de estas pruebas, se pretende realizar un estudio cualitativo de los resultados arrojados por el método \emph{PageRank}. A modo de contraste, y para realizar una evaluación comparativo, se implementó un método de clasificación alternativo más simple, denominado In-Deg. Este consiste en ordenar las páginas considerando simplemente la cantidad de \emph{links} entrantes hacia cada una de ellas. En particular, el puntaje de una página se calcula como el cociente entre la cantidad de enlaces que recibe y el total de los mismos en la red.
 
             \subsubsection*{Metodología, datos y parámetros del experimento}
-            Para esta experiencia se construyeron artificialmente tres redes pequeñas, pensadas con el objetivo de poner de manifiesto y observar las diferencias entre los dos algoritmos planteados.
+            Para esta experiencia se construyeron artificialmente tres redes pequeñas, pensadas con el objetivo de poner de manifiesto y observar las diferencias entre los dos algoritmos planteados. Estos casos de prueba, que ilustra la Figura \ref{fig:exp3-webs}, son los siguientes:
             \begin{enumerate}[label=(\alph*)]
-                \item La primera de ellas (Web 1) cuenta con nueve nodos. Uno de ellos recibe enlaces de parte de los otros ocho nodos restantes. Además, estos otros ocho nodos se encuentran enlazados de forma tal que cada uno de ellos recibe enlaces de exactamente dos de los otros.
+                \item La Web 1 cuenta con ocho nodos. Seis de los mismos (nodos 3 a 8) se encuentran enlazados de forma tal que cada uno de ellos recibe enlaces de exactamente dos de los otros. Uno de los nodos restantes (nodo 1) recibe un enlace de cada uno de estos seis. El otro (nodo 2) recibe solo un enlace de este último.
+                \item La Web 2 también posee ocho nodos. Uno de ellos (nodo 1) recibe enlaces de todos los demás. Otro nodo (nodo 2) solo recibe un enlace del nodo 1. El nodo 3 recibe enlaces de los últimos cinco nodos (del 4 al 8). Estos, por su parte, no tienen enlaces entrantes.
+                \item La Web 3 se compone de dos subredes no conectadas, una de 4 nodos y otra de 2 nodos. Dentro de ellas, cada nodo recibe exactamente un enlace entrante desde otro nodo.
             \end{enumerate}
 
             \begin{figure}[h]
                 \begin{center}
                     \begin{tabular}{@{\extracolsep{2cm}} cc}
                       \includegraphics{imagenes/exp3-graph1.pdf} & \includegraphics{imagenes/exp3-graph2.pdf} \\
-                      {\small \strong{Web 1}} & {\small \strong{Web 2}}
+                      {\small \strong{Web 1}} & {\small \strong{Web 2}} \\
+                      \multicolumn{2}{c}{\includegraphics{imagenes/exp3-graph3.pdf}} \\
+                      \multicolumn{2}{c}{{\small \strong{Web 3}}} \\
                     \end{tabular}
                 \end{center}
 
-                \caption{Redes utilizadas como datos de entrada para el Experimento 3} \label{fig:exp3-webs}
+                \caption{Redes utilizadas como datos de entrada para el Experimento 3. El tamaño con el que aparece representado cada nodo corresponde al \emph{ranking} que la hipótesis planteada prevé como resultado de \emph{PageRank}.} \label{fig:exp3-webs}
             \end{figure}
+
+            \subsubsection*{Hipótesis}
+
+            \subsubsection*{Resultados}
+
+            \subsubsection*{Discusión}
+
 
 % Acá sigue lo viejo
 

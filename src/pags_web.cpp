@@ -65,7 +65,6 @@ vector<double> matrize::potencias(const vector<double>& inicial, double c, doubl
         SUMAR_ITERACION(counter);
         dif = difManhattan(v1, v2);
     }
-    cout << endl;
     return v2;
 }
 
