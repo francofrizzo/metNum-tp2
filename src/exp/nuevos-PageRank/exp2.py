@@ -7,11 +7,11 @@ import re
 import graphs
 
 instances = [
-    {'id': 'a', 'generated': True},
-    {'id': 'b', 'generated': False},
+    # {'id': 'a', 'generated': True},
+    # {'id': 'b', 'generated': False},
     {'id': 'c', 'generated': False}
 ]
-cs = [0.85, 0.90, 0.95, 0.99]
+cs = [0.85]
 tol = 0.001
 dataDirectory = '../../data/exp2'
 outDirectory = 'exp2'
