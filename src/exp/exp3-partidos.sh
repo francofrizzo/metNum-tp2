@@ -2,13 +2,13 @@
 
 LC_NUMERIC="en_US.UTF-8"
 
-cs=0.85 #c probabilidad de teletransportación
+cs=0.6 #c probabilidad de teletransportación
 nodos=13
 tolerancia=0.00001
 algoritmo=0
 cantLigas=5
 k="$(seq 0 1 10)"
-cc="0.1 0.15 0.2 0.25 0.3 0.35 0.4" #este es el c2
+cc="0.1 0.15 0.2 0.25 0.3 0.35" #este es el c2
 
 while getopts 'ch' opt; do
   case $opt in
