@@ -2,25 +2,32 @@
     ".deps_version": 2, 
     "g++ -c ./deportes.cpp -o ./deportes.o -std=c++0x -g": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d", 
-        "config.h": "input-6a55c8768bc8c10f57316053003f777f", 
-        "deportes.cpp": "input-e81ace530e0f04578741f0dabac3e073", 
-        "deportes.h": "input-baccff3d735d68173ee5613266950036", 
-        "deportes.o": "output-cc296252af72e9b3a6c40ca321c3d894"
+        "config.h": "input-317caa524de6141b31e68718a3b3a195", 
+        "deportes.cpp": "input-985b1f680e428863bbe2d2215bce825b", 
+        "deportes.h": "input-014221afc8236e15ec34e48c173f1d31", 
+        "deportes.o": "output-fea54a1696ebff31ce666b813759a2d4"
     }, 
     "g++ -c ./pags_web.cpp -o ./pags_web.o -std=c++0x -g": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d", 
-        "config.h": "input-6a55c8768bc8c10f57316053003f777f", 
-        "pags_web.cpp": "input-f845ef330790caf08f7b43534a581fc5", 
-        "pags_web.h": "input-d23ae4963bbf14252993daf14c2d802e", 
-        "pags_web.o": "output-fdcdb1849660c883194ca5990ac245c5"
+        "config.h": "input-317caa524de6141b31e68718a3b3a195", 
+        "pags_web.cpp": "input-81b1c824c972d98c230b871e1d4e44a7", 
+        "pags_web.h": "input-1505e41aaea933bd8390596c76eb2fe5", 
+        "pags_web.o": "output-1d40c0f48ec4ebb14dd5050f712de3b8"
     }, 
     "g++ -c ./tp.cpp -o ./tp.o -std=c++0x -g": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d", 
-        "config.h": "input-6a55c8768bc8c10f57316053003f777f", 
-        "deportes.h": "input-baccff3d735d68173ee5613266950036", 
-        "pags_web.h": "input-d23ae4963bbf14252993daf14c2d802e", 
-        "tp.cpp": "input-638fefaf68ea65965979cd92de7d89ea", 
-        "tp.o": "output-460205f597936a0e5e1be4cdacc6e395"
+        "config.h": "input-317caa524de6141b31e68718a3b3a195", 
+        "deportes.h": "input-014221afc8236e15ec34e48c173f1d31", 
+        "pags_web.h": "input-1505e41aaea933bd8390596c76eb2fe5", 
+        "tp.cpp": "input-8594803afe65488502c158946a9067b0", 
+        "tp.o": "output-9450315e39b86f823c24b2ce37146913"
+    }, 
+    "g++ -o ./tp ./deportes.o ./tp.o ./pags_web.o": {
+        ".": "input-5058f1af8388633f609cadb75a75dc9d", 
+        "deportes.o": "input-fea54a1696ebff31ce666b813759a2d4", 
+        "pags_web.o": "input-1d40c0f48ec4ebb14dd5050f712de3b8", 
+        "tp": "output-8652203ff2ea8d205b92b44e74411e01", 
+        "tp.o": "input-9450315e39b86f823c24b2ce37146913"
     }, 
     "g++ -o ./tp ./tp.o ./deportes.o ./pags_web.o": {
         ".": "input-5058f1af8388633f609cadb75a75dc9d", 
