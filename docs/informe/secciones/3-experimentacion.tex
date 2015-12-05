@@ -257,8 +257,8 @@
             Como podemos ver en las tablas de \emph{rankings}, los órdenes no son exactamente iguales. Por ejemplo, mirando el equipo 1 (Aldosivi), en el \emph{ranking} de la \acr{AFA} se encuentra en la posición 20 y cuando usamos el método de \emph{GeM} éste está en la posición 2. Esto se debe a que Aldosivi le ganó tanto al equipo 24 (San Lorenzo) como al 7 (Boca Juniors), que se encontraban primero y segundo en la tabla de posiciones de la \acr{AFA}, respectivamente. Por esto, en \emph{GeM} sube muchas posiciones mientras que con la \acr{AFA} sólo se le otorgan 3 puntos por cada uno de los dos partidos.
 
         \subsubsection{Experimento 2}
-        \subsubsection*{Presentación}
-        Con este experimento se busca mostrar como varía el ranking de los equipos a medida que van pasando las fechas de la liga para diferentes valores de c. Para ello se tomará la primer fecha y se medirá el ranking hasta el momento. Luego tomaremos la liga completa y se evaluará el ranking final. Esto se repetirá para cada uno de los valores de c. Luego se compararán las variaciones entre el inicio y el fin de la liga para cada uno de los valores.
+            \subsubsection*{Presentación}
+            Con este experimento se busca mostrar como varía el ranking de los equipos a medida que van pasando las fechas de la liga para diferentes valores de c. Para ello se tomará la primer fecha y se medirá el ranking hasta el momento. Luego tomaremos la liga completa y se evaluará el ranking final. Esto se repetirá para cada uno de los valores de c. Luego se compararán las variaciones entre el inicio y el fin de la liga para cada uno de los valores.
 
             \subsubsection*{Hipótesis}
             Suponemos que cuando el grafo es muy poco conexo, es decir, cuando no hay demasiadas conexiones entre los equipos, como es al inicio de la liga, el c cobra relevancia. Por lo tanto, al inicio, para diferentes valores de c va a haber mucha variación en los rankings de los equipos. En cambio, cuando el grafo es mas conexo, es decir, cuando los equipos están muy relacionados entre sí, como sucede al final de la liga, cuando ya se jugaron todas las fechas, la importancia del c disminuye, por lo que suponemos que van a ser muy similares los rankings finales para los diferentes valores de c.
@@ -298,36 +298,33 @@
 
 
         \subsubsection{Experimento 3}
-        \subsubsection*{Presentación}
-        El objetivo de este experimento es determinar cual de los tres métodos presentados anteriormente resuelve mejor la situación del empate. Para ello de tomaron diferentes ligas que constan de 6 equipos que juegan entre si a lo largo de 6 fechas. Cada una de ellas presenta diferentes situaciones de empate.
-        En la liga 2 el equipo 1 le gana a todos menos con el 6 que empata. El equipo 6 pierde con todos menos con el 1 que empata. El equipo 2 le gana al 5 y al 3 y pierde con el 4. El 3 le gana al 4 y al 5 y pierde con el 2. El 4 gana contra el 2 y pierde con el 3 y el 5. Por último el 5 gana contra el 4 y pierde contra el 2 y el 3.
-            \begin{figure}[h]
+            \subsubsection*{Presentación}
+            El objetivo de este experimento es determinar cual de los tres métodos presentados anteriormente resuelve mejor la situación del empate. Para ello de tomaron diferentes ligas que constan de 6 equipos que juegan entre si a lo largo de 6 fechas. Cada una de ellas presenta diferentes situaciones de empate.
+            En la liga 2 el equipo 1 le gana a todos menos con el 6 que empata. El equipo 6 pierde con todos menos con el 1 que empata. El equipo 2 le gana al 5 y al 3 y pierde con el 4. El 3 le gana al 4 y al 5 y pierde con el 2. El 4 gana contra el 2 y pierde con el 3 y el 5. Por último el 5 gana contra el 4 y pierde contra el 2 y el 3.
+                \begin{figure}[h]
+                    \begin{center}
+                      \includegraphics[width=7cm]{imagenes/liga2.png} \\
+                      {\small Liga 2}
+                    \end{center}
+                \end{figure}
+
+            En la liga 4 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El resto de los equipos quedan iguales que en la liga 2.
+
+                \begin{figure}[h]
+                    \begin{center}
+                      \includegraphics[width=7cm]{imagenes/liga4.png} \\
+                      {\small Liga 4}
+                    \end{center}
+                \end{figure}
+
+            Por último en la liga 5 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El equipo 3 pierde con todos los que juega excepto cuando juega contra el 6 que empata. El resto de los equipos quedan iguales que en la liga 2.
+
+             \begin{figure}[h]
                 \begin{center}
-                    \begin{tabular}{@{\extracolsep{2cm}} cc}
-                      \includegraphics{imagenes/liga2.odg} 
-                      {\small \strong{liga 2}} \\
-                    \end{tabular}
+                  \includegraphics[width=7cm]{imagenes/liga5.png} \\
+                  {\small Liga 5}
                 \end{center}
-
-        En la liga 4 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El resto de los equipos quedan iguales que en la liga 2.
-
-            \begin{figure}[h]
-                \begin{center}
-                    \begin{tabular}{@{\extracolsep{2cm}} cc}
-                      \includegraphics{imagenes/liga4.odg} \\
-                      {\small \strong{liga 4}} \\
-                    \end{tabular}
-                \end{center}
-
-        Por último en la liga 5 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El equipo 3 pierde con todos los que juega excepto cuando juega contra el 6 que empata. El resto de los equipos quedan iguales que en la liga 2.
-
-         \begin{figure}[h]
-                \begin{center}
-                    \begin{tabular}{@{\extracolsep{2cm}} cc}
-                      \includegraphics{imagenes/liga5.odg} 
-                      {\small \strong{liga 5}}
-                    \end{tabular}
-                \end{center}
+            \end{figure}
 
             \subsubsection*{Hipótesis}
             Suponemos que para el método en el que se les da 0 puntos a los equipos empatados lo que va a pasar es que para dos equipos en los cuales uno empata todos los partidos en los que juega y otro que pierde (es indistinto si cuando juegan entre ellos empatan o pierde el primero) ambos quedarán con igual puntaje, lo que es injusto para el equipo que empata. Suponemos que esto se va a poder observar bien en la liga 5, ya que el equipo 3 pierde todos los partidos menos uno que lo empata (cuando juega contra el 6) y el 6 que empata todos. Ambos equipos quedarán con 0 puntos en el ranking final. Además si un equipo fuerte juega con uno débil y estos dos empatan entonces para ambos sera lo mismo que no haber jugado lo que no es justo para el equipa débil. Esto se puede ver en la liga 2 ya que el equipo 1 vence contra todos menos con el 6, con quien empata. El equipo 6 pierde con todos menos con el 1. En el resultado final el equipo 6 obtendrá 0 puntos a pesar de haber empatado con el equipo mas fuerte de la liga.
