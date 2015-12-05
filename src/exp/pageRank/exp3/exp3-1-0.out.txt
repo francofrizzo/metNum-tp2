@@ -1,8 +1,31 @@
-0.205549
-0.216403
-0.096341
-0.096341
-0.096341
-0.096341
-0.096341
-0.096341
+    \multicolumn{3}{|c||}{\emph{Ranking} Web 1 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 1 - \textsc{In-deg}} \\ \hline
+    Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
+    1    & 2    & 0.216403   & 1    & 1    & 0.315789 \\
+    2    & 1    & 0.205549   & 2    & 3    & 0.105263 \\
+    3    & 3    & 0.096341   & 3    & 4    & 0.105263 \\
+    4    & 4    & 0.096341   & 4    & 5    & 0.105263 \\
+    5    & 5    & 0.096341   & 5    & 6    & 0.105263 \\
+    6    & 6    & 0.096341   & 6    & 7    & 0.105263 \\
+    7    & 7    & 0.096341   & 7    & 8    & 0.105263 \\
+    8    & 8    & 0.096341   & 8    & 2    & 0.052632 \\ \hline
+    \multicolumn{6}{c}{} \\ \hline
+    \multicolumn{3}{|c||}{\emph{Ranking} Web 2 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 2 - \textsc{In-deg}} \\ \hline
+    Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
+    1    & 1    & 0.447829   & 1    & 1    & 0.538462 \\
+    2    & 2    & 0.399828   & 2    & 3    & 0.384615 \\
+    3    & 3    & 0.058594   & 3    & 2    & 0.076923 \\
+    4    & 4    & 0.018750   & 4    & 4    & 0.000000 \\
+    5    & 5    & 0.018750   & 5    & 5    & 0.000000 \\
+    6    & 6    & 0.018750   & 6    & 6    & 0.000000 \\
+    7    & 7    & 0.018750   & 7    & 7    & 0.000000 \\
+    8    & 8    & 0.018750   & 8    & 8    & 0.000000 \\
+    \multicolumn{6}{c}{} \\ \hline
+    \multicolumn{3}{|c||}{\emph{Ranking} Web 3 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 3 - \textsc{In-deg}} \\ \hline
+    Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
+    1    & 1    & 0.166667   & 1    & 1    & 0.166667 \\
+    2    & 2    & 0.166667   & 2    & 2    & 0.166667 \\
+    3    & 3    & 0.166667   & 3    & 3    & 0.166667 \\
+    4    & 4    & 0.166667   & 4    & 4    & 0.166667 \\
+    5    & 5    & 0.166667   & 5    & 5    & 0.166667 \\
+    6    & 6    & 0.166667   & 6    & 6    & 0.166667 \\ \hline
+\end{tabular}

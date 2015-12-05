@@ -18,14 +18,16 @@
             \subsubsection*{Metodología, datos y parámetros del experimento}
                 Se realizaron pruebas para medir el rendimiento temporal según dos parámetros:
                 \begin{enumerate}[label=(\alph*)]
-                    \item Cantidad de páginas de la red. Se consideraron redes generadas artificialmente con las siguientes cantidades de nodos: \{200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000\}, estableciendo en todas ellas la misma cantidad de enlaces, 40000, distribuidos entre las páginas de manera uniforme. Los casos de prueba se pueden generar mediante el \emph{script} \texttt{exp/exp1-a-data.sh}.
+                    \item Cantidad de páginas de la red. Se consideraron redes generadas artificialmente con las siguientes cantidades de nodos: \{200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000\}, estableciendo en todas ellas la misma cantidad de enlaces, 40000.
 
-                    \item Cantidad de enlaces de la red. Se consideraron redes generadas artificialmente con una cantidad fija de 400 nodos, variando la cantidad de enlaces establecidos entre ellos, tomando los valores \{1200, 4000, 10000, 20000, 40000, 60000, 80000, 120000, 160000\}, distribuidos entre las páginas de manera uniforme. Los casos de prueba se pueden generar mediante el \emph{script} \texttt{exp/exp1-b-data.sh}.
+                    \item Cantidad de enlaces de la red. Se consideraron redes generadas artificialmente con una cantidad fija de 400 nodos, variando la cantidad de enlaces establecidos entre ellos, tomando los valores \{1200, 4000, 10000, 20000, 40000, 60000, 80000, 120000, 160000\}.
                 \end{enumerate}
+
+                En todos los casos, para la generación de las instancias de prueba, se distribuyó uniformemente entre las páginas la cantidad de \emph{links} salientes; las páginas hacia los que estos apuntan fueron determinadas al azar.
 
                 El parámetro de amortiguación $c$ se mantuvo fijo con el valor 0.85 (el utilizado normalmente por el buscador Google\cite{Brin1998}), mientras que el umbral de tolerancia para la detención del método se fijó en 0.0001.
 
-                En cada caso, se midió el tiempo necesario para la construcción de la matriz que modela la red y para la ejecución de todas las iteraciones necesarias del método. Para realizar las mediciones se utilizaron las funciones provistas a tal efecto por la biblioteca estándar de C++. Con el fin de evitar posibles errores en las mismas, cada una se repitió 10 veces, considerando luego el promedio entre los valores obtenidos.
+                En cada caso, se midió el tiempo necesario para la construcción de la matriz que modela la red y para la ejecución de todas las iteraciones necesarias del método. Para realizar las mediciones se utilizaron las funciones provistas a tal efecto por la biblioteca estándar de C++. Con el fin de evitar posibles errores en las mismas, cada una se repitió 20 veces, considerando luego el promedio entre los valores obtenidos.
 
             \subsubsection*{Hipótesis}
             Es importante considerar en este punto la forma en que la implementación del algoritmo \emph{PageRank} aprovecha la propiedad de la matriz que modela la red ($\mat{P_1}$) de ser esparsa. Una inspección al código de dicha implementación revela que la única operación costosa que se realiza en cada iteración es  el producto entre la dicha matriz y el vector resultante de la iteración anterior. Dentro de este producto existen dos ciclos no anidados; uno de ellos itera sobre todas las posiciones no nulas de la matriz, es decir, linealmente en la cantidad de \emph{links} de la red, para realizar el producto del vector con estos coeficientes. El otro ciclo se realiza sobre todas las posiciones del vector, cuya cantidad es igual a la cantidad de nodos de la red; cabe destacar que este ciclo es extremadamente simple, consistiendo únicamente en un par de sumas.
@@ -34,16 +36,21 @@
 
             \subsubsection*{Resultados obtenidos y discusión}
 
-            \begin{figure}
+            \noindent{} \begin{minipage}{\textwidth}
                 \begin{center}
+                    \vspace{1em}
 
                     \begin{tabular}{cc}
                         \includegraphics{graficos/exp1-a.pdf} & \includegraphics{graficos/exp1-b.pdf} \\
                     \end{tabular}
 
-                    \label*{Resultados arrojados por el experimento 1. El gráfico de la izquierda representa el tiempo promedio de ejecución del algoritmo \emph{PageRank} en función de la cantidad de nodos de la red, y el de la derecha, en función de la cantidad de \emph{links} de la misma. Se representa también el desvío estándar de las mediciones.}
+                    \vspace{1em}
+
+                    Resultados arrojados por el experimento 1. El gráfico de la izquierda representa el tiempo promedio de ejecución del algoritmo \emph{PageRank} en función de la cantidad de nodos de la red, y el de la derecha, en función de la cantidad de \emph{links} de la misma. Se representa también el desvío estándar de las mediciones..
+
+                    \vspace{1em}
                 \end{center}
-            \end{figure}
+            \end{minipage}
 
             Como puede observarse en los gráficos que se incluyen, los resultados obtenidos corroboraron la hipótesis de que el tiempo de ejecución del algoritmo aumentaría linealmente con la cantidad de links de la red evaluada. No obstante, la relación con la cantidad de nodos de la red parece no ser lineal, sino de un orden mayor. Aquí entra en juego, muy probablemente, un hecho que no fue tomado en cuenta al elaborar las hipótesis: la naturaleza iterativa del método, que no permite determinar cuántas veces se ejecutará hasta detenerse a partir de una simple inspección de los ciclos del algoritmo. Es decir, hay que tener en cuenta que un incremento en la cantidad de nodos de la red puede tener un efecto no solo en la complejidad de cada iteración particular, sino en la cantidad total de iteraciones requeridas para alcanzar un resultado.
 
@@ -79,17 +86,31 @@
 
             \subsubsection*{Resultados obtenidos y discusión}
 
-            \begin{figure}
+            \noindent{} \begin{minipage}{\textwidth}
                 \begin{center}
+                    \vspace{1em}
 
                     \begin{tabular}{cc}
                         \includegraphics{graficos/exp2-a.pdf} & \includegraphics{graficos/exp2-b.pdf} \\
-                        \multicolumn{2}{c}{\includegraphics{graficos/exp2-c.pdf}}
+                        {\small Instancia (a)}                & {\small Instancia (b)}
                     \end{tabular}
-
-                    \label*{Resultados arrojados por el experimento 1. El gráfico de la izquierda representa el tiempo promedio de ejecución del algoritmo \emph{PageRank} en función de la cantidad de nodos de la red, y el de la derecha, en función de la cantidad de \emph{links} de la misma. Se representa también el desvío estándar de las mediciones.}
                 \end{center}
-            \end{figure}
+            \end{minipage}
+
+            \noindent{} \begin{minipage}{\textwidth}
+                \begin{center}
+                    \includegraphics{graficos/exp2-c.pdf} \\
+                    {\small Instancia (c)}
+
+                    \vspace{1em}
+
+                    Resultados arrojados por el experimento 2. Los gráficos representan la diferencia Manhattan entre el resultado de cada iteración y el de la inmediatamente anterior durante la ejecución del algoritmo, para las distintas instancias y valores de $c$ considerados.
+
+                    \vspace{1em}
+                \end{center}
+            \end{minipage}
+
+
 
         \subsubsection{Experimento 3: Análisis cualitativo de los resultados}
 
@@ -119,268 +140,118 @@
 
             \subsubsection*{Hipótesis}
 
+            En el primero, suponemos que los \emph{rankings} obtenidos en ambos casos serán iguales ya que existe una sola página principal y el resto tiene igual cantidad de relaciones. Por otro lado, en el segundo notaremos diferencias. Llamaremos enlace fuerte a aquel que va de una página que es apuntada por muchas otras hacia otra página. El método \emph{PageRank} tiene en cuenta cuál es el peso de los \emph{links} que apuntan a las distintas páginas. En el caso de \textsc{In-deg}, solo se utiliza como información la cantidad de enlaces que llegan a cada una de las distintas páginas.
+
+            En el experimento, si consideramos el método \emph{PageRank}, la página 1 quedará en primer lugar, ya que es la que recibe más \emph{links} a la misma, pero en segundo lugar quedará la página 2. Esto se debe a que el enlace de la 1 a la 2 es un enlace muy fuerte. En el caso de \textsc{In-deg}, esto no sucede ya que este método solo toma en cuenta que existe un único link hacia la página 2. Por lo tanto en \emph{PageRank} las posiciones serán 1-2-3 y luego el resto. En \textsc{In-deg} tendremos primero a la página 1 seguida de la 3, luego la 2 y finalmente el resto.
+
+            \subsubsection*{Resultados obtenidos y discusión}
+
+            \begin{center}
+                \begin{tabular}{|c|c|c||c|c|c|}
+                    \hline
+                    \multicolumn{3}{|c||}{\emph{Ranking} Web 1 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 1 - \textsc{In-deg}} \\ \hline
+                    Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
+                    1    & 2    & 0.216403   & 1    & 1    & 0.315789 \\
+                    2    & 1    & 0.205549   & 2    & 3    & 0.105263 \\
+                    3    & 3    & 0.096341   & 3    & 4    & 0.105263 \\
+                    4    & 4    & 0.096341   & 4    & 5    & 0.105263 \\
+                    5    & 5    & 0.096341   & 5    & 6    & 0.105263 \\
+                    6    & 6    & 0.096341   & 6    & 7    & 0.105263 \\
+                    7    & 7    & 0.096341   & 7    & 8    & 0.105263 \\
+                    8    & 8    & 0.096341   & 8    & 2    & 0.052632 \\ \hline
+                    \multicolumn{6}{c}{} \\ \hline
+                    \multicolumn{3}{|c||}{\emph{Ranking} Web 2 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 2 - \textsc{In-deg}} \\ \hline
+                    Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
+                    1    & 1    & 0.447829   & 1    & 1    & 0.538462 \\
+                    2    & 2    & 0.399828   & 2    & 3    & 0.384615 \\
+                    3    & 3    & 0.058594   & 3    & 2    & 0.076923 \\
+                    4    & 4    & 0.018750   & 4    & 4    & 0.000000 \\
+                    5    & 5    & 0.018750   & 5    & 5    & 0.000000 \\
+                    6    & 6    & 0.018750   & 6    & 6    & 0.000000 \\
+                    7    & 7    & 0.018750   & 7    & 7    & 0.000000 \\
+                    8    & 8    & 0.018750   & 8    & 8    & 0.000000 \\
+                    \multicolumn{6}{c}{} \\ \hline
+                    \multicolumn{3}{|c||}{\emph{Ranking} Web 3 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 3 - \textsc{In-deg}} \\ \hline
+                    Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
+                    1    & 1    & 0.166667   & 1    & 1    & 0.166667 \\
+                    2    & 2    & 0.166667   & 2    & 2    & 0.166667 \\
+                    3    & 3    & 0.166667   & 3    & 3    & 0.166667 \\
+                    4    & 4    & 0.166667   & 4    & 4    & 0.166667 \\
+                    5    & 5    & 0.166667   & 5    & 5    & 0.166667 \\
+                    6    & 6    & 0.166667   & 6    & 6    & 0.166667 \\ \hline
+                \end{tabular}
+            \end{center}
+
+            Como podemos ver en los \emph{rankings} del primer análisis en ambos casos quedan iguales. En cambio, en el segundo observamos variaciones, ya que en la lista de entrada el peso de todos los enlaces no es el mismo, es decir, hay enlaces más fuertes que otros. A diferencia de \emph{PageRank}, el método \textsc{In-deg} no tiene en cuenta esta propiedad. Por lo tanto, si en las páginas de entrada todos los \emph{links} tienen igual fuerza, el resultado obtenido por ambos métodos no difiere.
+
+
+    \subsection{\emph{GeM} y ligas deportivas}
+
+        \subsubsection{Experimento 1}
+        \subsubsection*{Presentación}
+        En este experimento se verá la diferencia entre los métodos de \emph{GeM} y el de la \acr{AFA} para determinar el \emph{ranking} de una liga deportiva. Para ello se tomará como parámetro de entrada una tabla con los partidos, sus respectivas fechas, y sus resultados. En la misma, deberá existir un equipo que ocupe una de las primaras posiciones en la tabla de \emph{rankings} que haya perdido contra otro que ocupa una de las últimas. Observaremos la diferencia entre el \emph{ranking} generado por cada uno de los métodos.
+
+            \subsubsection*{Hipótesis}
+            Cuando se juega un partido entre dos equipos, en el método de \emph{GeM} se tendrá en cuenta que tan fuerte son los equipos involucrados y cual fue la diferencia de goles en el partido. En cambio, en el método de la \acr{AFA} el ganador recibirá 3 puntos sin importar los resultados ni las posiciones que los mismos tenían hasta el momento. Esto puede generar diferencias en el \emph{ranking} ya que cada método considera distinta información para determinar las nuevas posiciones.
+
+            Por otro lado, si un equipo que se encuentra en las últimas posiciones de la tabla juega contra uno que está en las primeras y gana, para el método de la \acr{AFA} es exactamente igual que haya jugado con cualquier otro. Para \emph{GeM}, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así, en este método, entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la \acr{AFA} no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador.
+
+            \subsubsection*{Datos de entrada}
+                Resultados del Torneo de Primera División del Fútbol Argentino hasta la Fecha 23. El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. Se eligió el valor de c y el de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas.
+.
+
             \subsubsection*{Resultados}
+
+                \begin{center}
+                    \begin{tabular}{|c|c|c||c|c|c|}
+                        \hline
+                        \multicolumn{3}{|c||}{\emph{Ranking} Liga Deportiva - \emph{GeM}} & \multicolumn{3}{c|}{\emph{Ranking} Liga Deportiva - \acr{AFA}} \\
+                        \hline
+                        Pos. & Equipo & Puntaje                 & Pos. & Equipo & Puntaje \\ \hline
+                        1 & Boca Juniors & 0.080913             & 1 & San Lorenzo & 0.054289 \\
+                        2 & Aldosivi & 0.069879                 & 2 & Boca Juniors & 0.053203 \\
+                        3 & River Plate & 0.069065              & 3 & Racing Club & 0.049946 \\
+                        4 & San Lorenzo & 0.058309              & 4 & Rosario Central & 0.048860 \\
+                        5 & San Martín (SJ) & 0.051788          & 5 & River Plate & 0.047774 \\
+                        6 & Racing Club & 0.051674              & 6 & Independiente & 0.041260 \\
+                        7 & Rosario Central & 0.046326          & 7 & Belgrano & 0.041260 \\
+                        8 & Quilmes & 0.045206                  & 8 & Estudiantes (LP) & 0.041260 \\
+                        9 & Newell's Old Boys & 0.043581        & 9 & Tigre & 0.040174 \\
+                        10 & Vélez Sarsfield & 0.039828         & 10 & Banfield & 0.040174 \\
+                        11 & Gimnasia y Esgrima (LP) & 0.035738 & 11 & Lanús & 0.039088 \\
+                        12 & Estudiantes (LP) & 0.034629        & 12 & Gimnasia y Esgrima (LP) & 0.038002 \\
+                        13 & Belgrano & 0.033908                & 13 & Quilmes & 0.034745 \\
+                        14 & Banfield & 0.032996                & 14 & San Martín (SJ) & 0.034745 \\
+                        15 & Unión & 0.028015                   & 15 & Unión & 0.033659 \\
+                        16 & Defensa y Justicia & 0.027041      & 16 & Tempreley & 0.030402 \\
+                        17 & Lanús & 0.026036                   & 17 & Argentinos Juniors & 0.028230 \\
+                        18 & Independiente & 0.023666           & 18 & Newell's Old Boys & 0.028230 \\
+                        19 & Tigre & 0.023078                   & 19 & Aldosivi & 0.028230 \\
+                        20 & Sarmiento & 0.022266               & 20 & Vélez Sarsfield & 0.027144 \\
+                        21 & Olimpo & 0.021956                  & 21 & Defensa y Justicia & 0.026059 \\
+                        22 & Crucero del Norte & 0.021713       & 22 & Sarmiento & 0.026059 \\
+                        23 & Arsenal & 0.018678                 & 23 & Olimpo & 0.024973 \\
+                        24 & Argentinos Juniors & 0.017951      & 24 & Colón & 0.024973 \\
+                        25 & Tempreley & 0.017670               & 25 & Godoy Cruz & 0.023887 \\
+                        26 & Huracán & 0.013740                 & 26 & Huracán & 0.022801 \\
+                        27 & Godoy Cruz & 0.013541              & 27 & Atlético de Rafaela & 0.021716 \\
+                        28 & Atlético de Rafaela & 0.011738     & 28 & Arsenal & 0.018458 \\
+                        29 & Colón & 0.011141                   & 29 & Nueva Chicago & 0.015201 \\
+                        30 & Nueva Chicago & 0.007928           & 30 & Crucero del Norte & 0.015201 \\
+                        \hline
+                    \end{tabular}
+                \end{center}
 
             \subsubsection*{Discusión}
 
-
-% Acá sigue lo viejo
-
-			\subsubsection*{Resultados}
-				{\centering \begin{tabular}{c}
-			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp1.png} \\
-			    \end{tabular}}
-
-			\subsubsection*{Discusión} 
-			Como se puede observar en el experimento, a medida que aumenta el valor de c, aumenta el tiempo de ejecución. Esto se debe a que la matriz inicial no es homogénea y la que formamos a partir del c si lo es. Así, cuando la segunda toma dicha importancia, el sistema tiende más rápido a ser homogéneo y requiere menos iteraciones del ciclo para lograr una norma menor a la tolerancia deseada. 
-
-
-		\subsubsection{Experimento 2}
-			\subsubsection*{Presentación}
-			Con este experimento se pretende observar la diferencia en el tiempo de ejecución cuando se varía la cantidad de \emph{links} en una determinada cantidad de páginas, manteniendo el valor de la tolerancia constante.
-			Para ello se utilizan listas de páginas diferentes como parámetro de entrada en cada una de las ejecuciones a comparar, pero manteniendo la cantidad de las mismas. Se toma el tiempo que se demora en ejecutar el algoritmo y se lo divide por la cantidad de iteraciones realizadas. Esto permite obtener un promedio del tiempo que demora por cada una de las iteraciones del ciclo.
-		
-			\subsubsection*{Hipótesis} 
-			Suponemos que variar la cantidad de \emph{links} altera más el tiempo de ejecución que variar la cantidad de páginas sin que estén relacionadas entre ellas. Esto se debe a que, dada la forma en la que está implementado el algoritmo, sacando provecho del hecho de que la matriz es esparsa, agregar entradas a la matriz de adyacencia tendrá un mayor impacto sobre la cantidad de operaciones a realizar. Por lo tanto, se espera observar que el tiempo de ejecución aumente a medida que la cantidad de relaciones entre páginas sea mayor.
-
-			\subsubsection*{Datos de entrada} 		
-			Para este experimento se toman 50 páginas. La cantidad de \emph{links} entre ellas varía, tomando los valores \texttt{4, 32, 70, 105, 130, 160}. Estos valores fueron elegidos a modo de análisis. Para generarlos se creó una red a partir de diferentes páginas web interconectadas entre sí. Luego se borraron algunas páginas, eliminando una determinada cantidad de \emph{links}, y se agregaron nuevas páginas desconectadas totalmente de las ya existentes. De esta forma, no se disminuyó la cantidad de páginas pero sí la de \emph{links}. Además el valor de $c$ es \texttt{0.85} y el valor de la tolerancia es \texttt{0.00001}. El valor de $c$ y de la tolerancia fueron elegidos arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. 
-			
-			\subsubsection*{Resultados}
-				{\centering \begin{tabular}{c}
-			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp2.png} \\
-			    \end{tabular}}
-
-
-			\subsubsection*{Discusión}
-			Como se puede observar en el gráfico, a medida que aumentan las relaciones entre las páginas el tiempo de ejecución es mayor.  
-
-		\subsubsection{Experimento 3}
-			\subsubsection*{Presentación}
-			En este experimento también se observa la diferencia en el tiempo de ejecución, pero comparando igual cantidad de páginas y relaciones entre las mismas y variando el valor de la tolerancia.
-			Para ello se toma como parámetro de entrada en cada una de las ejecuciones una misma lista de páginas y se incrementa el valor de la tolerancia.
-
-			\subsubsection*{Hipótesis} 
-			Creemos que cuanto mayor sea la tolerancia, menor será el tiempo de ejecución del algoritmo. Esto se debe a que el algoritmo termina cuando la diferencia Manhattan es menor que la tolerancia. Entonces cuanto más grande sea el valor de la tolerancia, más rápido se cumplirá la condición para salir del ciclo y menos tardará en ejecutarse el algoritmo. Suponemos que para los valore mas chicos de tolerancia el tiempo de ejecución será altamente mayor que para valores de tolerancia cercanos a 1. Es decir, el crecimiento será exponenecial a medida que disminuimos el valor de la tolerancia.
-
-			\subsubsection*{Datos de entrada} 
-			Se toman 13 páginas con 16 \emph{links}. Además la tolerancia toma los siguientes valores: \texttt{0.000001, 0.000005, 0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1, 0.3, 0.5, 0.7}. El parámetro $c$ es igual a \texttt{0.85}. El valor de $c$ y la cantidad de páginas fueron elegidos arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Los valores de la tolerancia fueron tomados a modo de análisis teniendo en cuenta que el objetivo del experimento. 
-
-			\subsubsection*{Resultados}
-				{\centering \begin{tabular}{c}
-			      % \includegraphics[width=12cm]{../../src/exp/graficos/exp3.png} \\
-			    \end{tabular}}
-
-			\subsubsection*{Discusión}
-			Como se puede ver en el gráfico, al aumentar la tolerancia disminuye el tiempo de ejecución linealmente. Al estar en escala logaritmica, esto quiere decir que la función decrece de forma exponencial. Para valores de tolerancia cercanos a 1, la cantidad de iteraciones a realizar es notoriamente menor que para valores de tolerancia cercanos a 0. Esto sucede ya que el método converge cada vez mas lento, entonces cuando la tolerancia toma valores muy chicos las ultimas iteraciones modifican muy poco el vector por lo que se requieren más iteraciones para acercarse al resultado.
-			Además se puede observar que hasta el valor de tolerancia 0.01 la variación en tiempo de ejecución dependiendo del valor de la tolerancia es mínimo. Cuando ese valor es menor que 0.01 el tiempo de ejecución se incrementa notoriamente. Dejamos a experimentos futuros ver cuál es el valor en el que el tiempo de ejecución es muy grande. En este sentido, se pudo confirmar la hipótesis.   
-
-	\subsubsection{Experimento 4}
-		\subsubsection*{Presentación}
-		Otra de las pruebas consiste en comparar los \emph{rankings} formados al ejecutar los algoritmos de \emph{PageRank} y el de \textsc{In-deg}. Primero se analiza una lista de páginas de entrada en la que una de ellas sea apuntada por el resto (Web 1). 
-
-		Luego se realiza la comparación con una lista en la que hayan dos páginas (a las que llamaremos página 1 y página 3) que sean apuntadas por varias paginas. Además, la página 3 tendrá un link a la 1. También se cuenta con otra (a la que llamaremos página 2) que apunta y es apuntada por la página 1, tal como se muestra en el siguiente esquema (Web 2):
-
-			\begin{figure}[h]
-
-				\begin{center}
-					\begin{tabular}{@{\extracolsep{2cm}} cc}
-				      \includegraphics{imagenes/exp4-graph1.pdf} & \includegraphics{imagenes/exp4-graph2.pdf} \\
-				      {\small \strong{Web 1}} & {\small \strong{Web 2}}
-				    \end{tabular}
-			    \end{center}
-
-		    	\caption{Redes utilizadas como datos de entrada para el Experimento 4} \label{fig:exp4-webs}
-
-		    \end{figure}
-
-			\subsubsection*{Hipótesis} 
-			En el primero, suponemos que los \emph{rankings} obtenidos en ambos casos serán iguales ya que existe una sola página principal y el resto tiene igual cantidad de relaciones. Por otro lado, en el segundo notaremos diferencias. Llamaremos enlace fuerte a aquel que va de una página que es apuntada por muchas otras hacia otra página. El método \emph{PageRank} tiene en cuenta cuál es el peso de los \emph{links} que apuntan a las distintas páginas. En el caso de \textsc{In-deg}, solo se utiliza como información la cantidad de enlaces que llegan a cada una de las distintas páginas.
-
-			En el experimento, si consideramos el método \emph{PageRank}, la página 1 quedará en primer lugar, ya que es la que recibe más \emph{links} a la misma, pero en segundo lugar quedará la página 2. Esto se debe a que el enlace de la 1 a la 2 es un enlace muy fuerte. En el caso de \textsc{In-deg}, esto no sucede ya que este método solo toma en cuenta que existe un único link hacia la página 2. Por lo tanto en \emph{PageRank} las posiciones serán 1-2-3 y luego el resto. En \textsc{In-deg} tendremos primero a la página 1 seguida de la 3, luego la 2 y finalmente el resto.
-
-			\subsubsection*{Datos de entrada}
-			Para la Web 1, se tomaron 9 páginas con 10 \emph{links}. Para la Web 2, se tomaron 8 páginas con 13 \emph{links}.  
-
-			El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. 
-			 		
-			\subsubsection*{Resultados}
-
-			   \begin{center}
-	      			\begin{tabular}{c|c|c} 
-			      		\hline
-			  				\multicolumn{3}{c}{\emph{Ranking} Web 1 - \emph{PageRank}} \\
-			 			\hline
-	        			Posición & Nodo & Puntaje \\ \hline
-	         			1 & 1 & 0.473848 \\
-	        			2 & 8 & 0.078821 \\
-	        			3 & 9 & 0.078821 \\
-	        			4 & 2 & 0.061418 \\
-	        			5 & 3 & 0.061418 \\
-	        			6 & 4 & 0.061418 \\
-	        			7 & 5 & 0.061418 \\
-	        			8 & 6 & 0.061418 \\
-	        			9 & 7 & 0.061418 
-	      			\end{tabular} 
-
-	      			\begin{tabular}{c|c|c}
-			      		\hline
-			  				\multicolumn{3}{c}{\emph{Ranking} Web 1 - \textsc{In-deg}} \\
-			 			\hline
-	        			Posición & Nodo & Puntaje \\ \hline
-	         			1 & 1 & 0.8 \\
-	        			2 & 8 & 0.1 \\
-	        			3 & 9 & 0.1 \\
-	        			4 & 2 & 0 \\
-	        			5 & 3 & 0 \\
-	        			6 & 4 & 0 \\
-	        			7 & 5 & 0 \\
-	        			8 & 6 & 0 \\
-	        			9 & 7 & 0 
-	      			\end{tabular}
-
-	      			\begin{tabular}{c|c|c}
-			      		\hline
-			  				\multicolumn{3}{c}{\emph{Ranking} Web 2 - \emph{PageRank}} \\
-			 			\hline
-	        			Posición & Nodo & Puntaje \\ \hline
-	         			1 & 1 & 0.448059 \\
-	        			2 & 2 & 0.448059 \\
-	        			3 & 3 & 0.058594 \\
-	        			4 & 4 & 0.058594 \\
-	        			5 & 5 & 0.018750 \\
-	        			6 & 6 & 0.018750 \\
-	        			7 & 7 & 0.018750 \\
-	        			8 & 8 & 0.018750
-	      			\end{tabular}
-	    		
-	      			\begin{tabular}{c|c|c}
-			      		\hline
-			  				\multicolumn{3}{c}{\emph{Ranking} Web 2 - \textsc{In-deg}} \\
-			 			\hline
-	        			Posición & Nodo & Puntaje \\ \hline
-	         			1 & 1 & 0.538462 \\
-	        			2 & 3 & 0.384615 \\
-	        			3 & 2 & 0.076923 \\
-	        			4 & 4 & 0 \\
-	        			5 & 5 & 0 \\
-	        			6 & 6 & 0 \\
-	        			7 & 7 & 0 \\
-	        			8 & 8 & 0 \\
-	      			\end{tabular}
-	    	\end{center}
-
-			\subsubsection*{Discusión} 
-			Como podemos ver en los \emph{rankings} del primer análisis en ambos casos quedan iguales. En cambio, en el segundo observamos variaciones, ya que en la lista de entrada el peso de todos los enlaces no es el mismo, es decir, hay enlaces más fuertes que otros. A diferencia de \emph{PageRank}, el método \textsc{In-deg} no tiene en cuenta esta propiedad. Por lo tanto, si en las páginas de entrada todos los \emph{links} tienen igual fuerza, el resultado obtenido por ambos métodos no difiere. 
-
-
-	\subsection{\emph{GeM} y ligas deportivas}
-		
-		\subsubsection{Experimento 1}
-		\subsubsection*{Presentación}
-		En este experimento se verá la diferencia entre los métodos de \emph{GeM} y el de la \acr{AFA} para determinar el \emph{ranking} de una liga deportiva. Para ello se tomará como parámetro de entrada una tabla con los partidos, sus respectivas fechas, y sus resultados. En la misma, deberá existir un equipo que ocupe una de las primaras posiciones en la tabla de \emph{rankings} que haya perdido contra otro que ocupa una de las últimas. Observaremos la diferencia entre el \emph{ranking} generado por cada uno de los métodos.
-
-			\subsubsection*{Hipótesis} 
-			Cuando se juega un partido entre dos equipos, en el método de \emph{GeM} se tendrá en cuenta que tan fuerte son los equipos involucrados y cual fue la diferencia de goles en el partido. En cambio, en el método de la \acr{AFA} el ganador recibirá 3 puntos sin importar los resultados ni las posiciones que los mismos tenían hasta el momento. Esto puede generar diferencias en el \emph{ranking} ya que cada método considera distinta información para determinar las nuevas posiciones. 
-			
-			Por otro lado, si un equipo que se encuentra en las últimas posiciones de la tabla juega contra uno que está en las primeras y gana, para el método de la \acr{AFA} es exactamente igual que haya jugado con cualquier otro. Para \emph{GeM}, al tener en cuenta que tan fuertes son los equipos, esto generará que el nuevo vencedor quede en una mejor posición en la tabla. Así, en este método, entre dos fechas se pueden generar saltos, es decir, un equipo puede pasar de tener una muy mala posición en la tabla a estar dentro de los mejores solo por haber ganado un partido contra un equipo fuerte. En el método de la \acr{AFA} no pasa ya que sólo se le sumarán 3 puntos al equipo triunfador.		
-
-			\subsubsection*{Datos de entrada} 
-				Resultados del Torneo de Primera División del Fútbol Argentino hasta la Fecha 23. El valor de $c$ es \texttt{0.85} y el valor de tolerancia es \texttt{0.00001}. Se eligió el valor de c y el de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. 
-. 
-
-			\subsubsection*{Resultados}
-
-				\begin{center}
-	      			\begin{tabular}{|c|c|c|} 
-			      		\hline
-			  				\multicolumn{3}{c}{\emph{Ranking} Liga Deportiva - \emph{GeM}} \\
-			 			\hline
-	        			Posición & Equipo & Puntaje \\ \hline
-	         			1 & Boca Juniors & 0.080913 \\
-	        			2 & Aldosivi & 0.069879 \\
-	        			3 & River Plate & 0.069065 \\
-	        			4 & San Lorenzo & 0.058309 \\
-	        			5 & San Martín (SJ) & 0.051788 \\
-	        			6 & Racing Club & 0.051674 \\
-	        			7 & Rosario Central & 0.046326 \\
-	        			8 & Quilmes & 0.045206 \\
-	        			9 & Newell's Old Boys & 0.043581 \\
-	        			10 & Vélez Sarsfield & 0.039828 \\
-	        			11 & Gimnasia y Esgrima (LP) & 0.035738 \\
-	        			12 & Estudiantes (LP) & 0.034629 \\
-	        			13 & Belgrano & 0.033908 \\
-	        			14 & Banfield & 0.032996 \\
-	        			15 & Unión & 0.028015 \\
-	        			16 & Defensa y Justicia & 0.027041 \\
-	        			17 & Lanús & 0.026036 \\
-	   					18 & Independiente & 0.023666 \\
-	   					19 & Tigre & 0.023078 \\
-	   					20 & Sarmiento & 0.022266 \\
-	   					21 & Olimpo & 0.021956 \\
-	   					22 & Crucero del Norte & 0.021713 \\
-	  					23 & Arsenal & 0.018678 \\
-	   					24 & Argentinos Juniors & 0.017951 \\
-	   					25 & Tempreley & 0.017670 \\
-	   					26 & Huracán & 0.013740 \\
-	   					27 & Godoy Cruz & 0.013541 \\
-	   					28 & Atlético de Rafaela & 0.011738 \\
-	   					29 & Colón & 0.011141 \\
-	   					30 & Nueva Chicago & 0.007928 
-
-	      			\end{tabular} 
-	      			    \begin{tabular}{|c|c|c|} 
-			      		\hline
-			  				\multicolumn{3}{c}{\emph{Ranking} Liga Deportiva - \acr{AFA}} \\
-			 			\hline
-	        			Posición & Equipo & Puntaje \\ \hline
-						    1 & San Lorenzo & 0.054289 \\
-						    2 & Boca Juniors & 0.053203 \\
-						    3 & Racing Club & 0.049946 \\
-						    4 & Rosario Central & 0.048860 \\
-						    5 & River Plate & 0.047774 \\
-						    6 & Independiente & 0.041260 \\
-						    7 & Belgrano & 0.041260 \\
-						    8 & Estudiantes (LP) & 0.041260 \\
-						    9 & Tigre & 0.040174 \\
-						   10 & Banfield & 0.040174 \\
-						   11 & Lanús & 0.039088 \\
-						   12 & Gimnasia y Esgrima (LP) & 0.038002 \\
-						   13 & Quilmes & 0.034745 \\
-						   14 & San Martín (SJ) & 0.034745 \\
-						   15 & Unión & 0.033659 \\
-						   16 & Tempreley & 0.030402 \\
-						   17 & Argentinos Juniors & 0.028230 \\
-						   18 & Newell's Old Boys & 0.028230 \\
-						   19 & Aldosivi & 0.028230 \\
-						   20 & Vélez Sarsfield & 0.027144 \\
-						   21 & Defensa y Justicia & 0.026059 \\
-						   22 & Sarmiento & 0.026059 \\
-						   23 & Olimpo & 0.024973 \\
-						   24 & Colón & 0.024973 \\
-						   25 & Godoy Cruz & 0.023887 \\
-						   26 & Huracán & 0.022801 \\
-						   27 & Atlético de Rafaela & 0.021716 \\
-						   28 & Arsenal & 0.018458 \\
-						   29 & Nueva Chicago & 0.015201 \\
-						   30 & Crucero del Norte & 0.015201 \\
-
-	      			\end{tabular} 
-	      	\end{center}
-
-			\subsubsection*{Discusión}
-
-
-			Como podemos ver en las tablas de \emph{rankings}, los órdenes no son exactamente iguales. Por ejemplo, mirando el equipo 1 (Aldosivi), en el \emph{ranking} de la \acr{AFA} se encuentra en la posición 20 y cuando usamos el método de \emph{GeM} éste está en la posición 2. Esto se debe a que Aldosivi le ganó tanto al equipo 24 (San Lorenzo) como al 7 (Boca Juniors), que se encontraban primero y segundo en la tabla de posiciones de la \acr{AFA}, respectivamente. Por esto, en \emph{GeM} sube muchas posiciones mientras que con la \acr{AFA} sólo se le otorgan 3 puntos por cada uno de los dos partidos.
-
-
+            Como podemos ver en las tablas de \emph{rankings}, los órdenes no son exactamente iguales. Por ejemplo, mirando el equipo 1 (Aldosivi), en el \emph{ranking} de la \acr{AFA} se encuentra en la posición 20 y cuando usamos el método de \emph{GeM} éste está en la posición 2. Esto se debe a que Aldosivi le ganó tanto al equipo 24 (San Lorenzo) como al 7 (Boca Juniors), que se encontraban primero y segundo en la tabla de posiciones de la \acr{AFA}, respectivamente. Por esto, en \emph{GeM} sube muchas posiciones mientras que con la \acr{AFA} sólo se le otorgan 3 puntos por cada uno de los dos partidos.
 
         \subsubsection{Experimento 2}
         \subsubsection*{Presentación}
-        Con este experimento se busca mostrar como varía el ranking de los equipos a medida que van pasando las fechas de la liga para diferentes valores de c. Para ello se tomará la primer fecha y se medirá el ranking hasta el momento. Luego tomaremos la liga completa y se evaluará el ranking final. Esto se repetirá para cada uno de los valores de c. Luego se compararán las variaciones entre el inicio y el fin de la liga para cada uno de los valores. 
+        Con este experimento se busca mostrar como varía el ranking de los equipos a medida que van pasando las fechas de la liga para diferentes valores de c. Para ello se tomará la primer fecha y se medirá el ranking hasta el momento. Luego tomaremos la liga completa y se evaluará el ranking final. Esto se repetirá para cada uno de los valores de c. Luego se compararán las variaciones entre el inicio y el fin de la liga para cada uno de los valores.
 
-            \subsubsection*{Hipótesis} 
-            Suponemos que cuando el grafo es muy poco conexo, es decir, cuando no hay demasiadas conexiones entre los equipos, como es al inicio de la liga, el c cobra relevancia. Por lo tanto, al inicio, para diferentes valores de c va a haber mucha variación en los rankings de los equipos. En cambio, cuando el grafo es mas conexo, es decir, cuando los equipos están muy relacionados entre sí, como sucede al final de la liga, cuando ya se jugaron todas las fechas, la importancia del c disminuye, por lo que suponemos que van a ser muy similares los rankings finales para los diferentes valores de c.  
+            \subsubsection*{Hipótesis}
+            Suponemos que cuando el grafo es muy poco conexo, es decir, cuando no hay demasiadas conexiones entre los equipos, como es al inicio de la liga, el c cobra relevancia. Por lo tanto, al inicio, para diferentes valores de c va a haber mucha variación en los rankings de los equipos. En cambio, cuando el grafo es mas conexo, es decir, cuando los equipos están muy relacionados entre sí, como sucede al final de la liga, cuando ya se jugaron todas las fechas, la importancia del c disminuye, por lo que suponemos que van a ser muy similares los rankings finales para los diferentes valores de c.
 
             \subsubsection*{Datos de entrada}
             Se tomará como valor de tolerancia 0.00001 y los valores de c serán 0.2, 0.5 y 0.9. La liga utilizada se encuentra en el archivo matches.txt. Se eligió el valor de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Los valores de c elegidos son valores intermedios del total de valores que puede tomar (c no puede ser mayor que 1).
@@ -397,21 +268,21 @@
                 \end{figure}
 
             \subsubsection*{Discusión}
-            Como se puede observar en los gráficos, en la instancia inicial de la liga los diferentes valores de c generan variaciones mayores entre los puntajes de cada equipo que cuando tomamos el ranking final. 
-            Además podemos observar que para valores mas chicos de c, los resultados son más homogéneos. Esto se debe a que al decrementar c, incrementamos (1-c) que es la probabilidad de que un equipo juegue con otro y gane. Ésta probabilidad es para todos los equipos igual. Si la aumentamos, entonces ésta tomará mas importancia generando así un sistema en el que los puntajes de los diferentes equipos sean mucho mas cercanos. 
+            Como se puede observar en los gráficos, en la instancia inicial de la liga los diferentes valores de c generan variaciones mayores entre los puntajes de cada equipo que cuando tomamos el ranking final.
+            Además podemos observar que para valores mas chicos de c, los resultados son más homogéneos. Esto se debe a que al decrementar c, incrementamos (1-c) que es la probabilidad de que un equipo juegue con otro y gane. Ésta probabilidad es para todos los equipos igual. Si la aumentamos, entonces ésta tomará mas importancia generando así un sistema en el que los puntajes de los diferentes equipos sean mucho mas cercanos.
 
 
         \subsubsection{Experimento 3}
         \subsubsection*{Presentación}
-        El objetivo de este experimento es determinar cual de los tres métodos presentados anteriormente resuelve mejor la situación del empate. Para ello de tomaron diferentes ligas que constan de 6 equipos que juegan entre si a lo largo de 6 fechas. Cada una de ellas presenta diferentes situaciones de empate. 
-        En la segunda liga el equipo 1 le gana a todos menos con el 6 que empata. El equipo 6 pierde con todos menos con el 1 que empata. El equipo 2 le gana al 5 y al 3 y pierde con el 4. El 3 le gana al 4 y al 5 y pierde con el 2. El 4 gana contra el 2 y pierde con el 3 y el 5. Por ultimo el 5 gana contra el 4 y pierde contra el 2 y el 3. 
-        En la liga 4 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El resto de los equipos quedan iguales que en la liga 2. 
+        El objetivo de este experimento es determinar cual de los tres métodos presentados anteriormente resuelve mejor la situación del empate. Para ello de tomaron diferentes ligas que constan de 6 equipos que juegan entre si a lo largo de 6 fechas. Cada una de ellas presenta diferentes situaciones de empate.
+        En la segunda liga el equipo 1 le gana a todos menos con el 6 que empata. El equipo 6 pierde con todos menos con el 1 que empata. El equipo 2 le gana al 5 y al 3 y pierde con el 4. El 3 le gana al 4 y al 5 y pierde con el 2. El 4 gana contra el 2 y pierde con el 3 y el 5. Por ultimo el 5 gana contra el 4 y pierde contra el 2 y el 3.
+        En la liga 4 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El resto de los equipos quedan iguales que en la liga 2.
         Por último en la liga 5 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El equipo 3 pierde con todos los que juega excepto cuando juega contra el 6 que empata. El resto de los equipos quedan iguales que en la liga 2.
-            
-            \subsubsection*{Hipótesis} 
+
+            \subsubsection*{Hipótesis}
             Suponemos que para el método en el que se les da 0 puntos a los equipos empatados lo que va a pasar es que para dos equipos en los cuales uno empata todos los partidos en los que juega y otro que pierde (es indistinto si cuando juegan entre ellos empatan o pierde el primero) ambos quedarán con igual puntaje, lo que es injusto para el equipo que empata. Suponemos que esto se va a poder observar bien en la liga 5, ya que el equipo 3 pierde todos los partidos menos uno que lo empata (cuando juega contra el 6) y el 6 que empata todos. Ambos equipos quedarán con 0 puntos en el ranking final. Además si un equipo fuerte juega con uno débil y estos dos empatan entonces para ambos sera lo mismo que no haber jugado lo que no es justo para el equipa débil. Esto se puede ver en la liga 2 ya que el equipo 1 vence contra todos menos con el 6, con quien empata. El equipo 6 pierde con todos menos con el 1. En el resultado final el equipo 6 obtendrá 0 puntos a pesar de haber empatado con el equipo mas fuerte de la liga.
             En el método en el cual se le otorga una cantidad de puntos distinta de 0 al empate se supone que cuando un equipo débil le gane a uno fuerte va a subir mucho en el ranking. Esto es así ya que el peso que le da el enlace del equipo fuerte al débil es muy grande. Lo que va a pasar cuando estos equipos jueguen es que para el que lleva la delantera va a ser casi indistinto perder que empatar mientras que para el otro empatar lo favorece demasiado. Esto se puede observar en la liga 2. Suponemos que el equipo 6 (quien perdió todos menos uno que empató) quedará en una posición mucho mejor en el ranking por haber empatado con el 1 (quien gano todos los otros partidos que jugó). Además en este caso veremos que sucede con los rankings a medida que aumentamos el puntaje otorgado a los equipos que empatan. Suponemos que para valores muy grandes del empate puede pasar que sea mas conveniente empatar que ganar. Esto puede suceder ya que para determinar los puntos que se obtienen cuando se gana un partido hay que calcular la diferencia de goles. Si empatar otorga muchos puntos entonces posiblemente la diferencia de goles sea menor que lo que se puede obtener al empatar. Esto se puede observar en la liga 4. Suponemos que para valores de empate muy grandes el equipo 6 (quien empato todos) superará en el ranking final al equipo 1 (quien gano todos).
-            En el tercer método, el valor de C2 representa la importancia que se le da a la matriz de empate. Suponemos que al aumentar este valor, cuando empaten dos equipos en los cuales uno sea débil y el otro fuerte, la cantidad de posiciones que ascenderá el equipo débil será mayor. Suponemos que con valores de C2 intermedios no ocurrirá que el equipo débil que empató con el fuerte ascienda demasiado en el ranking pero si se le otorgarán puntos por ello. Esto se puede observar en la liga 5 donde suponemos que se observará que empatar es mejor que perder pero peor que ganar y en la liga 2 donde el equipo 6 no va a tomar puna posición en el ranking muy elevada solo por haber vencido a un poderoso pero tampoco quedará con cero puntos. 
+            En el tercer método, el valor de C2 representa la importancia que se le da a la matriz de empate. Suponemos que al aumentar este valor, cuando empaten dos equipos en los cuales uno sea débil y el otro fuerte, la cantidad de posiciones que ascenderá el equipo débil será mayor. Suponemos que con valores de C2 intermedios no ocurrirá que el equipo débil que empató con el fuerte ascienda demasiado en el ranking pero si se le otorgarán puntos por ello. Esto se puede observar en la liga 5 donde suponemos que se observará que empatar es mejor que perder pero peor que ganar y en la liga 2 donde el equipo 6 no va a tomar puna posición en el ranking muy elevada solo por haber vencido a un poderoso pero tampoco quedará con cero puntos.
 
             \subsubsection*{Datos de entrada}
             Se tomará como valor de tolerancia 0.00001 y el valor de c 0.85. Se eligió el valor de la tolerancia y el de c arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Las 5 ligas utilizadas se encuentran en la carpeta exp3-partidos. Los valores de puntajes que se les darán a los equipos que empaten que se pasarán como parámetro en el segundo método son 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 y 10. Los valores de c que se pasarán para el tercer método serán 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 y 0.4. Los valores de k y c que se observan en los gráficos son los valores más representativos.
@@ -440,9 +311,9 @@
         
 
             \subsubsection*{Discusión}
-            Como se puede ver en el gráfico ((de la liga 2 modificando el k)), el equipo 6 tiene muy poco puntaje cuando el k vale cero ya que al haber perdido todos y tener únicamente un empate, si éste vale cero entonces su puntaje es el mas bajo. Cuando el k aumenta, entonces se le dan puntos por el empate. Como este empate fue con un equipo fuerte entonces deja al equipo 6 muy bien posicionado en la tabla. 
-            En el gráfico ((de la liga 4 modificando k)) puede verse como a pesar de que el 1 ser el equipo con mas partidos ganados, al ponerle valores mas altos al puntaje que obtienen los equipos cuando empatan que la diferencia de goles que tiene el equipo mas fuerte entonces el que empato logra tomar posiciones mas altas en la tabla. 
-            En el gráfico ((de la liga 5 modificando k)) puedo observarse cuando el k vale 0 que los equipos 3 y 6 quedan empatados a pesar de que uno haya perdido en todos y el otro empatado. En cambio cuando se le da puntos a los equipos que empatan el equipo 6 sube mucho en el ranking. Incluso llega a superar al equipo que gano todos los partidos. Dejamos a experimentos futuros determinar cual es el valor que deberá tomar k para que no suceda que supere al equipo vencedor. 
-            Cuando usamos el método 3, al que le pasamos por parámetro un C2 que será el nivel de importancia que se le da a la matriz de empate explicada anteriormente, podemos observar que para los diferentes valores de C2 lo único que se modifica es el puntaje de los equipos sin alterar el ranking. Cuando el C2 toma valores mas grandes se les asigna mayor puntaje a los equipos que empataron, dejando con menos puntos a los que ganaron. 
+            Como se puede ver en el gráfico ((de la liga 2 modificando el k)), el equipo 6 tiene muy poco puntaje cuando el k vale cero ya que al haber perdido todos y tener únicamente un empate, si éste vale cero entonces su puntaje es el mas bajo. Cuando el k aumenta, entonces se le dan puntos por el empate. Como este empate fue con un equipo fuerte entonces deja al equipo 6 muy bien posicionado en la tabla.
+            En el gráfico ((de la liga 4 modificando k)) puede verse como a pesar de que el 1 ser el equipo con mas partidos ganados, al ponerle valores mas altos al puntaje que obtienen los equipos cuando empatan que la diferencia de goles que tiene el equipo mas fuerte entonces el que empato logra tomar posiciones mas altas en la tabla.
+            En el gráfico ((de la liga 5 modificando k)) puedo observarse cuando el k vale 0 que los equipos 3 y 6 quedan empatados a pesar de que uno haya perdido en todos y el otro empatado. En cambio cuando se le da puntos a los equipos que empatan el equipo 6 sube mucho en el ranking. Incluso llega a superar al equipo que gano todos los partidos. Dejamos a experimentos futuros determinar cual es el valor que deberá tomar k para que no suceda que supere al equipo vencedor.
+            Cuando usamos el método 3, al que le pasamos por parámetro un C2 que será el nivel de importancia que se le da a la matriz de empate explicada anteriormente, podemos observar que para los diferentes valores de C2 lo único que se modifica es el puntaje de los equipos sin alterar el ranking. Cuando el C2 toma valores mas grandes se les asigna mayor puntaje a los equipos que empataron, dejando con menos puntos a los que ganaron.
             También se puede observar que para los equipos que no empatan con ninguno, la variación del C2 no les afecta. Esto es así ya que el C2 sólo modifica la matriz de empates. En el caso de los equipos que no empataron nunca el valor correspondiente de la matriz para ellos es cero. Al multiplicarlo por el C2 sigue siendo cero. Entonces ésta variación no modifica su puntaje.
             Concluimos que el criterio mas acertado es
