@@ -275,14 +275,39 @@
         \subsubsection{Experimento 3}
         \subsubsection*{Presentación}
         El objetivo de este experimento es determinar cual de los tres métodos presentados anteriormente resuelve mejor la situación del empate. Para ello de tomaron diferentes ligas que constan de 6 equipos que juegan entre si a lo largo de 6 fechas. Cada una de ellas presenta diferentes situaciones de empate.
-        En la segunda liga el equipo 1 le gana a todos menos con el 6 que empata. El equipo 6 pierde con todos menos con el 1 que empata. El equipo 2 le gana al 5 y al 3 y pierde con el 4. El 3 le gana al 4 y al 5 y pierde con el 2. El 4 gana contra el 2 y pierde con el 3 y el 5. Por ultimo el 5 gana contra el 4 y pierde contra el 2 y el 3.
+        En la liga 2 el equipo 1 le gana a todos menos con el 6 que empata. El equipo 6 pierde con todos menos con el 1 que empata. El equipo 2 le gana al 5 y al 3 y pierde con el 4. El 3 le gana al 4 y al 5 y pierde con el 2. El 4 gana contra el 2 y pierde con el 3 y el 5. Por último el 5 gana contra el 4 y pierde contra el 2 y el 3.
+            \begin{figure}[h]
+                \begin{center}
+                    \begin{tabular}{@{\extracolsep{2cm}} cc}
+                      \includegraphics{imagenes/liga2.odg} 
+                      {\small \strong{liga 2}} \\
+                    \end{tabular}
+                \end{center}
+
         En la liga 4 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El resto de los equipos quedan iguales que en la liga 2.
+
+            \begin{figure}[h]
+                \begin{center}
+                    \begin{tabular}{@{\extracolsep{2cm}} cc}
+                      \includegraphics{imagenes/liga4.odg} \\
+                      {\small \strong{liga 4}} \\
+                    \end{tabular}
+                \end{center}
+
         Por último en la liga 5 el equipo 1 gana con todos los que juega excepto cuando juega con el 6 que empata. El equipo 6 empata todos. El equipo 3 pierde con todos los que juega excepto cuando juega contra el 6 que empata. El resto de los equipos quedan iguales que en la liga 2.
+
+         \begin{figure}[h]
+                \begin{center}
+                    \begin{tabular}{@{\extracolsep{2cm}} cc}
+                      \includegraphics{imagenes/liga5.odg} 
+                      {\small \strong{liga 5}}
+                    \end{tabular}
+                \end{center}
 
             \subsubsection*{Hipótesis}
             Suponemos que para el método en el que se les da 0 puntos a los equipos empatados lo que va a pasar es que para dos equipos en los cuales uno empata todos los partidos en los que juega y otro que pierde (es indistinto si cuando juegan entre ellos empatan o pierde el primero) ambos quedarán con igual puntaje, lo que es injusto para el equipo que empata. Suponemos que esto se va a poder observar bien en la liga 5, ya que el equipo 3 pierde todos los partidos menos uno que lo empata (cuando juega contra el 6) y el 6 que empata todos. Ambos equipos quedarán con 0 puntos en el ranking final. Además si un equipo fuerte juega con uno débil y estos dos empatan entonces para ambos sera lo mismo que no haber jugado lo que no es justo para el equipa débil. Esto se puede ver en la liga 2 ya que el equipo 1 vence contra todos menos con el 6, con quien empata. El equipo 6 pierde con todos menos con el 1. En el resultado final el equipo 6 obtendrá 0 puntos a pesar de haber empatado con el equipo mas fuerte de la liga.
             En el método en el cual se le otorga una cantidad de puntos distinta de 0 al empate se supone que cuando un equipo débil le gane a uno fuerte va a subir mucho en el ranking. Esto es así ya que el peso que le da el enlace del equipo fuerte al débil es muy grande. Lo que va a pasar cuando estos equipos jueguen es que para el que lleva la delantera va a ser casi indistinto perder que empatar mientras que para el otro empatar lo favorece demasiado. Esto se puede observar en la liga 2. Suponemos que el equipo 6 (quien perdió todos menos uno que empató) quedará en una posición mucho mejor en el ranking por haber empatado con el 1 (quien gano todos los otros partidos que jugó). Además en este caso veremos que sucede con los rankings a medida que aumentamos el puntaje otorgado a los equipos que empatan. Suponemos que para valores muy grandes del empate puede pasar que sea mas conveniente empatar que ganar. Esto puede suceder ya que para determinar los puntos que se obtienen cuando se gana un partido hay que calcular la diferencia de goles. Si empatar otorga muchos puntos entonces posiblemente la diferencia de goles sea menor que lo que se puede obtener al empatar. Esto se puede observar en la liga 4. Suponemos que para valores de empate muy grandes el equipo 6 (quien empato todos) superará en el ranking final al equipo 1 (quien gano todos).
-            En el tercer método, el valor de C2 representa la importancia que se le da a la matriz de empate. Suponemos que al aumentar este valor, cuando empaten dos equipos en los cuales uno sea débil y el otro fuerte, la cantidad de posiciones que ascenderá el equipo débil será mayor. Suponemos que con valores de C2 intermedios no ocurrirá que el equipo débil que empató con el fuerte ascienda demasiado en el ranking pero si se le otorgarán puntos por ello. Esto se puede observar en la liga 5 donde suponemos que se observará que empatar es mejor que perder pero peor que ganar y en la liga 2 donde el equipo 6 no va a tomar puna posición en el ranking muy elevada solo por haber vencido a un poderoso pero tampoco quedará con cero puntos.
+            En el tercer método, el valor de C2 representa la importancia que se le da a la matriz de empate. Suponemos que al aumentar este valor, cuando empaten dos equipos en los cuales uno sea débil y el otro fuerte, la cantidad de posiciones que ascenderá el equipo débil será mayor. Suponemos que con valores de C2 intermedios no ocurrirá que el equipo débil que empató con el fuerte ascienda demasiado en el ranking pero si se le otorgarán puntos por ello. Esto se puede observar en la liga 5 donde suponemos que se observará que empatar es mejor que perder pero peor que ganar y en la liga 2 donde el equipo 6 no va a tomar puna posición en el ranking muy elevada solo por haber vencido a un equipo fuerte pero tampoco quedará con cero puntos.
 
             \subsubsection*{Datos de entrada}
             Se tomará como valor de tolerancia 0.00001 y el valor de c 0.85. Se eligió el valor de la tolerancia y el de c arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Las 5 ligas utilizadas se encuentran en la carpeta exp3-partidos. Los valores de puntajes que se les darán a los equipos que empaten que se pasarán como parámetro en el segundo método son 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 y 10. Los valores de c que se pasarán para el tercer método serán 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 y 0.4. Los valores de k y c que se observan en los gráficos son los valores más representativos.
