@@ -6,9 +6,9 @@
 
     A continuación, se encuentran las pruebas relacionadas con respecto al método \emph{GeM}. Estas se encuentran focalizadas en la elaboración de \emph{rankings} para ligas futbolísticas, estudiando la factibilidad de la aplicación del algoritmo en este contexto particular, y diversas alternativas para resolver la dificultad que se presenta a la hora de tener en cuenta los empates.
 
-    Cabe señalar que con los archivos fuente del trabajo práctico se incluye una serie de scripts en lenguaje Bash que permiten reproducir por completo los experimentos realizados, como así también los gráficos que se incluyen en este informe. Estos se encuentran dentro del directorio \texttt{exp}, y llevan los nombres \texttt{exp{i}.sh}, siendo \texttt{i} el número de experimento.
+    Cabe señalar que con los archivos fuente del trabajo práctico se incluye una serie de scripts, en lenguajes Bash y Python, que permiten reproducir por completo los experimentos realizados, como así también los gráficos que se incluyen en este informe. Estos se encuentran dentro del directorio \texttt{exp}, y llevan los nombres \texttt{exp{i}.sh}, siendo \texttt{i} el número de experimento.
 
-    \subsection{Experimentación con respecto a \emph{PageRank} y páginas web}
+    \subsection{Experimentación sobre \emph{PageRank} y páginas web}
 
         \subsubsection{Experimento 1: Tiempo de ejecución de \emph{PageRank}}
 
@@ -18,14 +18,14 @@
             \subsubsection*{Metodología, datos y parámetros del experimento}
                 Se realizaron pruebas para medir el rendimiento temporal según dos parámetros:
                 \begin{enumerate}[label=(\alph*)]
-                    \item Cantidad de páginas de la red. Se consideraron redes generadas artificialmente con las siguientes cantidades de nodos: \{200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000\}, estableciendo en todas ellas la misma cantidad de enlaces, 40000.
+                    \item Cantidad de páginas de la red. Se consideraron redes generadas artificialmente con las siguientes cantidades de nodos: \{400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 4000, 6000, 8000, 10000, 20000, 40000, 60000, 80000, 100000\}, estableciendo en todas ellas la misma cantidad de enlaces, 100000.
 
-                    \item Cantidad de enlaces de la red. Se consideraron redes generadas artificialmente con una cantidad fija de 400 nodos, variando la cantidad de enlaces establecidos entre ellos, tomando los valores \{1200, 4000, 10000, 20000, 40000, 60000, 80000, 120000, 160000\}.
+                    \item Cantidad de enlaces de la red. Se consideraron redes generadas artificialmente con una cantidad fija de 1050 nodos, variando la cantidad de enlaces establecidos entre ellos, tomando los valores \{1000, 5000, 10000, 20000, 40000, 60000, 80000, 100000, 150000, 200000, 300000, 400000, 500000, 600000, 800000, 1000000\}.
                 \end{enumerate}
 
                 En todos los casos, para la generación de las instancias de prueba, se distribuyó uniformemente entre las páginas la cantidad de \emph{links} salientes; las páginas hacia los que estos apuntan fueron determinadas al azar.
 
-                El parámetro de amortiguación $c$ se mantuvo fijo con el valor 0.85 (el utilizado normalmente por el buscador Google\cite{Brin1998}), mientras que el umbral de tolerancia para la detención del método se fijó en 0.0001.
+                El parámetro de amortiguación $c$ se mantuvo fijo con el valor 0.85 (el utilizado normalmente por el buscador Google\cite{Brin1998}), mientras que el umbral de tolerancia para la detención del método se fijó en 0.001.
 
                 En cada caso, se midió el tiempo necesario para la construcción de la matriz que modela la red y para la ejecución de todas las iteraciones necesarias del método. Para realizar las mediciones se utilizaron las funciones provistas a tal efecto por la biblioteca estándar de C++. Con el fin de evitar posibles errores en las mismas, cada una se repitió 20 veces, considerando luego el promedio entre los valores obtenidos.
 
@@ -84,6 +84,8 @@
 
             Ahora bien, el vector inicial con el que se realiza la primera iteración es un vector homogéneo, que, como puede deducirse fácilmente, es el resultado esperado en caso de que la matriz de la red sea exactamente $\mat{E}$. Por lo tanto, es razonable esperar que ante valores menores de $c$, el vector inicial sea una mejor aproximación del resultado buscado, produciendo que el método converja más rápidamente.
 
+            Por otra parte, los resultados del experimento anterior parecen sugerir que el método tiende a converger más lentamente para redes con más nodos, conjetura que se espera corroborar con las instancias evaluadas en esta prueba. 
+
             \subsubsection*{Resultados obtenidos y discusión}
 
             \noindent{} \begin{minipage}{\textwidth}
@@ -110,12 +112,16 @@
                 \end{center}
             \end{minipage}
 
+            La primer conclusión, que resulta evidente de una sencilla observación de los gráficos obtenidos, es que el valor de $c$ tiene, efectivamente, una gran influencia en la convergencia del método: cuando este pasa de 0.95 a 0.99, por ejemplo, la cantidad de iteraciones requeridas para alcanzar el umbral fijado de tolerancia aumenta a casi el triple, en el menos extremo de los tres casos.
 
+            También se corrobora en los gráficos que la convergencia del método es cada vez más lenta conforme avanzan las iteraciones. Se observa, especialmente en el caso de $c = 0.99$, que la convergencia es rápida hasta que se alcanza un punto de inflexión, a partir del cual queda relativamente estancada. Su aproximación a una línea recta en los gráficos, cuyo eje $y$ posee escala logarítmica, sugiere que su comportamiento asintótico es un decrecimiento exponencial.
+
+            Un interesante hecho a notar es que la evidencia empírica contradice la hipótesis de la existencia de una relación inversa entre la cantidad de nodos de la red estudiada y la velocidad de convergencia del método: la instancia (b), pese a poseer considerablemente menos nodos que la instancia (c), requirió para todos los valores estudiados de $c$ una mayor cantidad de iteraciones para alcanzar el umbral de tolerancia aceptado. No es posible, sin embargo, descartar por completo la posibilidad de que tamaño de la red y convergencia estén relacionadas; es necesario tener en cuenta que en el experimento anterior se comparaban redes con la misma cantidad de enlaces y una estructura semejante, características que no poseen las instancias contrastadas en esta prueba, por lo que se considera pendiente para investigaciones futuras la realización de nuevas pruebas donde se estudie la interferencia de estos factores con los resultados observados.
 
         \subsubsection{Experimento 3: Análisis cualitativo de los resultados}
 
             \subsubsection*{Presentación}
-            Por medio de estas pruebas, se pretende realizar un estudio cualitativo de los resultados arrojados por el método \emph{PageRank}. A modo de contraste, y para realizar una evaluación comparativo, se implementó un método de clasificación alternativo más simple, denominado In-Deg. Este consiste en ordenar las páginas considerando simplemente la cantidad de \emph{links} entrantes hacia cada una de ellas. En particular, el puntaje de una página se calcula como el cociente entre la cantidad de enlaces que recibe y el total de los mismos en la red.
+            Por medio de estas pruebas, se pretende realizar un estudio cualitativo de los resultados arrojados por el método \emph{PageRank}. A modo de contraste, y para realizar una evaluación comparativo, se implementó un método de clasificación alternativo más simple, denominado \textsc{In-deg}. Este consiste en ordenar las páginas considerando simplemente la cantidad de \emph{links} entrantes hacia cada una de ellas. En particular, el puntaje de una página se calcula como el cociente entre la cantidad de enlaces que recibe y el total de los mismos en la red.
 
             \subsubsection*{Metodología, datos y parámetros del experimento}
             Para esta experiencia se construyeron artificialmente tres redes pequeñas, pensadas con el objetivo de poner de manifiesto y observar las diferencias entre los dos algoritmos planteados. Estos casos de prueba, que ilustra la Figura \ref{fig:exp3-webs}, son los siguientes:
@@ -140,9 +146,13 @@
 
             \subsubsection*{Hipótesis}
 
-            En el primero, suponemos que los \emph{rankings} obtenidos en ambos casos serán iguales ya que existe una sola página principal y el resto tiene igual cantidad de relaciones. Por otro lado, en el segundo notaremos diferencias. Llamaremos enlace fuerte a aquel que va de una página que es apuntada por muchas otras hacia otra página. El método \emph{PageRank} tiene en cuenta cuál es el peso de los \emph{links} que apuntan a las distintas páginas. En el caso de \textsc{In-deg}, solo se utiliza como información la cantidad de enlaces que llegan a cada una de las distintas páginas.
+            Las redes estudiadas pretenden poner de manifiesto las principales características distintivas del algoritmo \emph{PageRank}.
 
-            En el experimento, si consideramos el método \emph{PageRank}, la página 1 quedará en primer lugar, ya que es la que recibe más \emph{links} a la misma, pero en segundo lugar quedará la página 2. Esto se debe a que el enlace de la 1 a la 2 es un enlace muy fuerte. En el caso de \textsc{In-deg}, esto no sucede ya que este método solo toma en cuenta que existe un único link hacia la página 2. Por lo tanto en \emph{PageRank} las posiciones serán 1-2-3 y luego el resto. En \textsc{In-deg} tendremos primero a la página 1 seguida de la 3, luego la 2 y finalmente el resto.
+            La primera de ellas presenta un nodo (el nodo 2) que recibe un solo enlace, menos que todos los demás. No obstante, este es un enlace de gran peso, ya que procede del nodo 1, quien recibe a su vez links de todos los nodos restantes. Cabe esperar que esta página sea ignorada por \textsc{In-deg}, pero no por \emph{PageRank}, que seguramente la ubicará por encima de los otros nodos satélites.
+
+            La segunda red presenta un escenario más sutil. Aquí la diferencia se espera entre los nodos 2 y 3: el segundo recibe más enlaces, por lo que será más relevante para \textsc{In-deg}; el primero, sin embargo, recibe un enlace del nodo 1, que ocupa una posición central en la red. Cabe esperar que esto eleve su posición en \emph{PageRank}. También es de interés que el nodo 2 de esta red, a diferencia del de la red anterior, tiene un enlace saliente hacia 1. Dado que esto tiende a incrementar más el puntaje de 1 en \emph{PageRank}, se espera que resulte perjudicial para el puntaje de 2.
+
+            La tercera red es un caso simple de una red no conexa. Para \textsc{In-deg}, todas las páginas tendrán el mismo puntaje, ya que poseen exactamente un \emph{link} entrante. \emph{PageRank}, sin embargo, podría establecer una diferencia a favor de la subred mayor, teniendo en cuenta el \emph{factor de teletransportación}; en caso de ser un navegante aleatorio al momento de teletransportarse, es mayor la probabilidad de moverse a una página de la subred de mayor tamaño.
 
             \subsubsection*{Resultados obtenidos y discusión}
 
@@ -169,7 +179,7 @@
                     5    & 5    & 0.018750   & 5    & 5    & 0.000000 \\
                     6    & 6    & 0.018750   & 6    & 6    & 0.000000 \\
                     7    & 7    & 0.018750   & 7    & 7    & 0.000000 \\
-                    8    & 8    & 0.018750   & 8    & 8    & 0.000000 \\
+                    8    & 8    & 0.018750   & 8    & 8    & 0.000000 \\ \hline
                     \multicolumn{6}{c}{} \\ \hline
                     \multicolumn{3}{|c||}{\emph{Ranking} Web 3 - \emph{PageRank}} & \multicolumn{3}{c|}{\emph{Ranking} Web 3 - \textsc{In-deg}} \\ \hline
                     Pos. & Nodo & Puntaje    & Pos. & Nodo & Puntaje  \\ \hline
@@ -185,7 +195,7 @@
             Como podemos ver en los \emph{rankings} del primer análisis en ambos casos quedan iguales. En cambio, en el segundo observamos variaciones, ya que en la lista de entrada el peso de todos los enlaces no es el mismo, es decir, hay enlaces más fuertes que otros. A diferencia de \emph{PageRank}, el método \textsc{In-deg} no tiene en cuenta esta propiedad. Por lo tanto, si en las páginas de entrada todos los \emph{links} tienen igual fuerza, el resultado obtenido por ambos métodos no difiere.
 
 
-    \subsection{\emph{GeM} y ligas deportivas}
+    \subsection{Experimentación sobre \emph{GeM} y ligas deportivas}
 
         \subsubsection{Experimento 1}
         \subsubsection*{Presentación}
@@ -257,15 +267,30 @@
             Se tomará como valor de tolerancia 0.00001 y los valores de c serán 0.2, 0.5 y 0.9. La liga utilizada se encuentra en el archivo matches.txt. Se eligió el valor de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Los valores de c elegidos son valores intermedios del total de valores que puede tomar (c no puede ser mayor que 1).
 
             \subsubsection*{Resultados}
-                \begin{figure}
-                    \begin{center}
+            \noindent{} \begin{minipage}{\textwidth}
+                \begin{center}
+                    \vspace{1em}
 
-                        \begin{tabular}{ccc}
-                            \includegraphics{graficos/exp2-partidos-liga-afa1.pdf} & \includegraphics{graficos/exp2-partidos-liga-afa3.pdf} &
-                            \includegraphics{graficos/exp2-partidos-liga-afa2.pdf}}
-                        \end{tabular}
-                         \label*{El gráfico de la izquierda corresponde al ranking de la AFA con una única fecha, el del centro contiene 5 fechas y por último, el gráfico de la derecha contiene las 23 fechas de la liga.}
-                \end{figure}
+                    \begin{tabular}{cc}
+                        \includegraphics{graficos/exp2-partidos-liga-afa1.pdf} & \includegraphics{graficos/exp2-partidos-liga-afa3.pdf} \\
+                        {\small 1 fecha}                                       & {\small 5 fechas}
+                    \end{tabular}
+                \end{center}
+            \end{minipage}
+
+            \noindent{} \begin{minipage}{\textwidth}
+                \begin{center}
+                    \includegraphics{graficos/exp2-partidos-liga-afa2.pdf} \\
+                    {\small 23 fechas}
+
+                    \vspace{1em}
+
+                    Resultados arrojados por el experimento 2. Los gráficos muestran la evolución del \emph{ranking} obtenido mediante \emph{GeM} para la Liga de Primera División de la \acr{AFA}, según el transcurso de las fechas.
+
+                    \vspace{1em}
+                \end{center}
+            \end{minipage}
+
 
             \subsubsection*{Discusión}
             Como se puede observar en los gráficos, en la instancia inicial de la liga los diferentes valores de c generan variaciones mayores entre los puntajes de cada equipo que cuando tomamos el ranking final.
@@ -313,26 +338,53 @@
             Se tomará como valor de tolerancia 0.00001 y el valor de c 0.85. Se eligió el valor de la tolerancia y el de c arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Las 5 ligas utilizadas se encuentran en la carpeta exp3-partidos. Los valores de puntajes que se les darán a los equipos que empaten que se pasarán como parámetro en el segundo método son 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 y 10. Los valores de c que se pasarán para el tercer método serán 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 y 0.4. Los valores de k y c que se observan en los gráficos son los valores más representativos.
 
             \subsubsection*{Resultados}
-
-             \begin{figure}
+            \noindent{} \begin{minipage}{\textwidth}
                 \begin{center}
+                    \vspace{1em}
 
-                    \begin{tabular}{ccc}
-                        \includegraphics{graficos/exp3-partidos-liga2-K.pdf} & \includegraphics{graficos/exp3-partidos-liga4-K.pdf} &
-                        \includegraphics{graficos/exp3-partidos-liga5-K.pdf}}
+                    \begin{tabular}{cc}
+                        \includegraphics{graficos/exp3-partidos-liga2-K.pdf} & \includegraphics{graficos/exp3-partidos-liga4-K} \\
+                        {\small Liga 2}                                      & {\small Liga 4}
                     \end{tabular}
-                    \label*{El gráfico de la izquierda corresponde a la liga 2, el del centro a la liga 4 y el de la derecha a la liga 5.}
-            \end{figure}
+                \end{center}
+            \end{minipage}
 
-            \begin{figure}
+            \noindent{} \begin{minipage}{\textwidth}
                 \begin{center}
+                    \includegraphics{graficos/exp3-partidos-liga5-K} \\
+                    {\small Liga 5}
 
-                    \begin{tabular}{ccc}
-                        \includegraphics{graficos/exp3-partidos-liga2-C.pdf} & \includegraphics{graficos/exp3-partidos-liga4-C.pdf} &
-                        \includegraphics{graficos/exp3-partidos-liga5-C.pdf}}
+                    \vspace{1em}
+
+                    Resultados arrojados por el experimento 2 para el método (2).
+
+                    \vspace{1em}
+                \end{center}
+            \end{minipage}
+
+            \noindent{} \begin{minipage}{\textwidth}
+                \begin{center}
+                    \vspace{1em}
+
+                    \begin{tabular}{cc}
+                        \includegraphics{graficos/exp3-partidos-liga2-C.pdf} & \includegraphics{graficos/exp3-partidos-liga4-C} \\
+                        {\small Liga 2}                                      & {\small Liga 4}
                     \end{tabular}
-                    \label*{El gráfico de la izquierda corresponde a la liga 2, el del centro a la liga 4 y el de la derecha a la liga 5.}
-            \end{figure}
+                \end{center}
+            \end{minipage}
+
+            \noindent{} \begin{minipage}{\textwidth}
+                \begin{center}
+                    \includegraphics{graficos/exp3-partidos-liga5-C} \\
+                    {\small Liga 5}
+
+                    \vspace{1em}
+
+                    Resultados arrojados por el experimento 2 para el método (3).
+
+                    \vspace{1em}
+                \end{center}
+            \end{minipage}
         
 
             \subsubsection*{Discusión}
