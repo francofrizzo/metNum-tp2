@@ -28,13 +28,26 @@
                 En cada caso, se midió el tiempo necesario para la construcción de la matriz que modela la red y para la ejecución de todas las iteraciones necesarias del método. Para realizar las mediciones se utilizaron las funciones provistas a tal efecto por la biblioteca estándar de C++. Con el fin de evitar posibles errores en las mismas, cada una se repitió 10 veces, considerando luego el promedio entre los valores obtenidos.
 
             \subsubsection*{Hipótesis}
-            Es importante considerar en este punto la forma en que la implementación del algoritmo \emph{PageRank} aprovecha la propiedad de la matriz que modela la red ($\mat{P_1}$) de ser esparsa. Una inspección al código de dicha implementación revela que la única operación costosa que se realiza en cada iteración es  el producto entre la dicha matriz y el vector resultante de la iteración anterior. Dentro de este producto existen un ciclo que itera sobre todas las posiciones de la matriz, es decir, cuadráticamente en la cantidad de nodos, realizando un producto en cada caso, correspondiente a la multiplicación con la matriz homogénea de amortiguación ($\mat{E}$). Por otra parte, también existe un ciclo que itera sobre las posiciones no nulas de la matriz, es decir, linealmente en la cantidad de \emph{links} de la red, para realizar el producto del vector con estos coeficientes; en este caso, cada iteración requiere que se realicen dos productos.
+            Es importante considerar en este punto la forma en que la implementación del algoritmo \emph{PageRank} aprovecha la propiedad de la matriz que modela la red ($\mat{P_1}$) de ser esparsa. Una inspección al código de dicha implementación revela que la única operación costosa que se realiza en cada iteración es  el producto entre la dicha matriz y el vector resultante de la iteración anterior. Dentro de este producto existen dos ciclos no anidados; uno de ellos itera sobre todas las posiciones no nulas de la matriz, es decir, linealmente en la cantidad de \emph{links} de la red, para realizar el producto del vector con estos coeficientes. El otro ciclo se realiza sobre todas las posiciones del vector, cuya cantidad es igual a la cantidad de nodos de la red; cabe destacar que este ciclo es extremadamente simple, consistiendo únicamente en un par de sumas.
 
-            Teniendo en cuenta lo anterior, cabe esperar que el tiempo de ejecución dependa cuadráticamente de la cantidad de nodos de la red y linealmente, pero con una constante mayor, de la cantidad de \emph{links} de la misma.
+            Teniendo en cuenta lo anterior, cabe esperar que el tiempo de ejecución dependa linealmente tanto de la cantidad de nodos de la red como de la cantidad de \emph{links} de la misma, pero con una constante mucho mayor en este último caso.
 
-            \subsubsection*{Resultados obtenidos}
+            \subsubsection*{Resultados obtenidos y discusión}
 
-            \subsubsection*{Discusión}
+            \begin{figure}
+                \begin{center}
+
+                    \begin{tabular}{cc}
+                        \includegraphics{graficos/exp1-a.pdf} & \includegraphics{graficos/exp1-b.pdf} \\
+                    \end{tabular}
+
+                    \label*{Resultados arrojados por el experimento 1. El gráfico de la izquierda representa el tiempo promedio de ejecución del algoritmo \emph{PageRank} en función de la cantidad de nodos de la red, y el de la derecha, en función de la cantidad de \emph{links} de la misma. Se representa también el desvío estándar de las mediciones.}
+                \end{center}
+            \end{figure}
+
+            Como puede observarse en los gráficos que se incluyen, los resultados obtenidos corroboraron la hipótesis de que el tiempo de ejecución del algoritmo aumentaría linealmente con la cantidad de links de la red evaluada. No obstante, la relación con la cantidad de nodos de la red parece no ser lineal, sino de un orden mayor. Aquí entra en juego, muy probablemente, un hecho que no fue tomado en cuenta al elaborar las hipótesis: la naturaleza iterativa del método, que no permite determinar cuántas veces se ejecutará hasta detenerse a partir de una simple inspección de los ciclos del algoritmo. Es decir, hay que tener en cuenta que un incremento en la cantidad de nodos de la red puede tener un efecto no solo en la complejidad de cada iteración particular, sino en la cantidad total de iteraciones requeridas para alcanzar un resultado.
+
+            En efecto, al considerarse una red con más nodos, los valores del vector que se espera obtener luego de cada iteración disminuyen en magnitud, ya que siempre deben sumar 1, al tiempo que aumenta su cantidad. La evidencia empírica obtenida parece indicar que este incremento progresivo del tamaño de la red causó efectos en el cálculo de la norma Manhattan entre los resultados de iteraciones sucesivas, ralentizando la convergencia del algoritmo y alterando el comportamiento que había sido previsto. Este efecto, por otra parte, no parece tener influencia cuando la variable modificada es la cantidad de \emph{links}.
 
         \subsubsection{Experimento 2: Convergencia de \emph{PageRank}}
 
@@ -46,7 +59,7 @@
             \begin{enumerate}[label=(\alph*)]
                 \item Red pequeña, formada por 50 páginas web reales y la estructura de \emph{links} determinada por las mismas, que al momento del experimento contenía 160 enlaces. La lista de sitios utilizados puede encontrarse en el archivo \texttt{exp/exp2-a-webs.txt}, y el grafo generado, en \texttt{exp/exp2-a-graph.txt}.
 
-                \item Red mediana , formada por las páginas de la Universidad de Stanford (stanford.edu) y los enlaces entre ellas. Comprende 281903 páginas y 2312497 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 2002.
+                \item Red mediana, formada por las páginas de la Universidad de Stanford (stanford.edu) y los enlaces entre ellas. Comprende 281903 páginas y 2312497 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 2002.
 
                 \item Red mediana, formada por las páginas de la Universidad de Notre Dame (nd.edu) y los enlaces entre ellas. Comprende 325729 páginas y 1497134 enlaces. Los datos, extraídos de \cite{SNAP}, fueron recopilados en 1999.
             \end{enumerate}
@@ -64,9 +77,19 @@
 
             Ahora bien, el vector inicial con el que se realiza la primera iteración es un vector homogéneo, que, como puede deducirse fácilmente, es el resultado esperado en caso de que la matriz de la red sea exactamente $\mat{E}$. Por lo tanto, es razonable esperar que ante valores menores de $c$, el vector inicial sea una mejor aproximación del resultado buscado, produciendo que el método converja más rápidamente.
 
-            \subsubsection*{Resultados obtenidos}
+            \subsubsection*{Resultados obtenidos y discusión}
 
-            \subsubsection*{Discusión}
+            \begin{figure}
+                \begin{center}
+
+                    \begin{tabular}{cc}
+                        \includegraphics{graficos/exp2-a.pdf} & \includegraphics{graficos/exp2-b.pdf} \\
+                        \multicolumn{2}{c}{\includegraphics{graficos/exp2-c.pdf}}
+                    \end{tabular}
+
+                    \label*{Resultados arrojados por el experimento 1. El gráfico de la izquierda representa el tiempo promedio de ejecución del algoritmo \emph{PageRank} en función de la cantidad de nodos de la red, y el de la derecha, en función de la cantidad de \emph{links} de la misma. Se representa también el desvío estándar de las mediciones.}
+                \end{center}
+            \end{figure}
 
         \subsubsection{Experimento 3: Análisis cualitativo de los resultados}
 

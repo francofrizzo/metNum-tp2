@@ -71,29 +71,27 @@ vector<double> matrize::potencias(const vector<double>& inicial, double c, doubl
 vector<double> matrize::prod(const vector<double>& vec, double c) const {
     vector<double> res(_cant_nodos, 0);
     double suma_cols = 0;
+    double empty_cols = 0;
         
     for (int j = 0; j < _cant_nodos; j++) {
         double val_vec = c * vec[j];
-        suma_cols = suma_cols + val_vec;
-        double empty_col = val_vec / _cant_nodos;
         int ptr_actual;
         int ptr_next;
         rango_columna(j, ptr_actual, ptr_next);
-        int i;
         if (ptr_actual == -1) { // Le sumo a todos 1/n * vec_j
-            for (i = 0; i < _cant_nodos; i++) {
-                res[i] = res[i] + empty_col;
-            }
+            empty_cols = empty_cols + val_vec;
         } else {
-            for (i = ptr_actual; i < ptr_next; i++) { // vamos sumando el valor correspondiente a cada posición no nula de la fila
+            for (int i = ptr_actual; i < ptr_next; i++) { // vamos sumando el valor correspondiente a cada posición no nula de la fila
                 res[ind_filas[i]] = res[ind_filas[i]] + val_vec * vals[i];
             }
         }
+        suma_cols = suma_cols + vec[j];
     }
 
     double dumping = suma_cols * (1 - c) / _cant_nodos;
+    empty_cols = empty_cols / _cant_nodos;
     for (int i = 0; i < _cant_nodos; i++) {
-        res[i] = res[i] + dumping;
+        res[i] = res[i] + dumping + empty_cols;
     }
 
     return res;
