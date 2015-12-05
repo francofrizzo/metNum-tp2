@@ -386,7 +386,15 @@
             Se tomará como valor de tolerancia 0.00001 y los valores de c serán 0.2, 0.5 y 0.9. La liga utilizada se encuentra en el archivo matches.txt. Se eligió el valor de la tolerancia arbitrariamente, procurando que los casos de prueba no fueran excesivamente grandes para no prolongar innecesariamente la duración de las pruebas. Los valores de c elegidos son valores intermedios del total de valores que puede tomar (c no puede ser mayor que 1).
 
             \subsubsection*{Resultados}
-            
+                \begin{figure}
+                    \begin{center}
+
+                        \begin{tabular}{ccc}
+                            \includegraphics{graficos/exp2-partidos-liga-afa1.pdf} & \includegraphics{graficos/exp2-partidos-liga-afa3.pdf} &
+                            \includegraphics{graficos/exp2-partidos-liga-afa2.pdf}}
+                        \end{tabular}
+                         \label*{El gráfico de la izquierda corresponde al ranking de la AFA con una única fecha, el del centro contiene 5 fechas y por último, el gráfico de la derecha contiene las 23 fechas de la liga.}
+                \end{figure}
 
             \subsubsection*{Discusión}
             Como se puede observar en los gráficos, en la instancia inicial de la liga los diferentes valores de c generan variaciones mayores entre los puntajes de cada equipo que cuando tomamos el ranking final. 
@@ -410,16 +418,26 @@
 
             \subsubsection*{Resultados}
 
-                {\centering \begin{tabular}{c}
-                  % \includegraphics[width=12cm]{../../src/exp/graficos/exp3-partidos-liga2-K.pdf} \\
-                \end{tabular}}
-                  {\centering \begin{tabular}{c}
-                  % \includegraphics[width=12cm]{../../src/exp/graficos/exp3-partidos-liga4-K.pdf} \\
-                \end{tabular}}
-                  {\centering \begin{tabular}{c}
-                  % \includegraphics[width=12cm]{../../src/exp/graficos/exp3-partidos-liga5-K.pdf} \\
-                \end{tabular}}
+             \begin{figure}
+                \begin{center}
 
+                    \begin{tabular}{ccc}
+                        \includegraphics{graficos/exp3-partidos-liga2-K.pdf} & \includegraphics{graficos/exp3-partidos-liga4-K.pdf} &
+                        \includegraphics{graficos/exp3-partidos-liga5-K.pdf}}
+                    \end{tabular}
+                    \label*{El gráfico de la izquierda corresponde a la liga 2, el del centro a la liga 4 y el de la derecha a la liga 5.}
+            \end{figure}
+
+            \begin{figure}
+                \begin{center}
+
+                    \begin{tabular}{ccc}
+                        \includegraphics{graficos/exp3-partidos-liga2-C.pdf} & \includegraphics{graficos/exp3-partidos-liga4-C.pdf} &
+                        \includegraphics{graficos/exp3-partidos-liga5-C.pdf}}
+                    \end{tabular}
+                    \label*{El gráfico de la izquierda corresponde a la liga 2, el del centro a la liga 4 y el de la derecha a la liga 5.}
+            \end{figure}
+        
 
             \subsubsection*{Discusión}
             Como se puede ver en el gráfico ((de la liga 2 modificando el k)), el equipo 6 tiene muy poco puntaje cuando el k vale cero ya que al haber perdido todos y tener únicamente un empate, si éste vale cero entonces su puntaje es el mas bajo. Cuando el k aumenta, entonces se le dan puntos por el empate. Como este empate fue con un equipo fuerte entonces deja al equipo 6 muy bien posicionado en la tabla. 
